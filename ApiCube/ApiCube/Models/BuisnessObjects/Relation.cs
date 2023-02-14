@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ApiCube.Models.BuisnessObjects
 {
-    [Keyless]
     public class Relation
     {
+        [Key] public int RelationId { get; set; }
         [Required]
         public Utilisateur? Utilisateur { get; set; }
         [Required]

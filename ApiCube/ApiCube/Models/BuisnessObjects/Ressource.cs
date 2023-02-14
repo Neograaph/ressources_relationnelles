@@ -24,5 +24,7 @@ namespace ApiCube.Models.BuisnessObjects
         public int DocumentId { get; set; }
         public Document? Document { get; set; }
 
+        public int UtilisateurId { get; set; }
+
     }
 }

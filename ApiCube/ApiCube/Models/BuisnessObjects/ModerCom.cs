@@ -3,12 +3,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ApiCube.Models.BuisnessObjects
 {
-    [Keyless]
     public class ModererCom
     {
 
-        [Required]
-        public Utilisateur? Utilisateur { get; set; }
+        [Key]
+        public int ModererComId { get; set; }
+       
         [Required]
         public Commentaire? Commentaire { get; set; }
         [Required]

@@ -4,6 +4,7 @@ namespace ApiCube.Models.BuisnessObjects
 {
     public class Commentaire
     {
+        [Key]
         public int CommentaireId { get; set; }
 
         [MaxLength(255)]
@@ -12,12 +13,10 @@ namespace ApiCube.Models.BuisnessObjects
 
         [Required]
         public DateTime? DateCreation { get; set; }
-
         [Required]
-        public Ressource? RessourceId { get; set; }
+        public Ressource? Ressource { get; set; }
 
-        [Required]
-        public Utilisateur? UtilisateurId { get; set; }
+        public int UtilisateurId { get; set; }
 
         public int CommentaireReponse { get; set; }
     }

@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiCube.Migrations
 {
     [DbContext(typeof(AppContexte))]
-    [Migration("20230214135535_init")]
+    [Migration("20230214140019_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

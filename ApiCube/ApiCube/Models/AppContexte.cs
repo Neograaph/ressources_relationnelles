@@ -17,7 +17,18 @@ namespace ApiCube.Models
             var connectionString = configuration.GetConnectionString("connexion");
             optionsBuilder.UseSqlServer(connectionString);
         }
+        public DbSet<ActionType> ActionTypes { get; set; }
+        public DbSet<Adresse> Adresses { get; set; }
+        public DbSet<Aimer> Aimers { get; set; }
+        public DbSet<Consulter> Consulters { get; set; }
+        public DbSet<Commentaire> Commentaires { get; set; }
+        public DbSet<Document> Documents { get; set; }
+        public DbSet<ModererCom> ModererComs { get; set; }
+        public DbSet<ModererRes> ModererRess { get; set; }
+        public DbSet<Rechercher> Recherchers { get; set; }
+        public DbSet<Relation> Relations { get; set; }
+        public DbSet<Ressource> Ressources { get; set; }
         public DbSet<Utilisateur> Utilisateurs { get; set; }
-
+        
     }
 }

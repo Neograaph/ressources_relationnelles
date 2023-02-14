@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ApiCube.Models.BuisnessObjects
 {
@@ -22,5 +23,10 @@ namespace ApiCube.Models.BuisnessObjects
         public string? Role { get; set; }
 
         public Adresse? Adresse { get; set; }
+
+        [NotMapped]
+        public virtual ICollection<ModererCom> modererComs { get; set; }
+        [NotMapped]
+        public virtual ICollection<ModererRes> modererRess{ get; set; }
     }
 }

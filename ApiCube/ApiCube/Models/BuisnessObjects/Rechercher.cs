@@ -3,9 +3,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ApiCube.Models.BuisnessObjects
 {
-    [Keyless]
     public class Rechercher
     {
+        [Key]
+        public int RechercherId { get; set; }
         [MaxLength(255)]
         [Required]
         public string? RechercheLibelle { get; set; }
@@ -13,6 +14,6 @@ namespace ApiCube.Models.BuisnessObjects
         public DateTime? RechercheDate { get;set; }
 
         public Ressource? Ressource { get; set; }
-        public Utilisateur? Utilisateur { get;set; }
+       
     }
 }

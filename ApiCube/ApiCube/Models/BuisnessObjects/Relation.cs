@@ -8,6 +8,8 @@ namespace ApiCube.Models.BuisnessObjects
     {
         [Required]
         public Utilisateur? Utilisateur { get; set; }
+        [Required]
+        public Utilisateur? UtilisateurRelation { get; set; }
         [MaxLength(50)]
         [Required]
         public string? Libelle { get; set; }

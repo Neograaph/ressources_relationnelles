@@ -28,5 +28,7 @@ namespace ApiCube.Models.BuisnessObjects
         public virtual ICollection<ModererCom> modererComs { get; set; }
         [NotMapped]
         public virtual ICollection<ModererRes> modererRess{ get; set; }
+        [NotMapped]
+        public virtual ICollection<Relation> Relations { get; set; }
     }
 }

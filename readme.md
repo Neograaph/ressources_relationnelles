@@ -1,7 +1,11 @@
 ![Logo](https://zupimages.net/up/23/07/qq19.png)
 
-
 # Ressources Relationnelles
+
+## Installation
+
+- [Git](https://git-scm.com/book/fr/v2/D%C3%A9marrage-rapide-Installation-de-Git)
+- [NodeJs](https://nodejs.org/fr/download/)
 
 ## Run Locally
 
@@ -9,6 +13,26 @@ Clone the project
 
 ```bash
   git clone https://github.com/Neograaph/ressources_relationnelles.git
+```
+
+Change directory
+
+```bash
+  cd ressources_relationnelles
+```
+
+Front-end | Angular
+
+Install packages
+
+```bash
+  npm install
+```
+
+Build the app
+
+```bash
+  ng serve
 ```
 
 ## Documentation

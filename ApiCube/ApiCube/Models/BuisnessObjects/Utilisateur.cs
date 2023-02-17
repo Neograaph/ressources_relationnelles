@@ -1,5 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ApiCube.Models.ViewModels;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ApiCube.Models.BuisnessObjects
 {
@@ -61,8 +64,17 @@ namespace ApiCube.Models.BuisnessObjects
         //        }
         //    }
 
-            [NotMapped]
-           public virtual ICollection<Relation>? Relations { get; set; }
+
+        //public List<RelationViewModel> GetRelations()
+        //{
+        //    return Relations.Select(r => new RelationViewModel
+        //    {
+        //        ID = r.ID,
+        //        User1_ID = r.User1_ID,
+        //        User2_ID = r.User2_ID,
+        //        Type = r.Type,
+        //        Libelle = r.Libelle
+        //    }).ToList();
         //}
     }
 }

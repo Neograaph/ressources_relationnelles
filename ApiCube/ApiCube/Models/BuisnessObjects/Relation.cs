@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ApiCube.Models.BuisnessObjects
 {
@@ -8,15 +9,20 @@ namespace ApiCube.Models.BuisnessObjects
     {
         [Key]
         public int ID { get; set; }
+
         [ForeignKey("User1")]
         public int User1_ID { get; set; }
 
         [ForeignKey("User2")]
         public int User2_ID { get; set; }
+
         public int Type { get; set; }
         public string? Libelle { get; set; }
+
+        [JsonIgnore]
         public virtual Utilisateur? User1 { get; set; }
+
+        [JsonIgnore]
         public virtual Utilisateur? User2 { get; set; }
     }
 }
-    

@@ -29,6 +29,19 @@ namespace ApiCube.Models
         public DbSet<Relation> Relations { get; set; }
         public DbSet<Ressource> Ressources { get; set; }
         public DbSet<Utilisateur> Utilisateurs { get; set; }
-        
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Relation>()
+                .HasOne(r => r.User1)
+                .WithMany()
+                .HasForeignKey(r => r.User1_ID);
+
+            modelBuilder.Entity<Relation>()
+                .HasOne(r => r.User2)
+                .WithMany()
+                .HasForeignKey(r => r.User2_ID)
+                .OnDelete(DeleteBehavior.Cascade);
+        }
     }
 }

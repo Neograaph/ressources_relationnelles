@@ -6,18 +6,17 @@ namespace ApiCube.Models.BuisnessObjects
 {
     public class Relation
     {
-        [Key] public int RelationId { get; set; }
-        [Required]
-        [NotMapped]
-        public Utilisateur? Utilisateur { get; set; }
-        [Required]
-        [NotMapped]
-        public Utilisateur? UtilisateurRelation { get; set; }
-        [MaxLength(50)]
-        [Required]
+        [Key]
+        public int ID { get; set; }
+        [ForeignKey("User1")]
+        public int User1_ID { get; set; }
+
+        [ForeignKey("User2")]
+        public int User2_ID { get; set; }
+        public int Type { get; set; }
         public string? Libelle { get; set; }
-        [Required]
-        [MaxLength(150)]
-        public string? Type { get; set; }
+        public virtual Utilisateur? User1 { get; set; }
+        public virtual Utilisateur? User2 { get; set; }
     }
 }
+    

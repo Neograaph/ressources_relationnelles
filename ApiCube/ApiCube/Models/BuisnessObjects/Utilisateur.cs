@@ -20,7 +20,9 @@ namespace ApiCube.Models.BuisnessObjects
         public bool UtilisateurActif { get; set; }
         public DateTime DateCreation { get; set; }
         public DateTime DerniereConnexion { get; set; }
-        public string? Role { get; set; }
+        [Required]
+        [MaxLength(50)]
+        public string Role { get; set; }
 
         public Adresse? Adresse { get; set; }
 

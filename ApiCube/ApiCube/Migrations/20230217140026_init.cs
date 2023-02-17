@@ -28,8 +28,9 @@ namespace ApiCube.Migrations
                 {
                     AdresseId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    AdresseNum = table.Column<int>(type: "int", nullable: false),
                     Rue = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
-                    Cp = table.Column<int>(type: "int", maxLength: 5, nullable: false),
+                    Cp = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
                     Ville = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false)
                 },
                 constraints: table =>
@@ -66,7 +67,7 @@ namespace ApiCube.Migrations
                     UtilisateurActif = table.Column<bool>(type: "bit", nullable: false),
                     DateCreation = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DerniereConnexion = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Role = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Role = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     AdresseId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -124,7 +125,7 @@ namespace ApiCube.Migrations
                         column: x => x.User1_ID,
                         principalTable: "Utilisateurs",
                         principalColumn: "UtilisateurId",
-                        onDelete: ReferentialAction.NoAction);
+                         onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
                         name: "FK_Relations_Utilisateurs_User2_ID",
                         column: x => x.User2_ID,

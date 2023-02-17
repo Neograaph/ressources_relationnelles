@@ -8,12 +8,15 @@ namespace ApiCube.Models.BuisnessObjects
     {
         [Key]
         public int ID { get; set; }
+        [ForeignKey("User1")]
         public int User1_ID { get; set; }
+
+        [ForeignKey("User2")]
         public int User2_ID { get; set; }
         public int Type { get; set; }
         public string? Libelle { get; set; }
-        public virtual Utilisateur User1 { get; set; }
-        public virtual Utilisateur User2 { get; set; }
+        public virtual Utilisateur? User1 { get; set; }
+        public virtual Utilisateur? User2 { get; set; }
     }
 }
     

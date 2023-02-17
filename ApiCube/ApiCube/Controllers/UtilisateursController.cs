@@ -1,15 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ApiCube.Models;
-using ApiCube.Models.BuisnessObjects;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ApiCube.Models;
+using ApiCube.Models.BuisnessObjects;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ApiCube.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
+    [ApiController]
     public class UtilisateursController : ControllerBase
     {
         private readonly AppContexte _context;
@@ -77,12 +77,12 @@ namespace ApiCube.Controllers
             _context.Utilisateurs.Add(utilisateur);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetUtilisateur), new { id = utilisateur.UtilisateurId }, utilisateur);
+            return CreatedAtAction("GetUtilisateur", new { id = utilisateur.UtilisateurId }, utilisateur);
         }
 
         // DELETE: api/Utilisateurs/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUtilisateur(int id)
+        public async Task<ActionResult<Utilisateur>> DeleteUtilisateur(int id)
         {
             var utilisateur = await _context.Utilisateurs.FindAsync(id);
             if (utilisateur == null)
@@ -93,7 +93,7 @@ namespace ApiCube.Controllers
             _context.Utilisateurs.Remove(utilisateur);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return utilisateur;
         }
 
         private bool UtilisateurExists(int id)

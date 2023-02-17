@@ -16,52 +16,53 @@ namespace ApiCube.Models.BuisnessObjects
         [MaxLength(15)]
         public string? Telephone { get; set; }
         [MaxLength(150)]
-        public string? Email { get;set; }
+        public string? Email { get; set; }
         public bool UtilisateurActif { get; set; }
         public DateTime DateCreation { get; set; }
         public DateTime DerniereConnexion { get; set; }
         [Required]
         [MaxLength(50)]
-        public string Role { get; set; }
+        public string? Role { get; set; }
 
         public Adresse? Adresse { get; set; }
 
-        [NotMapped]
-        private ICollection<ModererCom>? _modererComs;
-        [NotMapped]
-        public virtual ICollection<ModererCom> ModererComs
-        {
-            get
-            {
-                if (Role == "3")
-                {
-                    return _modererComs ??= new List<ModererCom>();
-                }
-                else
-                {
-                    throw new UnauthorizedAccessException("L'utilisateur n'a pas le rôle requis pour accéder à cette propriété.");
-                }
-            }
-        }
-        [NotMapped]
-        private ICollection<ModererRes>? _modererRess;
-        [NotMapped]
-        public virtual ICollection<ModererRes> ModererRess
-        {
-            get
-            {
-                if (Role == "3")
-                {
-                    return _modererRess ??= new List<ModererRes>();
-                }
-                else
-                {
-                    throw new UnauthorizedAccessException("L'utilisateur n'a pas le rôle requis pour accéder à cette propriété.");
-                }
-            }
-        }
+        //    [NotMapped]
+        //    private ICollection<ModererCom>? _modererComs;
+        //    [NotMapped]
+        //    public virtual ICollection<ModererCom> ModererComs
+        //    {
+        //        get
+        //        {
+        //            if (Role == "3")
+        //            {
+        //                return _modererComs ??= new List<ModererCom>();
+        //            }
+        //            else
+        //            {
+        //                throw new UnauthorizedAccessException("L'utilisateur n'a pas le rôle requis pour accéder à cette propriété.");
+        //            }
+        //        }
+        //    }
+        //    [NotMapped]
+        //    private ICollection<ModererRes>? _modererRess;
+        //    [NotMapped]
+        //    public virtual ICollection<ModererRes> ModererRess
+        //    {
+        //        get
+        //        {
+        //            if (Role == "3")
+        //            {
+        //                return _modererRess ??= new List<ModererRes>();
+        //            }
+        //            else
+        //            {
+        //                throw new UnauthorizedAccessException("L'utilisateur n'a pas le rôle requis pour accéder à cette propriété.");
+        //            }
+        //        }
+        //    }
 
-        [NotMapped]
-        public virtual ICollection<Relation>? Relations { get; set; }
+            [NotMapped]
+           public virtual ICollection<Relation>? Relations { get; set; }
+        //}
     }
 }

@@ -25,9 +25,9 @@ namespace ApiCube.Models.BuisnessObjects
         public Adresse? Adresse { get; set; }
 
         [NotMapped]
-        public virtual ICollection<ModererCom> modererComs { get; set; }
+        public virtual ICollection<ModererCom> ModererComs { get; set; }
         [NotMapped]
-        public virtual ICollection<ModererRes> modererRess{ get; set; }
+        public virtual ICollection<ModererRes> ModererRess{ get; set; }
         [NotMapped]
         public virtual ICollection<Relation> Relations { get; set; }
     }

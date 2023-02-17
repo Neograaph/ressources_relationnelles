@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ApiCube.Models.BuisnessObjects
 {
@@ -7,8 +8,10 @@ namespace ApiCube.Models.BuisnessObjects
     {
         [Key] public int RelationId { get; set; }
         [Required]
+        [NotMapped]
         public Utilisateur? Utilisateur { get; set; }
         [Required]
+        [NotMapped]
         public Utilisateur? UtilisateurRelation { get; set; }
         [MaxLength(50)]
         [Required]

@@ -1,5 +1,5 @@
 export const environment = {
     production: false,
-    title: 'Local Environment Heading',
-    apiURL: 'http://localhost:8000'
+    actiontype: 'https://localhost:7032/api/ActionTypes',
+    apiURL: 'https://localhost:7032/api/ActionTypes'
   };

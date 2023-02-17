@@ -109,18 +109,28 @@ namespace ApiCube.Migrations
                 name: "Relations",
                 columns: table => new
                 {
-                    UtilisateurId = table.Column<int>(type: "int", nullable: false),
-                    Libelle = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false)
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    User1_ID = table.Column<int>(type: "int", nullable: false),
+                    User2_ID = table.Column<int>(type: "int", nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    Libelle = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
+                    table.PrimaryKey("PK_Relations", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Relations_Utilisateurs_UtilisateurId",
-                        column: x => x.UtilisateurId,
+                        name: "FK_Relations_Utilisateurs_User1_ID",
+                        column: x => x.User1_ID,
                         principalTable: "Utilisateurs",
                         principalColumn: "UtilisateurId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_Relations_Utilisateurs_User2_ID",
+                        column: x => x.User2_ID,
+                        principalTable: "Utilisateurs",
+                        principalColumn: "UtilisateurId",
+                         onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -300,9 +310,14 @@ namespace ApiCube.Migrations
                 column: "RessourceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Relations_UtilisateurId",
+                name: "IX_Relations_User1_ID",
                 table: "Relations",
-                column: "UtilisateurId");
+                column: "User1_ID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Relations_User2_ID",
+                table: "Relations",
+                column: "User2_ID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ressources_DocumentId",

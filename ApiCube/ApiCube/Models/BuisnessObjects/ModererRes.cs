@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.Security.Policy;
 
 namespace ApiCube.Models.BuisnessObjects
 {
@@ -14,5 +15,7 @@ namespace ApiCube.Models.BuisnessObjects
         public ActionType? Action { get; set; }
         [Required]
         public DateTime DateModerRes { get; set; }
+
+        public int UtilisateurId { get; set; }
     }
 }

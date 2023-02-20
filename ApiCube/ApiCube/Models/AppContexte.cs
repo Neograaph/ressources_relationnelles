@@ -41,7 +41,7 @@ namespace ApiCube.Models
                 .HasOne(r => r.User2)
                 .WithMany()
                 .HasForeignKey(r => r.User2_ID)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

@@ -6,7 +6,6 @@ namespace ApiCube.Models.BuisnessObjects
     {
         [Key]
         public int ActionTypeId { get; set; }
-
         [MaxLength(50)]
         [Required]
         public string? Libelle { get; set; }

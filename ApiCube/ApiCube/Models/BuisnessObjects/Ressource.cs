@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ApiCube.Models.BuisnessObjects
 {
@@ -21,10 +23,15 @@ namespace ApiCube.Models.BuisnessObjects
         [MaxLength(50)]
         public string? CategorieLibelle { get; set; }
 
-        public int DocumentId { get; set; }
+        public int? DocumentId { get; set; }
         public Document? Document { get; set; }
 
+        [ForeignKey("Utilisateur")]
         public int UtilisateurId { get; set; }
+        [JsonIgnore]
+        public Utilisateur? Utilisateur { get; set; }
+        [JsonIgnore]
+        public ICollection<Aimer>? Aimes { get; set; }
 
     }
 }

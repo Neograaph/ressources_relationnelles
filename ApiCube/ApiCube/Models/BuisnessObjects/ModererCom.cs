@@ -15,5 +15,7 @@ namespace ApiCube.Models.BuisnessObjects
         public ActionType? Action { get; set; }
         [Required]
         public DateTime DateModerCom{ get; set; }
-}
+
+        public int UtilisateurId { get; set; }
+    }
 }

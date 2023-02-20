@@ -5,6 +5,8 @@ using ApiCube.Models.BuisnessObjects;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
+using System.Text.Json;
 
 namespace ApiCube.Controllers
 {
@@ -19,11 +21,17 @@ namespace ApiCube.Controllers
             _context = context;
         }
 
-        // GET: api/Ressources
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Ressource>>> GetRessources()
         {
-            return await _context.Ressources.ToListAsync();
+            var options = new JsonSerializerOptions
+            {
+                ReferenceHandler = ReferenceHandler.Preserve,
+            };
+
+            var ressources = await _context.Ressources.Include(r => r.Utilisateur).ToListAsync();
+            var serializedRessources = JsonSerializer.Serialize(ressources, options);
+            return Content(serializedRessources, "application/json");
         }
 
         // GET: api/Ressources/5

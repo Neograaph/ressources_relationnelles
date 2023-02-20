@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiCube.Migrations
 {
     [DbContext(typeof(AppContexte))]
-    [Migration("20230217140026_init")]
+    [Migration("20230220145902_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -87,9 +87,14 @@ namespace ApiCube.Migrations
                     b.Property<int>("RessourceId")
                         .HasColumnType("int");
 
+                    b.Property<int>("UtilisateurId")
+                        .HasColumnType("int");
+
                     b.HasKey("AimerId");
 
                     b.HasIndex("RessourceId");
+
+                    b.HasIndex("UtilisateurId");
 
                     b.ToTable("Aimers");
                 });
@@ -188,6 +193,9 @@ namespace ApiCube.Migrations
                     b.Property<DateTime>("DateModerCom")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("UtilisateurId")
+                        .HasColumnType("int");
+
                     b.HasKey("ModererComId");
 
                     b.HasIndex("ActionTypeId");
@@ -212,6 +220,9 @@ namespace ApiCube.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int>("RessourceId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UtilisateurId")
                         .HasColumnType("int");
 
                     b.HasKey("ModererResId");
@@ -297,7 +308,7 @@ namespace ApiCube.Migrations
                     b.Property<DateTime>("DateCreation")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DocumentId")
+                    b.Property<int?>("DocumentId")
                         .HasColumnType("int");
 
                     b.Property<string>("Titre")
@@ -317,6 +328,8 @@ namespace ApiCube.Migrations
                     b.HasKey("RessourceId");
 
                     b.HasIndex("DocumentId");
+
+                    b.HasIndex("UtilisateurId");
 
                     b.ToTable("Ressources");
                 });
@@ -354,10 +367,8 @@ namespace ApiCube.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("Role")
+                        .HasColumnType("int");
 
                     b.Property<string>("Telephone")
                         .HasMaxLength(15)
@@ -376,12 +387,20 @@ namespace ApiCube.Migrations
             modelBuilder.Entity("ApiCube.Models.BuisnessObjects.Aimer", b =>
                 {
                     b.HasOne("ApiCube.Models.BuisnessObjects.Ressource", "Ressource")
-                        .WithMany()
+                        .WithMany("Aimes")
                         .HasForeignKey("RessourceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ApiCube.Models.BuisnessObjects.Utilisateur", "Utilisateur")
+                        .WithMany("Aimes")
+                        .HasForeignKey("UtilisateurId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Ressource");
+
+                    b.Navigation("Utilisateur");
                 });
 
             modelBuilder.Entity("ApiCube.Models.BuisnessObjects.Commentaire", b =>
@@ -464,7 +483,7 @@ namespace ApiCube.Migrations
                     b.HasOne("ApiCube.Models.BuisnessObjects.Utilisateur", "User2")
                         .WithMany()
                         .HasForeignKey("User2_ID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("User1");
@@ -476,11 +495,17 @@ namespace ApiCube.Migrations
                 {
                     b.HasOne("ApiCube.Models.BuisnessObjects.Document", "Document")
                         .WithMany()
-                        .HasForeignKey("DocumentId")
+                        .HasForeignKey("DocumentId");
+
+                    b.HasOne("ApiCube.Models.BuisnessObjects.Utilisateur", "Utilisateur")
+                        .WithMany("Ressources")
+                        .HasForeignKey("UtilisateurId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Document");
+
+                    b.Navigation("Utilisateur");
                 });
 
             modelBuilder.Entity("ApiCube.Models.BuisnessObjects.Utilisateur", b =>
@@ -490,6 +515,18 @@ namespace ApiCube.Migrations
                         .HasForeignKey("AdresseId");
 
                     b.Navigation("Adresse");
+                });
+
+            modelBuilder.Entity("ApiCube.Models.BuisnessObjects.Ressource", b =>
+                {
+                    b.Navigation("Aimes");
+                });
+
+            modelBuilder.Entity("ApiCube.Models.BuisnessObjects.Utilisateur", b =>
+                {
+                    b.Navigation("Aimes");
+
+                    b.Navigation("Ressources");
                 });
 #pragma warning restore 612, 618
         }

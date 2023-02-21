@@ -43,6 +43,22 @@ namespace ApiCube.Models
                 .HasForeignKey(r => r.User2_ID)
                 .OnDelete(DeleteBehavior.NoAction);
 
+            modelBuilder.Entity<Aimer>(entity =>
+            {
+                entity.HasKey(e => e.AimerId);
+
+                entity.HasOne(d => d.Ressource)
+                    .WithMany(p => p.Aimes)
+                    .HasForeignKey(d => d.RessourceId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Aimer_Ressource");
+
+                entity.HasOne(d => d.Utilisateur)
+                    .WithMany(p => p.Aimes)
+                    .HasForeignKey(d => d.UtilisateurId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Aimer_Utilisateur");
+            });
 
         }
     }

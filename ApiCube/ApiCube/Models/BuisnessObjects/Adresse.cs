@@ -17,5 +17,7 @@ namespace ApiCube.Models.BuisnessObjects
         [MaxLength(150)]
         [Required]
         public string? Ville { get; set; }
+
+        public ICollection<Utilisateur>? Utilisateurs { get; set; }
     }
 }

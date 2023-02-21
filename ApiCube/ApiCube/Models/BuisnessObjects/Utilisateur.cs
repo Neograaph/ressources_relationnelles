@@ -25,12 +25,11 @@ namespace ApiCube.Models.BuisnessObjects
         [Range(1, 4, ErrorMessage = "Invalid role ID.")]
         public int Role { get; set; }
 
-        public Adresse? Adresse { get; set; }
+        public Adresse Adresse { get; set; }
+
 
         public ICollection<Aimer>? Aimes { get; set; }
         public ICollection<Ressource>? Ressources { get; set; }
-
-        //[NotMapped]
-        //public virtual ICollection<Relation>? Relations { get; set; }
+        public virtual ICollection<Relation>? Relations { get; set; }
     }
 }

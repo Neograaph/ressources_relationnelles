@@ -28,8 +28,10 @@ namespace ApiCube.Models.BuisnessObjects
 
         [ForeignKey("Utilisateur")]
         public int UtilisateurId { get; set; }
+
         [JsonIgnore]
         public Utilisateur? Utilisateur { get; set; }
+
         [JsonIgnore]
         public ICollection<Aimer>? Aimes { get; set; }
 

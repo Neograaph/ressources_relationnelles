@@ -17,7 +17,10 @@ namespace ApiCube.Models.BuisnessObjects
         public Ressource? Ressource { get; set; }
 
         public int UtilisateurId { get; set; }
+        public Utilisateur Utilisateur { get; set; }
 
         public int CommentaireReponse { get; set; }
+
+
     }
 }

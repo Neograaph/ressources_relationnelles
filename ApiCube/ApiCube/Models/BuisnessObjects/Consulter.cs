@@ -9,7 +9,13 @@ namespace ApiCube.Models.BuisnessObjects
         [Key]
         public int ConsulterId { get; set; }
         [Required]
-        public Ressource? Ressource { get; set; }
-       
+        public DateTime DateConsultation { get; set; }
+        public int RessourceId { get; set; }
+        public Ressource Ressource { get; set; }
+
+        public int UtilisateurId { get; set; }
+        public Utilisateur Utilisateur { get; set; }
+
+        
     }
 }

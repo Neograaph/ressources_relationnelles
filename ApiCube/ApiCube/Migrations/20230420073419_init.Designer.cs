@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiCube.Migrations
 {
     [DbContext(typeof(AppContexte))]
-    [Migration("20230214140019_init")]
+    [Migration("20230420073419_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -248,6 +248,12 @@ namespace ApiCube.Migrations
 
             modelBuilder.Entity("ApiCube.Models.BuisnessObjects.Relation", b =>
                 {
+                    b.Property<int>("RelationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RelationId"), 1L, 1);
+
                     b.Property<string>("Libelle")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -261,7 +267,10 @@ namespace ApiCube.Migrations
                     b.Property<int>("UtilisateurId")
                         .HasColumnType("int");
 
-                    b.HasIndex("UtilisateurId");
+                    b.Property<int>("UtilisateurRelationId")
+                        .HasColumnType("int");
+
+                    b.HasKey("RelationId");
 
                     b.ToTable("Relations");
                 });
@@ -437,17 +446,6 @@ namespace ApiCube.Migrations
                         .HasForeignKey("RessourceId");
 
                     b.Navigation("Ressource");
-                });
-
-            modelBuilder.Entity("ApiCube.Models.BuisnessObjects.Relation", b =>
-                {
-                    b.HasOne("ApiCube.Models.BuisnessObjects.Utilisateur", "Utilisateur")
-                        .WithMany()
-                        .HasForeignKey("UtilisateurId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Utilisateur");
                 });
 
             modelBuilder.Entity("ApiCube.Models.BuisnessObjects.Ressource", b =>

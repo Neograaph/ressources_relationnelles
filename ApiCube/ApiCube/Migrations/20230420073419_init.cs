@@ -53,6 +53,22 @@ namespace ApiCube.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Relations",
+                columns: table => new
+                {
+                    RelationId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UtilisateurId = table.Column<int>(type: "int", nullable: false),
+                    UtilisateurRelationId = table.Column<int>(type: "int", nullable: false),
+                    Libelle = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Type = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Relations", x => x.RelationId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Utilisateurs",
                 columns: table => new
                 {
@@ -102,24 +118,6 @@ namespace ApiCube.Migrations
                         column: x => x.DocumentId,
                         principalTable: "Documents",
                         principalColumn: "DocumentId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Relations",
-                columns: table => new
-                {
-                    UtilisateurId = table.Column<int>(type: "int", nullable: false),
-                    Libelle = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.ForeignKey(
-                        name: "FK_Relations_Utilisateurs_UtilisateurId",
-                        column: x => x.UtilisateurId,
-                        principalTable: "Utilisateurs",
-                        principalColumn: "UtilisateurId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -300,11 +298,6 @@ namespace ApiCube.Migrations
                 column: "RessourceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Relations_UtilisateurId",
-                table: "Relations",
-                column: "UtilisateurId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Ressources_DocumentId",
                 table: "Ressources",
                 column: "DocumentId");
@@ -336,19 +329,19 @@ namespace ApiCube.Migrations
                 name: "Relations");
 
             migrationBuilder.DropTable(
+                name: "Utilisateurs");
+
+            migrationBuilder.DropTable(
                 name: "Commentaires");
 
             migrationBuilder.DropTable(
                 name: "ActionTypes");
 
             migrationBuilder.DropTable(
-                name: "Utilisateurs");
+                name: "Adresses");
 
             migrationBuilder.DropTable(
                 name: "Ressources");
-
-            migrationBuilder.DropTable(
-                name: "Adresses");
 
             migrationBuilder.DropTable(
                 name: "Documents");

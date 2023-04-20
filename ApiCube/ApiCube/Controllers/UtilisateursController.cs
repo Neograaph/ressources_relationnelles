@@ -32,7 +32,6 @@ namespace ApiCube.Controllers
             _context = context;
         }
 
-        // POST: api/Utilisateurs/authenticate
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody] AuthentificationRequest request)
         {
@@ -54,7 +53,9 @@ namespace ApiCube.Controllers
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Name, utilisateur.UtilisateurId.ToString())
+                new Claim(ClaimTypes.Name, utilisateur.Prenom + " " + utilisateur.Nom),
+                new Claim(ClaimTypes.Role, utilisateur.Role),
+                new Claim("UtilisateurId", utilisateur.UtilisateurId.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
@@ -64,6 +65,7 @@ namespace ApiCube.Controllers
 
             return Ok(new { Token = tokenString });
         }
+
 
         // POST: api/Utilisateurs
         [HttpPost]
@@ -85,7 +87,7 @@ namespace ApiCube.Controllers
 
         // GET: api/Utilisateurs/5
         [HttpGet("{id}")]
-        [Authorize]
+       // [Authorize]
         public async Task<ActionResult<Utilisateur>> GetUtilisateur(int id)
         {
             var utilisateur = await _context.Utilisateurs.FindAsync(id);
@@ -98,8 +100,8 @@ namespace ApiCube.Controllers
             return utilisateur;
         }
         // PUT: api/Utilisateurs/5
-        [HttpPut("{id}")]
-        [Authorize]
+       [HttpPut("{id}")]
+        //[Authorize]
         public async Task<IActionResult> PutUtilisateur(int id, Utilisateur utilisateur)
         {
             if (id != utilisateur.UtilisateurId)

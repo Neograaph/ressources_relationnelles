@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiCube.Migrations
 {
     [DbContext(typeof(AppContexte))]
-    [Migration("20230420073419_init")]
+    [Migration("20230420080857_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -315,6 +315,8 @@ namespace ApiCube.Migrations
 
                     b.HasIndex("DocumentId");
 
+                    b.HasIndex("UtilisateurId");
+
                     b.ToTable("Ressources");
                 });
 
@@ -340,8 +342,7 @@ namespace ApiCube.Migrations
                         .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("MotDePasse")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nom")
                         .HasMaxLength(150)
@@ -456,7 +457,15 @@ namespace ApiCube.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ApiCube.Models.BuisnessObjects.Utilisateur", "Utilisateur")
+                        .WithMany()
+                        .HasForeignKey("UtilisateurId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Document");
+
+                    b.Navigation("Utilisateur");
                 });
 
             modelBuilder.Entity("ApiCube.Models.BuisnessObjects.Utilisateur", b =>

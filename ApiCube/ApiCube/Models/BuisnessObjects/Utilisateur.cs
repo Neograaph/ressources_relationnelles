@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ApiCube.Models.BuisnessObjects
@@ -11,7 +12,6 @@ namespace ApiCube.Models.BuisnessObjects
         public string? Nom { get; set; }
         [MaxLength(150)]
         public string? Prenom { get; set; }
-        [MaxLength(50)]
         public string? MotDePasse { get; set; }
         [MaxLength(15)]
         public string? Telephone { get; set; }
@@ -25,10 +25,13 @@ namespace ApiCube.Models.BuisnessObjects
         public Adresse? Adresse { get; set; }
 
         [NotMapped]
-        public virtual ICollection<ModererCom> ModererComs { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<ModererCom>? ModererComs { get; set; }
         [NotMapped]
-        public virtual ICollection<ModererRes> ModererRess{ get; set; }
+        [JsonIgnore]
+        public virtual ICollection<ModererRes>? ModererRess { get; set; }
         [NotMapped]
-        public virtual ICollection<Relation> Relations { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<Relation>? Relations { get; set; }
     }
 }

@@ -76,7 +76,7 @@ namespace ApiCube.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nom = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
                     Prenom = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
-                    MotDePasse = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    MotDePasse = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Telephone = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
                     UtilisateurActif = table.Column<bool>(type: "bit", nullable: false),
@@ -118,6 +118,12 @@ namespace ApiCube.Migrations
                         column: x => x.DocumentId,
                         principalTable: "Documents",
                         principalColumn: "DocumentId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Ressources_Utilisateurs_UtilisateurId",
+                        column: x => x.UtilisateurId,
+                        principalTable: "Utilisateurs",
+                        principalColumn: "UtilisateurId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -303,6 +309,11 @@ namespace ApiCube.Migrations
                 column: "DocumentId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Ressources_UtilisateurId",
+                table: "Ressources",
+                column: "UtilisateurId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Utilisateurs_AdresseId",
                 table: "Utilisateurs",
                 column: "AdresseId");
@@ -329,22 +340,22 @@ namespace ApiCube.Migrations
                 name: "Relations");
 
             migrationBuilder.DropTable(
-                name: "Utilisateurs");
-
-            migrationBuilder.DropTable(
                 name: "Commentaires");
 
             migrationBuilder.DropTable(
                 name: "ActionTypes");
 
             migrationBuilder.DropTable(
-                name: "Adresses");
-
-            migrationBuilder.DropTable(
                 name: "Ressources");
 
             migrationBuilder.DropTable(
                 name: "Documents");
+
+            migrationBuilder.DropTable(
+                name: "Utilisateurs");
+
+            migrationBuilder.DropTable(
+                name: "Adresses");
         }
     }
 }

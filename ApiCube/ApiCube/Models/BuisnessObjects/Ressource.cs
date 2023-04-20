@@ -26,5 +26,7 @@ namespace ApiCube.Models.BuisnessObjects
 
         public int UtilisateurId { get; set; }
 
+        public Utilisateur Utilisateur { get; set; }
+
     }
 }

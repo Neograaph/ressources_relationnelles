@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -20,11 +20,14 @@ namespace ApiCube.Models.BuisnessObjects
         public bool UtilisateurActif { get; set; }
         public DateTime DateCreation { get; set; }
         public DateTime DerniereConnexion { get; set; }
-        public string? Role { get; set; }
+        [Required]
+        [MaxLength(50)]
+        public string Role { get; set; }
 
         public Adresse? Adresse { get; set; }
 
         [NotMapped]
+
         [JsonIgnore]
         public virtual ICollection<ModererCom>? ModererComs { get; set; }
         [NotMapped]
@@ -32,6 +35,43 @@ namespace ApiCube.Models.BuisnessObjects
         public virtual ICollection<ModererRes>? ModererRess { get; set; }
         [NotMapped]
         [JsonIgnore]
+
+        private ICollection<ModererCom>? _modererComs;
+        [NotMapped]
+        public virtual ICollection<ModererCom> ModererComs
+        {
+            get
+            {
+                if (Role == "3")
+                {
+                    return _modererComs ??= new List<ModererCom>();
+                }
+                else
+                {
+                    throw new UnauthorizedAccessException("L'utilisateur n'a pas le rôle requis pour accéder à cette propriété.");
+                }
+            }
+        }
+        [NotMapped]
+        private ICollection<ModererRes>? _modererRess;
+        [NotMapped]
+        public virtual ICollection<ModererRes> ModererRess
+        {
+            get
+            {
+                if (Role == "3")
+                {
+                    return _modererRess ??= new List<ModererRes>();
+                }
+                else
+                {
+                    throw new UnauthorizedAccessException("L'utilisateur n'a pas le rôle requis pour accéder à cette propriété.");
+                }
+            }
+        }
+
+        [NotMapped]
+
         public virtual ICollection<Relation>? Relations { get; set; }
     }
 }

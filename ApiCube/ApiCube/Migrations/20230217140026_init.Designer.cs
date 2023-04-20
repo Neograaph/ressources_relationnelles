@@ -4,6 +4,7 @@ using ApiCube.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiCube.Migrations
 {
     [DbContext(typeof(AppContexte))]
-    partial class AppContexteModelSnapshot : ModelSnapshot
+    [Migration("20230217140026_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -249,7 +251,11 @@ namespace ApiCube.Migrations
 
             modelBuilder.Entity("ApiCube.Models.BuisnessObjects.Relation", b =>
                 {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
 
                     b.Property<string>("Libelle")
                         .HasColumnType("nvarchar(max)");
@@ -263,7 +269,11 @@ namespace ApiCube.Migrations
                     b.Property<int>("User2_ID")
                         .HasColumnType("int");
 
+                    b.HasKey("ID");
 
+                    b.HasIndex("User1_ID");
+
+                    b.HasIndex("User2_ID");
 
                     b.ToTable("Relations");
                 });
@@ -308,8 +318,6 @@ namespace ApiCube.Migrations
 
                     b.HasIndex("DocumentId");
 
-                    b.HasIndex("UtilisateurId");
-
                     b.ToTable("Ressources");
                 });
 
@@ -335,7 +343,8 @@ namespace ApiCube.Migrations
                         .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("MotDePasse")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("Nom")
                         .HasMaxLength(150)
@@ -444,17 +453,34 @@ namespace ApiCube.Migrations
                     b.Navigation("Ressource");
                 });
 
+            modelBuilder.Entity("ApiCube.Models.BuisnessObjects.Relation", b =>
+                {
+                    b.HasOne("ApiCube.Models.BuisnessObjects.Utilisateur", "User1")
+                        .WithMany()
+                        .HasForeignKey("User1_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ApiCube.Models.BuisnessObjects.Utilisateur", "User2")
+                        .WithMany()
+                        .HasForeignKey("User2_ID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User1");
+
+                    b.Navigation("User2");
+                });
+
             modelBuilder.Entity("ApiCube.Models.BuisnessObjects.Ressource", b =>
                 {
-
+                    b.HasOne("ApiCube.Models.BuisnessObjects.Document", "Document")
                         .WithMany()
-                        .HasForeignKey("UtilisateurId")
+                        .HasForeignKey("DocumentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Document");
-
-                    b.Navigation("Utilisateur");
                 });
 
             modelBuilder.Entity("ApiCube.Models.BuisnessObjects.Utilisateur", b =>

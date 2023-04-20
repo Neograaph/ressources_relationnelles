@@ -1,3 +1,4 @@
+
 ﻿using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -17,12 +18,15 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
+
+
 namespace ApiCube.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class UtilisateursController : ControllerBase
     {
+
         private readonly IConfiguration _config;
         private readonly AppContexte _context;
 
@@ -81,11 +85,24 @@ namespace ApiCube.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetUtilisateur", new { id = utilisateur.UtilisateurId }, utilisateur);
+
+        private readonly AppContexte _context;
+
+        public UtilisateursController(AppContexte context)
+        {
+            _context = context;
+        }
+
+        // GET: api/Utilisateurs
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Utilisateur>>> GetUtilisateurs()
+        {
+            return await _context.Utilisateurs.ToListAsync();
+
         }
 
         // GET: api/Utilisateurs/5
         [HttpGet("{id}")]
-        [Authorize]
         public async Task<ActionResult<Utilisateur>> GetUtilisateur(int id)
         {
             var utilisateur = await _context.Utilisateurs.FindAsync(id);
@@ -97,15 +114,22 @@ namespace ApiCube.Controllers
 
             return utilisateur;
         }
+
         // PUT: api/Utilisateurs/5
         [HttpPut("{id}")]
         [Authorize]
+
+
+        // PUT: api/Utilisateurs/5
+        [HttpPut("{id}")]
+
         public async Task<IActionResult> PutUtilisateur(int id, Utilisateur utilisateur)
         {
             if (id != utilisateur.UtilisateurId)
             {
                 return BadRequest();
             }
+
 
             var existingUtilisateur = await _context.Utilisateurs.FindAsync(id);
             if (existingUtilisateur == null)
@@ -122,6 +146,9 @@ namespace ApiCube.Controllers
             existingUtilisateur.Adresse = utilisateur.Adresse;
 
             _context.Entry(existingUtilisateur).State = EntityState.Modified;
+
+            _context.Entry(utilisateur).State = EntityState.Modified;
+
 
             try
             {
@@ -142,9 +169,24 @@ namespace ApiCube.Controllers
             return NoContent();
         }
 
+
         // DELETE: api/Utilisateurs/5
         [HttpDelete("{id}")]
         [Authorize(Roles = "admin")]
+
+        // POST: api/Utilisateurs
+        [HttpPost]
+        public async Task<ActionResult<Utilisateur>> PostUtilisateur(Utilisateur utilisateur)
+        {
+            _context.Utilisateurs.Add(utilisateur);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetUtilisateur", new { id = utilisateur.UtilisateurId }, utilisateur);
+        }
+
+        // DELETE: api/Utilisateurs/5
+        [HttpDelete("{id}")]
+
         public async Task<ActionResult<Utilisateur>> DeleteUtilisateur(int id)
         {
             var utilisateur = await _context.Utilisateurs.FindAsync(id);
@@ -166,6 +208,7 @@ namespace ApiCube.Controllers
     }
 }
 
+
         //// PUT: api/Utilisateurs/5
         //[HttpPut("{id}")]
         //[Authorize]
@@ -185,3 +228,5 @@ namespace ApiCube.Controllers
         //    catch (DbUpdateConcurrencyException)
         //    {
         //        if (!UtilisateurExists(id
+
+

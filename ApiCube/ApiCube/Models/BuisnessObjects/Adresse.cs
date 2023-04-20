@@ -7,12 +7,13 @@ namespace ApiCube.Models.BuisnessObjects
     {
         [Key]
         public int AdresseId { get; set; }
+        public int AdresseNum { get; set; }
         [MaxLength(150)]
         [Required]
         public string? Rue { get; set; }
         [MaxLength(5)]
         [Required]
-        public int? Cp { get; set; }
+        public string? Cp { get; set; }
         [MaxLength(150)]
         [Required]
         public string? Ville { get; set; }

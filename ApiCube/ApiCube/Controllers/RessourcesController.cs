@@ -84,15 +84,6 @@ namespace ApiCube.Controllers
             return NoContent();
         }
 
-        // POST: api/Ressources
-        [HttpPost]
-        public async Task<ActionResult<Ressource>> PostRessource(Ressource ressource)
-        {
-            _context.Ressources.Add(ressource);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetRessource), new { id = ressource.RessourceId }, ressource);
-        }
 
         // DELETE: api/Ressources/5
         [HttpDelete("{id}")]

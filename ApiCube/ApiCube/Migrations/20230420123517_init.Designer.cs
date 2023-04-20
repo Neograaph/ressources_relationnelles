@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiCube.Migrations
 {
     [DbContext(typeof(AppContexte))]
-    [Migration("20230217140026_init")]
+    [Migration("20230420123517_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -251,11 +251,11 @@ namespace ApiCube.Migrations
 
             modelBuilder.Entity("ApiCube.Models.BuisnessObjects.Relation", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<int>("RelationId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RelationId"), 1L, 1);
 
                     b.Property<string>("Libelle")
                         .HasColumnType("nvarchar(max)");
@@ -263,17 +263,17 @@ namespace ApiCube.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
-                    b.Property<int>("User1_ID")
+                    b.Property<int>("UtilisateurId")
                         .HasColumnType("int");
 
-                    b.Property<int>("User2_ID")
+                    b.Property<int>("UtilisateurRelationId")
                         .HasColumnType("int");
 
-                    b.HasKey("ID");
+                    b.HasKey("RelationId");
 
-                    b.HasIndex("User1_ID");
+                    b.HasIndex("UtilisateurId");
 
-                    b.HasIndex("User2_ID");
+                    b.HasIndex("UtilisateurRelationId");
 
                     b.ToTable("Relations");
                 });
@@ -318,6 +318,8 @@ namespace ApiCube.Migrations
 
                     b.HasIndex("DocumentId");
 
+                    b.HasIndex("UtilisateurId");
+
                     b.ToTable("Ressources");
                 });
 
@@ -343,8 +345,7 @@ namespace ApiCube.Migrations
                         .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("MotDePasse")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nom")
                         .HasMaxLength(150)
@@ -455,21 +456,21 @@ namespace ApiCube.Migrations
 
             modelBuilder.Entity("ApiCube.Models.BuisnessObjects.Relation", b =>
                 {
-                    b.HasOne("ApiCube.Models.BuisnessObjects.Utilisateur", "User1")
+                    b.HasOne("ApiCube.Models.BuisnessObjects.Utilisateur", "Utilisateur")
                         .WithMany()
-                        .HasForeignKey("User1_ID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("UtilisateurId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("ApiCube.Models.BuisnessObjects.Utilisateur", "User2")
+                    b.HasOne("ApiCube.Models.BuisnessObjects.Utilisateur", "UtilisateurRelation")
                         .WithMany()
-                        .HasForeignKey("User2_ID")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .HasForeignKey("UtilisateurRelationId")
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("User1");
+                    b.Navigation("Utilisateur");
 
-                    b.Navigation("User2");
+                    b.Navigation("UtilisateurRelation");
                 });
 
             modelBuilder.Entity("ApiCube.Models.BuisnessObjects.Ressource", b =>
@@ -480,7 +481,15 @@ namespace ApiCube.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("ApiCube.Models.BuisnessObjects.Utilisateur", "Utilisateur")
+                        .WithMany()
+                        .HasForeignKey("UtilisateurId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Document");
+
+                    b.Navigation("Utilisateur");
                 });
 
             modelBuilder.Entity("ApiCube.Models.BuisnessObjects.Utilisateur", b =>

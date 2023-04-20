@@ -61,7 +61,7 @@ namespace ApiCube.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nom = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
                     Prenom = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
-                    MotDePasse = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    MotDePasse = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Telephone = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
                     UtilisateurActif = table.Column<bool>(type: "bit", nullable: false),
@@ -78,6 +78,34 @@ namespace ApiCube.Migrations
                         column: x => x.AdresseId,
                         principalTable: "Adresses",
                         principalColumn: "AdresseId");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Relations",
+                columns: table => new
+                {
+                    RelationId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UtilisateurId = table.Column<int>(type: "int", nullable: false),
+                    UtilisateurRelationId = table.Column<int>(type: "int", nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    Libelle = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Relations", x => x.RelationId);
+                    table.ForeignKey(
+                        name: "FK_Relations_Utilisateurs_UtilisateurId",
+                        column: x => x.UtilisateurId,
+                        principalTable: "Utilisateurs",
+                        principalColumn: "UtilisateurId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Relations_Utilisateurs_UtilisateurRelationId",
+                        column: x => x.UtilisateurRelationId,
+                        principalTable: "Utilisateurs",
+                        principalColumn: "UtilisateurId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -104,34 +132,12 @@ namespace ApiCube.Migrations
                         principalTable: "Documents",
                         principalColumn: "DocumentId",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Relations",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    User1_ID = table.Column<int>(type: "int", nullable: false),
-                    User2_ID = table.Column<int>(type: "int", nullable: false),
-                    Type = table.Column<int>(type: "int", nullable: false),
-                    Libelle = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Relations", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Relations_Utilisateurs_User1_ID",
-                        column: x => x.User1_ID,
+                        name: "FK_Ressources_Utilisateurs_UtilisateurId",
+                        column: x => x.UtilisateurId,
                         principalTable: "Utilisateurs",
                         principalColumn: "UtilisateurId",
-                         onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_Relations_Utilisateurs_User2_ID",
-                        column: x => x.User2_ID,
-                        principalTable: "Utilisateurs",
-                        principalColumn: "UtilisateurId",
-                         onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -311,19 +317,24 @@ namespace ApiCube.Migrations
                 column: "RessourceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Relations_User1_ID",
+                name: "IX_Relations_UtilisateurId",
                 table: "Relations",
-                column: "User1_ID");
+                column: "UtilisateurId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Relations_User2_ID",
+                name: "IX_Relations_UtilisateurRelationId",
                 table: "Relations",
-                column: "User2_ID");
+                column: "UtilisateurRelationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ressources_DocumentId",
                 table: "Ressources",
                 column: "DocumentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ressources_UtilisateurId",
+                table: "Ressources",
+                column: "UtilisateurId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Utilisateurs_AdresseId",
@@ -358,16 +369,16 @@ namespace ApiCube.Migrations
                 name: "ActionTypes");
 
             migrationBuilder.DropTable(
-                name: "Utilisateurs");
-
-            migrationBuilder.DropTable(
                 name: "Ressources");
 
             migrationBuilder.DropTable(
-                name: "Adresses");
+                name: "Documents");
 
             migrationBuilder.DropTable(
-                name: "Documents");
+                name: "Utilisateurs");
+
+            migrationBuilder.DropTable(
+                name: "Adresses");
         }
     }
 }

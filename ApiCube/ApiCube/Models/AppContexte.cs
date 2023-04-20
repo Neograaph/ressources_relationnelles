@@ -30,18 +30,32 @@ namespace ApiCube.Models
         public DbSet<Ressource> Ressources { get; set; }
         public DbSet<Utilisateur> Utilisateurs { get; set; }
 
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<Relation>()
+        //        .HasOne(r => r.User1)
+        //        .WithMany()
+        //        .HasForeignKey(r => r.User1_ID);
+
+        //    modelBuilder.Entity<Relation>()
+        //        .HasOne(r => r.User2)
+        //        .WithMany()
+        //        .HasForeignKey(r => r.User2_ID)
+        //        .OnDelete(DeleteBehavior.Cascade);
+        //}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Relation>()
-                .HasOne(r => r.User1)
+                .HasOne(r => r.Utilisateur)
                 .WithMany()
-                .HasForeignKey(r => r.User1_ID);
+                .HasForeignKey(r => r.UtilisateurId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Relation>()
-                .HasOne(r => r.User2)
+                .HasOne(r => r.UtilisateurRelation)
                 .WithMany()
-                .HasForeignKey(r => r.User2_ID)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(r => r.UtilisateurRelationId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

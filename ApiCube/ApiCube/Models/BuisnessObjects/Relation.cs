@@ -10,10 +10,12 @@ namespace ApiCube.Models.BuisnessObjects
         [Key] 
         public int RelationId { get; set; }
         public int UtilisateurId { get; set; }
-        public Utilisateur Utilisateur { get; set; }
+
+        public Utilisateur? Utilisateur { get; set; }
         public int UtilisateurRelationId { get; set; }
-        public Utilisateur UtilisateurRelation { get; set; }
-        public int Type { get; set; }
+       
+        public Utilisateur? UtilisateurRelation { get; set; }
+        public int Type { get; set; }       
         public string? Libelle { get; set; }
 
     }

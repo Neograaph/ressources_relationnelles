@@ -26,6 +26,12 @@ namespace ApiCube.Models.BuisnessObjects
 
         public Adresse? Adresse { get; set; }
 
+        [NotMapped]
+        public ICollection<Aimer>? Aimers { get; set; }
+        [NotMapped]
+        public ICollection<Consulter>? Consulters { get; set; }
+        [NotMapped]
+        public ICollection<Rechercher>? Recherchers { get; set; }
         //[NotMapped]
 
         //[JsonIgnore]

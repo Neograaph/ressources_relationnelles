@@ -120,7 +120,7 @@ namespace ApiCube.Migrations
                     Valider = table.Column<bool>(type: "bit", nullable: false),
                     VisibiliteLibelle = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     CategorieLibelle = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    DocumentId = table.Column<int>(type: "int", nullable: false),
+                    DocumentId = table.Column<int>(type: "int", nullable: true),
                     UtilisateurId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -130,8 +130,7 @@ namespace ApiCube.Migrations
                         name: "FK_Ressources_Documents_DocumentId",
                         column: x => x.DocumentId,
                         principalTable: "Documents",
-                        principalColumn: "DocumentId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "DocumentId");
                     table.ForeignKey(
                         name: "FK_Ressources_Utilisateurs_UtilisateurId",
                         column: x => x.UtilisateurId,
@@ -147,7 +146,8 @@ namespace ApiCube.Migrations
                     AimerId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RessourceId = table.Column<int>(type: "int", nullable: false),
-                    DateAimer = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DateAimer = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UtilisateurId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -156,8 +156,12 @@ namespace ApiCube.Migrations
                         name: "FK_Aimers_Ressources_RessourceId",
                         column: x => x.RessourceId,
                         principalTable: "Ressources",
-                        principalColumn: "RessourceId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "RessourceId");
+                    table.ForeignKey(
+                        name: "FK_Aimers_Utilisateurs_UtilisateurId",
+                        column: x => x.UtilisateurId,
+                        principalTable: "Utilisateurs",
+                        principalColumn: "UtilisateurId");
                 });
 
             migrationBuilder.CreateTable(
@@ -170,7 +174,7 @@ namespace ApiCube.Migrations
                     DateCreation = table.Column<DateTime>(type: "datetime2", nullable: false),
                     RessourceId = table.Column<int>(type: "int", nullable: false),
                     UtilisateurId = table.Column<int>(type: "int", nullable: false),
-                    CommentaireReponse = table.Column<int>(type: "int", nullable: false)
+                    CommentaireReponse = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -189,7 +193,8 @@ namespace ApiCube.Migrations
                 {
                     ConsulterId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RessourceId = table.Column<int>(type: "int", nullable: false)
+                    RessourceId = table.Column<int>(type: "int", nullable: false),
+                    UtilisateurId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -198,8 +203,12 @@ namespace ApiCube.Migrations
                         name: "FK_Consulters_Ressources_RessourceId",
                         column: x => x.RessourceId,
                         principalTable: "Ressources",
-                        principalColumn: "RessourceId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "RessourceId");
+                    table.ForeignKey(
+                        name: "FK_Consulters_Utilisateurs_UtilisateurId",
+                        column: x => x.UtilisateurId,
+                        principalTable: "Utilisateurs",
+                        principalColumn: "UtilisateurId");
                 });
 
             migrationBuilder.CreateTable(
@@ -237,7 +246,8 @@ namespace ApiCube.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RechercheLibelle = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     RechercheDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    RessourceId = table.Column<int>(type: "int", nullable: true)
+                    RessourceId = table.Column<int>(type: "int", nullable: false),
+                    UtilisateurId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -247,6 +257,11 @@ namespace ApiCube.Migrations
                         column: x => x.RessourceId,
                         principalTable: "Ressources",
                         principalColumn: "RessourceId");
+                    table.ForeignKey(
+                        name: "FK_Recherchers_Utilisateurs_UtilisateurId",
+                        column: x => x.UtilisateurId,
+                        principalTable: "Utilisateurs",
+                        principalColumn: "UtilisateurId");
                 });
 
             migrationBuilder.CreateTable(
@@ -282,6 +297,11 @@ namespace ApiCube.Migrations
                 column: "RessourceId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Aimers_UtilisateurId",
+                table: "Aimers",
+                column: "UtilisateurId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Commentaires_RessourceId",
                 table: "Commentaires",
                 column: "RessourceId");
@@ -290,6 +310,11 @@ namespace ApiCube.Migrations
                 name: "IX_Consulters_RessourceId",
                 table: "Consulters",
                 column: "RessourceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Consulters_UtilisateurId",
+                table: "Consulters",
+                column: "UtilisateurId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ModererComs_ActionTypeId",
@@ -315,6 +340,11 @@ namespace ApiCube.Migrations
                 name: "IX_Recherchers_RessourceId",
                 table: "Recherchers",
                 column: "RessourceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Recherchers_UtilisateurId",
+                table: "Recherchers",
+                column: "UtilisateurId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Relations_UtilisateurId",

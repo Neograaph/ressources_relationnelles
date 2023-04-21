@@ -18,6 +18,6 @@ namespace ApiCube.Models.BuisnessObjects
 
         public int UtilisateurId { get; set; }
 
-        public int CommentaireReponse { get; set; }
+        public int? CommentaireReponse { get; set; }
     }
 }

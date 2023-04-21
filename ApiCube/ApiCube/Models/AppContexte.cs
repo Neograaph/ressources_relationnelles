@@ -56,6 +56,41 @@ namespace ApiCube.Models
                 .WithMany()
                 .HasForeignKey(r => r.UtilisateurRelationId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Aimer>()
+            .HasOne(a => a.Utilisateur)
+            .WithMany(u => u.Aimers)
+            .HasForeignKey(a => a.UtilisateurId)
+            .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Aimer>()
+                .HasOne(a => a.Ressource)
+                .WithMany(r => r.Aimers)
+                .HasForeignKey(a => a.RessourceId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+
+            modelBuilder.Entity<Consulter>()
+            .HasOne(a => a.Utilisateur)
+            .WithMany(u => u.Consulters)
+            .HasForeignKey(a => a.UtilisateurId)
+            .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Consulter>()
+                .HasOne(a => a.Ressource)
+                .WithMany(r => r.Consulters)
+                .HasForeignKey(a => a.RessourceId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Rechercher>()
+            .HasOne(a => a.Utilisateur)
+            .WithMany(u => u.Recherchers)
+            .HasForeignKey(a => a.UtilisateurId)
+            .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Rechercher>()
+                .HasOne(a => a.Ressource)
+                .WithMany(r => r.Recherchers)
+                .HasForeignKey(a => a.RessourceId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
+
     }
 }

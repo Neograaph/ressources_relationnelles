@@ -10,6 +10,8 @@ module.exports = {
       current: 'currentColor',
       'bleufonce': '#092A3F',
       'blanc': '#F9F9F9',
+      'background-classic': '#DEDEDE',
+      'background-panel': '#EFEFEF',
     },
     extend: {},
   },

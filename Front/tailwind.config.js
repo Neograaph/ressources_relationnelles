@@ -11,6 +11,7 @@ module.exports = {
       "background-panel": "#EFEFEF",
       rouge: "#730217",
       gris: "#747474",
+      bleubtn: "#0A3A5B",
     },
     extend: {
       backgroundImage: {

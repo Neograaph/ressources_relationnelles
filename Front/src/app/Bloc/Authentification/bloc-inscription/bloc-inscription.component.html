@@ -4,29 +4,28 @@
     (ngSubmit)="submitForm()"
     class="w-full max-w-md mx-auto p-5 rounded-lg shadow-md bg-gris bg-opacity-50"
   >
-  <div class="flex gap-2">
-
-    <div class="mb-4">
-      <input
-        type="text"
-        id="nom"
-        formControlName="nom"
-        required
-        placeholder="Nom"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-      />
+    <div class="flex gap-2">
+      <div class="mb-4">
+        <input
+          type="text"
+          id="nom"
+          formControlName="nom"
+          required
+          placeholder="Nom"
+          class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+        />
+      </div>
+      <div class="mb-4">
+        <input
+          type="text"
+          id="prenom"
+          formControlName="prenom"
+          required
+          placeholder="Prénom"
+          class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+        />
+      </div>
     </div>
-    <div class="mb-4">
-      <input
-        type="text"
-        id="prenom"
-        formControlName="prenom"
-        required
-        placeholder="Prénom"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-      />
-    </div>
-  </div>
     <div class="mb-4">
       <input
         type="email"
@@ -34,7 +33,7 @@
         formControlName="email"
         required
         placeholder="Email"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
       />
     </div>
     <div class="mb-4">
@@ -44,15 +43,19 @@
         formControlName="password"
         required
         placeholder="Mot de passe"
-        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+        class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
       />
     </div>
-    <button
-      type="submit"
-      [disabled]="!inscriptionForm.valid"
-      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-    >
-      S'inscrire
-    </button>
+    <div class="flex flex-col text-center">
+      <button
+        type="submit"
+        class="rounded bg-bleubtn rounded text-blanc py-2 px-4"
+      >
+        S'inscrire
+      </button>
+      <a class="pt-4 underline text-blanc text-opacity-70" href=""
+        >J'ai déjà un compte</a
+      >
+    </div>
   </form>
 </div>

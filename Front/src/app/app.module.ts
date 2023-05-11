@@ -5,11 +5,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './composants/navbar/navbar.component';
+import { MesRessourcesComponent } from './composants/mes-ressources/mes-ressources.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    MesRessourcesComponent
   ],
   imports: [
     BrowserModule,

@@ -13,7 +13,11 @@ module.exports = {
       'background-classic': '#DEDEDE',
       'background-panel': '#EFEFEF',
     },
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'custom-inscription': "url('src/assets/img/bg-inscription.png')",
+      }
+    },
   },
   plugins: [],
 }

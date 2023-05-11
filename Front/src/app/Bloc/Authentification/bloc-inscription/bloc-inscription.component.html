@@ -1,16 +1,58 @@
-<form [formGroup]="inscriptionForm" (ngSubmit)="submitForm()">
-    <div>
-      <label for="nom">Nom :</label>
-      <input type="text" id="nom" formControlName="nom" required>
+<div class="">
+  <form
+    [formGroup]="inscriptionForm"
+    (ngSubmit)="submitForm()"
+    class="w-full max-w-md mx-auto p-5 rounded-lg shadow-md bg-gris bg-opacity-50"
+  >
+  <div class="flex gap-2">
+
+    <div class="mb-4">
+      <input
+        type="text"
+        id="nom"
+        formControlName="nom"
+        required
+        placeholder="Nom"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      />
     </div>
-    <div>
-      <label for="email">Email :</label>
-      <input type="email" id="email" formControlName="email" required>
+    <div class="mb-4">
+      <input
+        type="text"
+        id="prenom"
+        formControlName="prenom"
+        required
+        placeholder="Prénom"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      />
     </div>
-    <div>
-      <label for="password">Mot de passe :</label>
-      <input type="password" id="password" formControlName="password" required>
+  </div>
+    <div class="mb-4">
+      <input
+        type="email"
+        id="email"
+        formControlName="email"
+        required
+        placeholder="Email"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      />
     </div>
-    <button type="submit" [disabled]="!inscriptionForm.valid">S'inscrire</button>
+    <div class="mb-4">
+      <input
+        type="password"
+        id="password"
+        formControlName="password"
+        required
+        placeholder="Mot de passe"
+        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+      />
+    </div>
+    <button
+      type="submit"
+      [disabled]="!inscriptionForm.valid"
+      class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+    >
+      S'inscrire
+    </button>
   </form>
-  
+</div>

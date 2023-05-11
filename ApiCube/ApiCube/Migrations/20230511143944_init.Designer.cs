@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiCube.Migrations
 {
     [DbContext(typeof(AppContexte))]
-    [Migration("20230421132929_init")]
+    [Migration("20230511143944_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -71,6 +71,16 @@ namespace ApiCube.Migrations
                     b.HasKey("AdresseId");
 
                     b.ToTable("Adresses");
+
+                    b.HasData(
+                        new
+                        {
+                            AdresseId = 1,
+                            AdresseNum = 123,
+                            Cp = "12345",
+                            Rue = "Rue de l'Exemple",
+                            Ville = "Ville de l'Exemple"
+                        });
                 });
 
             modelBuilder.Entity("ApiCube.Models.BuisnessObjects.Aimer", b =>
@@ -179,6 +189,15 @@ namespace ApiCube.Migrations
                     b.HasKey("DocumentId");
 
                     b.ToTable("Documents");
+
+                    b.HasData(
+                        new
+                        {
+                            DocumentId = 1,
+                            Chemin = "/chemin/vers/document.pdf",
+                            Extension = ".pdf",
+                            Poids = 100
+                        });
                 });
 
             modelBuilder.Entity("ApiCube.Models.BuisnessObjects.ModererCom", b =>
@@ -336,6 +355,31 @@ namespace ApiCube.Migrations
                     b.HasIndex("UtilisateurId");
 
                     b.ToTable("Ressources");
+
+                    b.HasData(
+                        new
+                        {
+                            RessourceId = 1,
+                            CategorieLibelle = "Catégorie",
+                            Contenu = "Contenu de la ressource",
+                            DateCreation = new DateTime(2023, 5, 11, 16, 39, 43, 607, DateTimeKind.Local).AddTicks(6714),
+                            DocumentId = 1,
+                            Titre = "Titre de la ressource",
+                            UtilisateurId = 1,
+                            Valider = true,
+                            VisibiliteLibelle = "Publique"
+                        },
+                        new
+                        {
+                            RessourceId = 2,
+                            CategorieLibelle = "Culture",
+                            Contenu = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec sapien sed odio malesuada lobortis sed ut ex. Vestibulum facilisis scelerisque elit, ac commodo magna eleifend id.",
+                            DateCreation = new DateTime(2023, 5, 11, 16, 39, 43, 607, DateTimeKind.Local).AddTicks(6742),
+                            Titre = "Ressource random",
+                            UtilisateurId = 1,
+                            Valider = true,
+                            VisibiliteLibelle = "Publique"
+                        });
                 });
 
             modelBuilder.Entity("ApiCube.Models.BuisnessObjects.Utilisateur", b =>
@@ -387,6 +431,22 @@ namespace ApiCube.Migrations
                     b.HasIndex("AdresseId");
 
                     b.ToTable("Utilisateurs");
+
+                    b.HasData(
+                        new
+                        {
+                            UtilisateurId = 1,
+                            AdresseId = 1,
+                            DateCreation = new DateTime(2023, 5, 11, 16, 39, 43, 607, DateTimeKind.Local).AddTicks(6123),
+                            DerniereConnexion = new DateTime(2023, 5, 11, 16, 39, 43, 607, DateTimeKind.Local).AddTicks(6172),
+                            Email = "john.doe@example.com",
+                            MotDePasse = "123456",
+                            Nom = "John",
+                            Prenom = "Doe",
+                            Role = "Utilisateur",
+                            Telephone = "0123456789",
+                            UtilisateurActif = true
+                        });
                 });
 
             modelBuilder.Entity("ApiCube.Models.BuisnessObjects.Aimer", b =>

@@ -31,6 +31,13 @@ namespace ApiCube.Controllers
             _config = config;
             _context = context;
         }
+        // GET: api/Utilisateurs/5
+        [HttpGet]
+        // [Authorize]
+        public async Task<ActionResult<IEnumerable<Utilisateur>>> GetUtilisateur()
+        {
+            return await _context.Utilisateurs.ToListAsync();
+        }
 
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody] AuthentificationRequest request)
@@ -146,7 +153,7 @@ namespace ApiCube.Controllers
 
         // DELETE: api/Utilisateurs/5
         [HttpDelete("{id}")]
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public async Task<ActionResult<Utilisateur>> DeleteUtilisateur(int id)
         {
             var utilisateur = await _context.Utilisateurs.FindAsync(id);

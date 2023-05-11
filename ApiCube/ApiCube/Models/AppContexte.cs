@@ -30,18 +30,67 @@ namespace ApiCube.Models
         public DbSet<Ressource> Ressources { get; set; }
         public DbSet<Utilisateur> Utilisateurs { get; set; }
 
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<Relation>()
+        //        .HasOne(r => r.User1)
+        //        .WithMany()
+        //        .HasForeignKey(r => r.User1_ID);
+
+        //    modelBuilder.Entity<Relation>()
+        //        .HasOne(r => r.User2)
+        //        .WithMany()
+        //        .HasForeignKey(r => r.User2_ID)
+        //        .OnDelete(DeleteBehavior.Cascade);
+        //}
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Relation>()
-                .HasOne(r => r.User1)
+                .HasOne(r => r.Utilisateur)
                 .WithMany()
-                .HasForeignKey(r => r.User1_ID);
+                .HasForeignKey(r => r.UtilisateurId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Relation>()
-                .HasOne(r => r.User2)
+                .HasOne(r => r.UtilisateurRelation)
                 .WithMany()
-                .HasForeignKey(r => r.User2_ID)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(r => r.UtilisateurRelationId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Aimer>()
+            .HasOne(a => a.Utilisateur)
+            .WithMany(u => u.Aimers)
+            .HasForeignKey(a => a.UtilisateurId)
+            .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Aimer>()
+                .HasOne(a => a.Ressource)
+                .WithMany(r => r.Aimers)
+                .HasForeignKey(a => a.RessourceId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+
+            modelBuilder.Entity<Consulter>()
+            .HasOne(a => a.Utilisateur)
+            .WithMany(u => u.Consulters)
+            .HasForeignKey(a => a.UtilisateurId)
+            .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Consulter>()
+                .HasOne(a => a.Ressource)
+                .WithMany(r => r.Consulters)
+                .HasForeignKey(a => a.RessourceId)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<Rechercher>()
+            .HasOne(a => a.Utilisateur)
+            .WithMany(u => u.Recherchers)
+            .HasForeignKey(a => a.UtilisateurId)
+            .OnDelete(DeleteBehavior.NoAction);
+            modelBuilder.Entity<Rechercher>()
+                .HasOne(a => a.Ressource)
+                .WithMany(r => r.Recherchers)
+                .HasForeignKey(a => a.RessourceId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
+
     }
 }

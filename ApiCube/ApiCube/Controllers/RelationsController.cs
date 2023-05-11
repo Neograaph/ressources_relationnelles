@@ -44,7 +44,7 @@ namespace ApiCube.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRelation(int id, Relation relation)
         {
-            if (id != relation.ID)
+            if (id != relation.RelationId)
             {
                 return BadRequest();
             }
@@ -77,7 +77,7 @@ namespace ApiCube.Controllers
             _context.Relations.Add(relation);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetRelation", new { id = relation.ID }, relation);
+            return CreatedAtAction("GetRelation", new { id = relation.RelationId }, relation);
         }
 
         // DELETE: api/Relations/5
@@ -98,7 +98,7 @@ namespace ApiCube.Controllers
 
         private bool RelationExists(int id)
         {
-            return _context.Relations.Any(e => e.ID == id);
+            return _context.Relations.Any(e => e.RelationId == id);
         }
     }
 }

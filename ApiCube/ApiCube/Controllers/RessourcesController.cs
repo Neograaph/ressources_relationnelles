@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ApiCube.Models;
+
+﻿using ApiCube.Models;
 using ApiCube.Models.BuisnessObjects;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -40,6 +41,19 @@ namespace ApiCube.Controllers
             return ressource;
         }
 
+
+        // POST: api/Ressources
+        [HttpPost]
+        public async Task<ActionResult<Ressource>> PostRessource(Ressource ressource)
+        {
+            _context.Ressources.Add(ressource);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction(nameof(GetRessource), new { id = ressource.RessourceId }, ressource);
+        }
+
+
+
         // PUT: api/Ressources/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutRessource(int id, Ressource ressource)
@@ -70,15 +84,6 @@ namespace ApiCube.Controllers
             return NoContent();
         }
 
-        // POST: api/Ressources
-        [HttpPost]
-        public async Task<ActionResult<Ressource>> PostRessource(Ressource ressource)
-        {
-            _context.Ressources.Add(ressource);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetRessource), new { id = ressource.RessourceId }, ressource);
-        }
 
         // DELETE: api/Ressources/5
         [HttpDelete("{id}")]

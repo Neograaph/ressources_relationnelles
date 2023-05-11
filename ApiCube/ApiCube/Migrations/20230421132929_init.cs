@@ -61,7 +61,7 @@ namespace ApiCube.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nom = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
                     Prenom = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
-                    MotDePasse = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    MotDePasse = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Telephone = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
                     UtilisateurActif = table.Column<bool>(type: "bit", nullable: false),
@@ -81,6 +81,34 @@ namespace ApiCube.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Relations",
+                columns: table => new
+                {
+                    RelationId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UtilisateurId = table.Column<int>(type: "int", nullable: false),
+                    UtilisateurRelationId = table.Column<int>(type: "int", nullable: false),
+                    Type = table.Column<int>(type: "int", nullable: false),
+                    Libelle = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Relations", x => x.RelationId);
+                    table.ForeignKey(
+                        name: "FK_Relations_Utilisateurs_UtilisateurId",
+                        column: x => x.UtilisateurId,
+                        principalTable: "Utilisateurs",
+                        principalColumn: "UtilisateurId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Relations_Utilisateurs_UtilisateurRelationId",
+                        column: x => x.UtilisateurRelationId,
+                        principalTable: "Utilisateurs",
+                        principalColumn: "UtilisateurId",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Ressources",
                 columns: table => new
                 {
@@ -92,7 +120,7 @@ namespace ApiCube.Migrations
                     Valider = table.Column<bool>(type: "bit", nullable: false),
                     VisibiliteLibelle = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     CategorieLibelle = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    DocumentId = table.Column<int>(type: "int", nullable: false),
+                    DocumentId = table.Column<int>(type: "int", nullable: true),
                     UtilisateurId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -102,36 +130,13 @@ namespace ApiCube.Migrations
                         name: "FK_Ressources_Documents_DocumentId",
                         column: x => x.DocumentId,
                         principalTable: "Documents",
-                        principalColumn: "DocumentId",
+                        principalColumn: "DocumentId");
+                    table.ForeignKey(
+                        name: "FK_Ressources_Utilisateurs_UtilisateurId",
+                        column: x => x.UtilisateurId,
+                        principalTable: "Utilisateurs",
+                        principalColumn: "UtilisateurId",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Relations",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    User1_ID = table.Column<int>(type: "int", nullable: false),
-                    User2_ID = table.Column<int>(type: "int", nullable: false),
-                    Type = table.Column<int>(type: "int", nullable: false),
-                    Libelle = table.Column<string>(type: "nvarchar(max)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Relations", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Relations_Utilisateurs_User1_ID",
-                        column: x => x.User1_ID,
-                        principalTable: "Utilisateurs",
-                        principalColumn: "UtilisateurId",
-                         onDelete: ReferentialAction.NoAction);
-                    table.ForeignKey(
-                        name: "FK_Relations_Utilisateurs_User2_ID",
-                        column: x => x.User2_ID,
-                        principalTable: "Utilisateurs",
-                        principalColumn: "UtilisateurId",
-                         onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateTable(
@@ -141,7 +146,8 @@ namespace ApiCube.Migrations
                     AimerId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RessourceId = table.Column<int>(type: "int", nullable: false),
-                    DateAimer = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    DateAimer = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UtilisateurId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -150,8 +156,12 @@ namespace ApiCube.Migrations
                         name: "FK_Aimers_Ressources_RessourceId",
                         column: x => x.RessourceId,
                         principalTable: "Ressources",
-                        principalColumn: "RessourceId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "RessourceId");
+                    table.ForeignKey(
+                        name: "FK_Aimers_Utilisateurs_UtilisateurId",
+                        column: x => x.UtilisateurId,
+                        principalTable: "Utilisateurs",
+                        principalColumn: "UtilisateurId");
                 });
 
             migrationBuilder.CreateTable(
@@ -164,7 +174,7 @@ namespace ApiCube.Migrations
                     DateCreation = table.Column<DateTime>(type: "datetime2", nullable: false),
                     RessourceId = table.Column<int>(type: "int", nullable: false),
                     UtilisateurId = table.Column<int>(type: "int", nullable: false),
-                    CommentaireReponse = table.Column<int>(type: "int", nullable: false)
+                    CommentaireReponse = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -183,7 +193,8 @@ namespace ApiCube.Migrations
                 {
                     ConsulterId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RessourceId = table.Column<int>(type: "int", nullable: false)
+                    RessourceId = table.Column<int>(type: "int", nullable: false),
+                    UtilisateurId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -192,8 +203,12 @@ namespace ApiCube.Migrations
                         name: "FK_Consulters_Ressources_RessourceId",
                         column: x => x.RessourceId,
                         principalTable: "Ressources",
-                        principalColumn: "RessourceId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "RessourceId");
+                    table.ForeignKey(
+                        name: "FK_Consulters_Utilisateurs_UtilisateurId",
+                        column: x => x.UtilisateurId,
+                        principalTable: "Utilisateurs",
+                        principalColumn: "UtilisateurId");
                 });
 
             migrationBuilder.CreateTable(
@@ -231,7 +246,8 @@ namespace ApiCube.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RechercheLibelle = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
                     RechercheDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    RessourceId = table.Column<int>(type: "int", nullable: true)
+                    RessourceId = table.Column<int>(type: "int", nullable: false),
+                    UtilisateurId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -241,6 +257,11 @@ namespace ApiCube.Migrations
                         column: x => x.RessourceId,
                         principalTable: "Ressources",
                         principalColumn: "RessourceId");
+                    table.ForeignKey(
+                        name: "FK_Recherchers_Utilisateurs_UtilisateurId",
+                        column: x => x.UtilisateurId,
+                        principalTable: "Utilisateurs",
+                        principalColumn: "UtilisateurId");
                 });
 
             migrationBuilder.CreateTable(
@@ -276,6 +297,11 @@ namespace ApiCube.Migrations
                 column: "RessourceId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Aimers_UtilisateurId",
+                table: "Aimers",
+                column: "UtilisateurId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Commentaires_RessourceId",
                 table: "Commentaires",
                 column: "RessourceId");
@@ -284,6 +310,11 @@ namespace ApiCube.Migrations
                 name: "IX_Consulters_RessourceId",
                 table: "Consulters",
                 column: "RessourceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Consulters_UtilisateurId",
+                table: "Consulters",
+                column: "UtilisateurId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ModererComs_ActionTypeId",
@@ -311,19 +342,29 @@ namespace ApiCube.Migrations
                 column: "RessourceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Relations_User1_ID",
-                table: "Relations",
-                column: "User1_ID");
+                name: "IX_Recherchers_UtilisateurId",
+                table: "Recherchers",
+                column: "UtilisateurId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Relations_User2_ID",
+                name: "IX_Relations_UtilisateurId",
                 table: "Relations",
-                column: "User2_ID");
+                column: "UtilisateurId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Relations_UtilisateurRelationId",
+                table: "Relations",
+                column: "UtilisateurRelationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ressources_DocumentId",
                 table: "Ressources",
                 column: "DocumentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ressources_UtilisateurId",
+                table: "Ressources",
+                column: "UtilisateurId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Utilisateurs_AdresseId",
@@ -358,16 +399,16 @@ namespace ApiCube.Migrations
                 name: "ActionTypes");
 
             migrationBuilder.DropTable(
-                name: "Utilisateurs");
-
-            migrationBuilder.DropTable(
                 name: "Ressources");
 
             migrationBuilder.DropTable(
-                name: "Adresses");
+                name: "Documents");
 
             migrationBuilder.DropTable(
-                name: "Documents");
+                name: "Utilisateurs");
+
+            migrationBuilder.DropTable(
+                name: "Adresses");
         }
     }
 }

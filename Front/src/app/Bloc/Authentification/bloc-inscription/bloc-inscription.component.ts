@@ -1,6 +1,7 @@
 import { compileNgModule } from '@angular/compiler';
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-bloc-inscription',
@@ -10,7 +11,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class BlocInscriptionComponent {
   inscriptionForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder,private AuthService: AuthService) {
     this.createForm();
   }
 
@@ -50,25 +51,10 @@ export class BlocInscriptionComponent {
         tableauDonnees.push(donneesFormulaire);
         console.log("Le formulaire d'inscription est valide + tableau créé");
         console.log(tableauDonnees);
+
+        // Envoyer les données à l'API
+        this.AuthService.envoyerDonnees(tableauDonnees);
       }
-
-      // Exemple : envoyer les données à l'API en C#
-      // fetch('https://votre-api.com/endpoint', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //   },
-      //   body: JSON.stringify(donneesFormulaire)
-      // })
-      // .then(response => {
-      //   // Traiter la réponse de l'API
-      // })
-      // .catch(error => {
-      //   // Gérer les erreurs
-      // });
-
-      // Traitez les données d'inscription ici, par exemple, appelez un service pour envoyer les données au serveur.
-      //console.log(this.inscriptionForm.value);
     } else {
       // Affichez des messages d'erreur ou effectuez d'autres actions appropriées si le formulaire n'est pas valide.
       console.log("Le formulaire d'inscription est invalide.");

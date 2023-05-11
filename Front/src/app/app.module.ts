@@ -4,11 +4,22 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavbarComponent } from './composants/navbar/navbar.component';
-import { PostRessourceComponent } from './composants/PostRessource/PostRessource.component';
-import { FiltreRechercheComponent } from './composants/FiltreRecherche/FiltreRecherche.component';
-import { FavRessourceComponent } from './composants/FavRessource/FavRessource.component';
-import { MesRessourcesComponent } from './composants/mes-ressources/mes-ressources.component';
+import { NavbarComponent } from './Bloc/Utilitaire/bloc-navbar/bloc-navbar.component';
+import { PostRessourceComponent } from './Bloc/Feed/bloc-ajout-ressource/PostRessource.component';
+import { FiltreRechercheComponent } from './Bloc/Modules/bloc-filtre-recherche/FiltreRecherche.component';
+import { FavRessourceComponent } from './Bloc/Modules/bloc-ressources-fav/FavRessource.component';
+import { MesRessourcesComponent } from './Bloc/Modules/bloc-mes-ressources/mes-ressources.component';
+import { PageVitrineComponent } from './Page/page-vitrine/page-vitrine.component';
+import { PageAuthentificationComponent } from './Page/page-authentification/page-authentification.component';
+import { PageHomeComponent } from './Page/page-home/page-home.component';
+import { PageProfilComponent } from './Page/page-profil/page-profil.component';
+import { BlocFooterComponent } from './Bloc/Utilitaire/bloc-footer/bloc-footer.component';
+import { BlocConnexionComponent } from './Bloc/Authentification/bloc-connexion/bloc-connexion.component';
+import { BlocInscriptionComponent } from './Bloc/Authentification/bloc-inscription/bloc-inscription.component';
+import { BlocMesRelationsComponent } from './Bloc/Modules/bloc-mes-relations/bloc-mes-relations.component';
+import { BlocRessourceComponent } from './Bloc/Feed/bloc-ressource/bloc-ressource.component';
+import { BlocRessourcesComponent } from './Bloc/Feed/bloc-ressources/bloc-ressources.component';
+import { MesInformationsComponent } from './Bloc/bloc-mes-informations/mes-informations.component';
 
 
 @NgModule({
@@ -17,8 +28,19 @@ import { MesRessourcesComponent } from './composants/mes-ressources/mes-ressourc
     NavbarComponent,
     PostRessourceComponent,
     FiltreRechercheComponent,
-    FavRessourceComponent
-    MesRessourcesComponent
+    FavRessourceComponent,
+    MesRessourcesComponent,
+    PageVitrineComponent,
+    PageAuthentificationComponent,
+    PageHomeComponent,
+    PageProfilComponent,
+    BlocFooterComponent,
+    BlocConnexionComponent,
+    BlocInscriptionComponent,
+    BlocMesRelationsComponent,
+    BlocRessourceComponent,
+    BlocRessourcesComponent,
+    MesInformationsComponent
   ],
   imports: [
     BrowserModule,

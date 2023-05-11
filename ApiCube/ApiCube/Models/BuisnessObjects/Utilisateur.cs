@@ -24,6 +24,8 @@ namespace ApiCube.Models.BuisnessObjects
         [MaxLength(50)]
         public string Role { get; set; }
 
+        public int? AdresseId { get; set; }
+
         public Adresse? Adresse { get; set; }
 
         [NotMapped]

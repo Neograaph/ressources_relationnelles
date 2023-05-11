@@ -4,9 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css'],
+  selector: 'app-bloc-navbar',
+  templateUrl: './bloc-navbar.component.html',
+  styleUrls: ['./bloc-navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
   public utilisateurs: any;

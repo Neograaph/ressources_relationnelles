@@ -15,8 +15,8 @@ import { PageAuthentificationComponent } from './Page/page-authentification/page
 import { PageHomeComponent } from './Page/page-home/page-home.component';
 import { PageProfilComponent } from './Page/page-profil/page-profil.component';
 import { BlocFooterComponent } from './Bloc/Utilitaire/bloc-footer/bloc-footer.component';
-import { BlocConnexionComponent } from './Bloc/Authentification/bloc-connexion/bloc-connexion.component';
 import { BlocInscriptionComponent } from './Bloc/Authentification/bloc-inscription/bloc-inscription.component';
+import { BlocConnexionComponent } from './Bloc/Authentification/bloc-connexion/bloc-connexion.component';
 import { BlocMesRelationsComponent } from './Bloc/Modules/bloc-mes-relations/bloc-mes-relations.component';
 import { BlocRessourceComponent } from './Bloc/Feed/bloc-ressource/bloc-ressource.component';
 import { BlocRessourcesComponent } from './Bloc/Feed/bloc-ressources/bloc-ressources.component';

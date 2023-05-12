@@ -4,12 +4,13 @@ import { PageAuthentificationComponent } from './Page/page-authentification/page
 import { PageHomeComponent } from './Page/page-home/page-home.component';
 
 const routes: Routes = [
-  { path: "inscription", component: PageAuthentificationComponent },
-  { path: "**", component: PageHomeComponent }
+  { path: 'inscription', component: PageAuthentificationComponent },
+  { path: 'connexion', component: PageAuthentificationComponent },
+  { path: '**', component: PageHomeComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

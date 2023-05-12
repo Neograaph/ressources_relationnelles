@@ -20,6 +20,7 @@ import { BlocMesRelationsComponent } from './Bloc/Modules/bloc-mes-relations/blo
 import { BlocRessourceComponent } from './Bloc/Feed/bloc-ressource/bloc-ressource.component';
 import { BlocRessourcesComponent } from './Bloc/Feed/bloc-ressources/bloc-ressources.component';
 import { MesInformationsComponent } from './Bloc/bloc-mes-informations/mes-informations.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -45,7 +46,9 @@ import { MesInformationsComponent } from './Bloc/bloc-mes-informations/mes-infor
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

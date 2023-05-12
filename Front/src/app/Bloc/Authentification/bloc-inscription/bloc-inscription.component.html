@@ -1,1 +1,61 @@
-<p>bloc-inscription works!</p>
+<div class="">
+  <form
+    [formGroup]="inscriptionForm"
+    (ngSubmit)="submitForm()"
+    class="w-full max-w-md mx-auto p-5 rounded-lg shadow-md bg-gris bg-opacity-50"
+  >
+    <div class="flex gap-2">
+      <div class="mb-4">
+        <input
+          type="text"
+          id="nom"
+          formControlName="nom"
+          required
+          placeholder="Nom"
+          class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+        />
+      </div>
+      <div class="mb-4">
+        <input
+          type="text"
+          id="prenom"
+          formControlName="prenom"
+          required
+          placeholder="Prénom"
+          class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+        />
+      </div>
+    </div>
+    <div class="mb-4">
+      <input
+        type="email"
+        id="email"
+        formControlName="email"
+        required
+        placeholder="Email"
+        class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+      />
+    </div>
+    <div class="mb-4">
+      <input
+        type="password"
+        id="password"
+        formControlName="password"
+        required
+        placeholder="Mot de passe"
+        class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+      />
+    </div>
+    <div class="flex flex-col text-center">
+      <button
+        type="submit"
+        class="rounded bg-bleubtn rounded text-blanc py-2 px-4"
+      >
+        S'inscrire
+      </button>
+      <a class="pt-4 underline text-blanc text-opacity-70" href="/connexion"
+        >J'ai déjà un compte</a
+      >
+    </div>
+  </form>
+</div>

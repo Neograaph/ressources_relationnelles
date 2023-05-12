@@ -22,10 +22,10 @@ export class BlocInscriptionComponent {
   createForm() {
     // j'ai mis des valeurs par défaut ici pour les tests pour éviter de remplir le formulaire à chaque fois
     this.inscriptionForm = this.formBuilder.group({
-      nom: ['neo', Validators.required],
-      prenom: ['graph', Validators.required],
-      email: ['admin@admin.com', [Validators.required, Validators.email]],
-      password: ['azerty', [Validators.required, Validators.minLength(6)]],
+      nom: ['neograph', Validators.required],
+      prenom: ['graphiste', Validators.required],
+      email: ['admin2@admin.com', [Validators.required, Validators.email]],
+      password: ['azertydqd', [Validators.required, Validators.minLength(6)]],
     });
   }
 

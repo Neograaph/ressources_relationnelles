@@ -90,6 +90,68 @@ namespace ApiCube.Models
                 .WithMany(r => r.Recherchers)
                 .HasForeignKey(a => a.RessourceId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+
+            modelBuilder.Entity<Utilisateur>().HasData(new Utilisateur
+            {
+                UtilisateurId = 1,
+                Nom = "John",
+                Prenom = "Doe",
+                MotDePasse = "123456",
+                Telephone = "0123456789",
+                Email = "john.doe@example.com",
+                UtilisateurActif = true,
+                DateCreation = DateTime.Now,
+                DerniereConnexion = DateTime.Now,
+                Role = "Utilisateur",
+                AdresseId = 1 // Clé étrangère vers l'adresse
+            });
+
+            modelBuilder.Entity<Adresse>().HasData(new Adresse
+            {
+                AdresseId = 1,
+                AdresseNum = 123,
+                Rue = "Rue de l'Exemple",
+                Cp = "12345",
+                Ville = "Ville de l'Exemple"
+            });
+
+            modelBuilder.Entity<Ressource>().HasData(new Ressource
+            {
+                RessourceId = 1,
+                Titre = "Titre de la ressource",
+                DateCreation = DateTime.Now,
+                Contenu = "Contenu de la ressource",
+                Valider = true,
+                VisibiliteLibelle = "Publique",
+                CategorieLibelle = "Catégorie",
+                DocumentId = 1,
+                UtilisateurId = 1
+            });
+            modelBuilder.Entity<Ressource>().HasData(new Ressource
+            {
+                RessourceId = 2,
+                Titre = "Ressource random",
+                DateCreation = DateTime.Now,
+                Contenu = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec sapien sed odio malesuada lobortis sed ut ex. Vestibulum facilisis scelerisque elit, ac commodo magna eleifend id.",
+                Valider = true,
+                VisibiliteLibelle = "Publique",
+                CategorieLibelle = "Culture",
+                UtilisateurId = 1
+            });
+
+            modelBuilder.Entity<Document>().HasData(new Document
+            {
+                DocumentId = 1,
+                Poids = 100,
+                Extension = ".pdf",
+                Chemin = "/chemin/vers/document.pdf"
+            });
+
+
+
+            base.OnModelCreating(modelBuilder);
+
         }
 
     }

@@ -19,10 +19,15 @@ namespace ApiCube.Models.BuisnessObjects
         public string? Email { get;set; }
         public bool UtilisateurActif { get; set; }
         public DateTime DateCreation { get; set; }
-        public DateTime DerniereConnexion { get; set; }
+        public DateTime? DerniereConnexion { get; set; }
+        public DateTime DateNaissance { get; set; }
+
+
         [Required]
         [MaxLength(50)]
         public string Role { get; set; }
+
+        public int? AdresseId { get; set; }
 
         public Adresse? Adresse { get; set; }
 

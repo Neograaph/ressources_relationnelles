@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -100,8 +101,28 @@ namespace ApiCube.Controllers
 
             _context.Utilisateurs.Add(nouvelUtilisateur);
             await _context.SaveChangesAsync();
+            // Appeler la fonction Authenticate pour générer le token
+            var authRequest = new AuthentificationRequest
+            {
+                Email = nouvelUtilisateur.Email,
+                MotDePasse = utilisateur.MotDePasse
+            };
 
-            return CreatedAtAction("GetUtilisateur", new { id = nouvelUtilisateur.UtilisateurId }, nouvelUtilisateur);
+            var authenticationResult = Authenticate(authRequest) as ObjectResult;
+
+            if (authenticationResult?.StatusCode == (int)HttpStatusCode.OK)
+            {
+                var tokenResponse = authenticationResult.Value as dynamic;
+                var token = tokenResponse.Token;
+
+                // Faire quelque chose avec le token, par exemple le retourner dans la réponse
+                return CreatedAtAction("GetUtilisateur", new { id = nouvelUtilisateur.UtilisateurId }, new { Token = token });
+            }
+            else
+            {
+                // Gérer les erreurs d'authentification
+                return BadRequest("Erreur lors de l'authentification.");
+            }
         }
 
         // GET: api/Utilisateurs/5

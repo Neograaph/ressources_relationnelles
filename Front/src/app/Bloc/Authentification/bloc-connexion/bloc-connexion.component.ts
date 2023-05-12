@@ -46,7 +46,19 @@ export class BlocConnexionComponent {
         };
 
         // Envoyer les données à l'API
-        this.AuthService.login(donneesFormulaire);
+        //console.log(donneesFormulaire);
+        const response = this.AuthService.login(donneesFormulaire)
+          .then((response) => {
+            // Récupération du token depuis la réponse
+            const token = response.token;
+
+            // Affichage du token
+            //console.log(token);
+            this.AuthService.saveToken(token);
+          })
+          .catch((error) => {
+            console.error(error);
+          });
       }
     } else {
       // Affichez des messages d'erreur ou effectuez d'autres actions appropriées si le formulaire n'est pas valide.

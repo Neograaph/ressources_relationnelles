@@ -1,37 +1,36 @@
-
 /* Bouton fin */
+
 h3 {
-  margin: 0;
-  font-size: 14px;
+    margin: 0;
+    font-size: 14px;
 }
 
 .separator {
-  border: none;
-  border-top: 1px solid #e1e8f2;
-  margin: 16px 0;
+    border: none;
+    border-top: 1px solid #e1e8f2;
+    margin: 16px 0;
 }
 
 form {
-  background-color: #f0f5f8;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
-  padding: 16px;
-  border-radius: 5px;
-  width: 12rem; /* Largeur fixe */
-  height: 25rem ;
+    background-color: #f0f5f8;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    padding: 16px;
+    border-radius: 5px;
+    height: 25rem;
 }
 
-label, select, input {
-  display: block;
-  margin-bottom: 8px;
+label,
+select,
+input {
+    display: block;
+    margin-bottom: 8px;
 }
 
 .titre {
-  font-size: 14px;
-
+    font-size: 14px;
 }
 
 .date {
-  font-size: 12px;
-  font-style: italic;
+    font-size: 12px;
+    font-style: italic;
 }
-

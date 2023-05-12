@@ -66,7 +66,7 @@ namespace ApiCube.Migrations
                     Email = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
                     UtilisateurActif = table.Column<bool>(type: "bit", nullable: false),
                     DateCreation = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DerniereConnexion = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DerniereConnexion = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Role = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     AdresseId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -304,17 +304,17 @@ namespace ApiCube.Migrations
             migrationBuilder.InsertData(
                 table: "Utilisateurs",
                 columns: new[] { "UtilisateurId", "AdresseId", "DateCreation", "DerniereConnexion", "Email", "MotDePasse", "Nom", "Prenom", "Role", "Telephone", "UtilisateurActif" },
-                values: new object[] { 1, 1, new DateTime(2023, 5, 11, 16, 39, 43, 607, DateTimeKind.Local).AddTicks(6123), new DateTime(2023, 5, 11, 16, 39, 43, 607, DateTimeKind.Local).AddTicks(6172), "john.doe@example.com", "123456", "John", "Doe", "Utilisateur", "0123456789", true });
+                values: new object[] { 1, 1, new DateTime(2023, 5, 12, 10, 23, 26, 162, DateTimeKind.Local).AddTicks(5706), new DateTime(2023, 5, 12, 10, 23, 26, 162, DateTimeKind.Local).AddTicks(5738), "john.doe@example.com", "123456", "John", "Doe", "Utilisateur", "0123456789", true });
 
             migrationBuilder.InsertData(
                 table: "Ressources",
                 columns: new[] { "RessourceId", "CategorieLibelle", "Contenu", "DateCreation", "DocumentId", "Titre", "UtilisateurId", "Valider", "VisibiliteLibelle" },
-                values: new object[] { 1, "Catégorie", "Contenu de la ressource", new DateTime(2023, 5, 11, 16, 39, 43, 607, DateTimeKind.Local).AddTicks(6714), 1, "Titre de la ressource", 1, true, "Publique" });
+                values: new object[] { 1, "Catégorie", "Contenu de la ressource", new DateTime(2023, 5, 12, 10, 23, 26, 162, DateTimeKind.Local).AddTicks(5866), 1, "Titre de la ressource", 1, true, "Publique" });
 
             migrationBuilder.InsertData(
                 table: "Ressources",
                 columns: new[] { "RessourceId", "CategorieLibelle", "Contenu", "DateCreation", "DocumentId", "Titre", "UtilisateurId", "Valider", "VisibiliteLibelle" },
-                values: new object[] { 2, "Culture", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec sapien sed odio malesuada lobortis sed ut ex. Vestibulum facilisis scelerisque elit, ac commodo magna eleifend id.", new DateTime(2023, 5, 11, 16, 39, 43, 607, DateTimeKind.Local).AddTicks(6742), null, "Ressource random", 1, true, "Publique" });
+                values: new object[] { 2, "Culture", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec sapien sed odio malesuada lobortis sed ut ex. Vestibulum facilisis scelerisque elit, ac commodo magna eleifend id.", new DateTime(2023, 5, 12, 10, 23, 26, 162, DateTimeKind.Local).AddTicks(5879), null, "Ressource random", 1, true, "Publique" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Aimers_RessourceId",

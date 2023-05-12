@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiCube.Migrations
 {
     [DbContext(typeof(AppContexte))]
-    [Migration("20230511143944_init")]
+    [Migration("20230512082326_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -362,7 +362,7 @@ namespace ApiCube.Migrations
                             RessourceId = 1,
                             CategorieLibelle = "Catégorie",
                             Contenu = "Contenu de la ressource",
-                            DateCreation = new DateTime(2023, 5, 11, 16, 39, 43, 607, DateTimeKind.Local).AddTicks(6714),
+                            DateCreation = new DateTime(2023, 5, 12, 10, 23, 26, 162, DateTimeKind.Local).AddTicks(5866),
                             DocumentId = 1,
                             Titre = "Titre de la ressource",
                             UtilisateurId = 1,
@@ -374,7 +374,7 @@ namespace ApiCube.Migrations
                             RessourceId = 2,
                             CategorieLibelle = "Culture",
                             Contenu = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec sapien sed odio malesuada lobortis sed ut ex. Vestibulum facilisis scelerisque elit, ac commodo magna eleifend id.",
-                            DateCreation = new DateTime(2023, 5, 11, 16, 39, 43, 607, DateTimeKind.Local).AddTicks(6742),
+                            DateCreation = new DateTime(2023, 5, 12, 10, 23, 26, 162, DateTimeKind.Local).AddTicks(5879),
                             Titre = "Ressource random",
                             UtilisateurId = 1,
                             Valider = true,
@@ -396,7 +396,7 @@ namespace ApiCube.Migrations
                     b.Property<DateTime>("DateCreation")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DerniereConnexion")
+                    b.Property<DateTime?>("DerniereConnexion")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Email")
@@ -437,8 +437,8 @@ namespace ApiCube.Migrations
                         {
                             UtilisateurId = 1,
                             AdresseId = 1,
-                            DateCreation = new DateTime(2023, 5, 11, 16, 39, 43, 607, DateTimeKind.Local).AddTicks(6123),
-                            DerniereConnexion = new DateTime(2023, 5, 11, 16, 39, 43, 607, DateTimeKind.Local).AddTicks(6172),
+                            DateCreation = new DateTime(2023, 5, 12, 10, 23, 26, 162, DateTimeKind.Local).AddTicks(5706),
+                            DerniereConnexion = new DateTime(2023, 5, 12, 10, 23, 26, 162, DateTimeKind.Local).AddTicks(5738),
                             Email = "john.doe@example.com",
                             MotDePasse = "123456",
                             Nom = "John",

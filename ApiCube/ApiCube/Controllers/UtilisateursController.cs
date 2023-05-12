@@ -76,20 +76,32 @@ namespace ApiCube.Controllers
 
         // POST: api/Utilisateurs
         [HttpPost]
-        public async Task<ActionResult<Utilisateur>> PostUtilisateur(Utilisateur utilisateur)
+        public async Task<ActionResult<Utilisateur>> PostUtilisateur(AjoutUtilisateur utilisateur)
         {
             if (_context.Utilisateurs.Any(u => u.Email == utilisateur.Email))
             {
                 return BadRequest("Email déjà utilisé.");
             }
+            var nouvelUtilisateur = new Utilisateur
+            {
+                Email = utilisateur.Email,
+                MotDePasse = BCrypt.Net.BCrypt.HashPassword(utilisateur.MotDePasse),
 
-            utilisateur.DateCreation = DateTime.Now;
-            utilisateur.MotDePasse = BCrypt.Net.BCrypt.HashPassword(utilisateur.MotDePasse);
+                Prenom = utilisateur.Prenom,
+                Nom = utilisateur.Nom,
+                Telephone = utilisateur.Telephone,
+                Role = "Citoyen",
+                DateCreation = DateTime.Now
+            };
 
-            _context.Utilisateurs.Add(utilisateur);
+
+            //utilisateur.DateCreation = DateTime.Now;
+            //utilisateur.MotDePasse = BCrypt.Net.BCrypt.HashPassword(utilisateur.MotDePasse);
+
+            _context.Utilisateurs.Add(nouvelUtilisateur);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetUtilisateur", new { id = utilisateur.UtilisateurId }, utilisateur);
+            return CreatedAtAction("GetUtilisateur", new { id = nouvelUtilisateur.UtilisateurId }, nouvelUtilisateur);
         }
 
         // GET: api/Utilisateurs/5

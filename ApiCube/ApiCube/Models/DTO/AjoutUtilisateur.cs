@@ -14,5 +14,7 @@ namespace ApiCube.Models.DTO
         public string? Telephone { get; set; }
         [MaxLength(150)]
         public string Email { get; set; }
+        public DateTime DateNaissance { get; set; }
+
     }
 }

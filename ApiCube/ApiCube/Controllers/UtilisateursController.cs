@@ -87,7 +87,7 @@ namespace ApiCube.Controllers
             {
                 Email = utilisateur.Email,
                 MotDePasse = BCrypt.Net.BCrypt.HashPassword(utilisateur.MotDePasse),
-
+                DateNaissance= utilisateur.DateNaissance,
                 Prenom = utilisateur.Prenom,
                 Nom = utilisateur.Nom,
                 Telephone = utilisateur.Telephone,

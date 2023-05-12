@@ -47,7 +47,7 @@ export class BlocInscriptionComponent {
           prenom: prenom,
           nom: nom,
           email: email,
-          password: password,
+          motDePasse: password,
           telephone: '0123456789',
           utilisateurActif: true,
           dateCreation: '2023-05-12T07:54:12.862Z',
@@ -62,7 +62,7 @@ export class BlocInscriptionComponent {
         console.log(tableauDonnees);
 
         // Envoyer les données à l'API
-        this.AuthService.envoyerDonnees(tableauDonnees);
+        this.AuthService.envoyerDonnees(donneesFormulaire);
       }
     } else {
       // Affichez des messages d'erreur ou effectuez d'autres actions appropriées si le formulaire n'est pas valide.

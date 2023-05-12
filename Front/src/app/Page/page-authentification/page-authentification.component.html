@@ -1,6 +1,16 @@
-<div class="bg-custom-inscription h-screen w-screen overflow-hidden">
-  <div class="flex items-center justify-center h-screen">
-    <app-bloc-inscription></app-bloc-inscription>
+<div *ngIf="estRoute('/inscription')">
+  <div class="bg-custom-inscription h-screen w-screen overflow-hidden">
+    <div class="flex items-center justify-center h-screen">
+      <app-bloc-inscription></app-bloc-inscription>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="estRoute('/connexion')">
+  <div class="bg-custom-connexion h-screen w-screen overflow-hidden">
+    <div class="flex items-center justify-center h-screen">
+      <app-bloc-connexion></app-bloc-connexion>
+    </div>
   </div>
 
   <app-bloc-footer></app-bloc-footer>

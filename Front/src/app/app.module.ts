@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,14 +15,13 @@ import { PageAuthentificationComponent } from './Page/page-authentification/page
 import { PageHomeComponent } from './Page/page-home/page-home.component';
 import { PageProfilComponent } from './Page/page-profil/page-profil.component';
 import { BlocFooterComponent } from './Bloc/Utilitaire/bloc-footer/bloc-footer.component';
-import { BlocConnexionComponent } from './Bloc/Authentification/bloc-connexion/bloc-connexion.component';
 import { BlocInscriptionComponent } from './Bloc/Authentification/bloc-inscription/bloc-inscription.component';
+import { BlocConnexionComponent } from './Bloc/Authentification/bloc-connexion/bloc-connexion.component';
 import { BlocMesRelationsComponent } from './Bloc/Modules/bloc-mes-relations/bloc-mes-relations.component';
 import { BlocRessourceComponent } from './Bloc/Feed/bloc-ressource/bloc-ressource.component';
 import { BlocRessourcesComponent } from './Bloc/Feed/bloc-ressources/bloc-ressources.component';
 import { MesInformationsComponent } from './Bloc/bloc-mes-informations/mes-informations.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-
 
 @NgModule({
   declarations: [
@@ -41,16 +41,16 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     BlocMesRelationsComponent,
     BlocRessourceComponent,
     BlocRessourcesComponent,
-    MesInformationsComponent
+    MesInformationsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-bloc-inscription',
@@ -22,10 +23,10 @@ export class BlocInscriptionComponent {
   createForm() {
     // j'ai mis des valeurs par défaut ici pour les tests pour éviter de remplir le formulaire à chaque fois
     this.inscriptionForm = this.formBuilder.group({
-      nom: ['neo', Validators.required],
-      prenom: ['graph', Validators.required],
-      email: ['admin@admin.com', [Validators.required, Validators.email]],
-      password: ['azerty', [Validators.required, Validators.minLength(6)]],
+      nom: ['neograph', Validators.required],
+      prenom: ['graphiste', Validators.required],
+      email: ['admin2@admin.com', [Validators.required, Validators.email]],
+      password: ['azertydqd', [Validators.required, Validators.minLength(6)]],
     });
   }
 
@@ -62,7 +63,7 @@ export class BlocInscriptionComponent {
         console.log(tableauDonnees);
 
         // Envoyer les données à l'API
-        this.AuthService.envoyerDonnees(donneesFormulaire);
+        this.AuthService.register(donneesFormulaire);
       }
     } else {
       // Affichez des messages d'erreur ou effectuez d'autres actions appropriées si le formulaire n'est pas valide.

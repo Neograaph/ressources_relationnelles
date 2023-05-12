@@ -16,6 +16,7 @@ module.exports = {
     extend: {
       backgroundImage: {
         "custom-inscription": "url('src/assets/img/bg-inscription.png')",
+        "custom-connexion": "url('src/assets/img/bg-connexion.png')",
       },
     },
   },

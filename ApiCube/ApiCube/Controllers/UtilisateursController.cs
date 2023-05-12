@@ -33,8 +33,8 @@ namespace ApiCube.Controllers
             _context = context;
         }
         // GET: api/Utilisateurs/5
+
         [HttpGet]
-        // [Authorize]
         public async Task<ActionResult<IEnumerable<Utilisateur>>> GetUtilisateur()
         {
             return await _context.Utilisateurs.ToListAsync();

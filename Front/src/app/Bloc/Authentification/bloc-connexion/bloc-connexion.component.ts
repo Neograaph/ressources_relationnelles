@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
-import { NotificationsService } from 'src/app/notifications.service';
+import { NotificationsService } from 'src/app/services/notifications.service';
 
 @Component({
   selector: 'app-bloc-connexion',
@@ -31,8 +31,8 @@ export class BlocConnexionComponent {
     this.connexionForm = this.formBuilder.group({
       nom: ['neograph', Validators.required],
       prenom: ['graphiste', Validators.required],
-      email: ['admin2@admin.com', [Validators.required, Validators.email]],
-      password: ['azertydqd', [Validators.required, Validators.minLength(6)]],
+      email: ['admin@admin.com', [Validators.required, Validators.email]],
+      password: ['azertyui', [Validators.required, Validators.minLength(6)]],
     });
   }
 

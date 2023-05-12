@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NotificationsService } from 'src/app/notifications.service';
+import { NotificationsService } from 'src/app/services/notifications.service';
 
 @Component({
   selector: 'app-bloc-inscription',
@@ -87,7 +87,7 @@ export class BlocInscriptionComponent {
             //console.error(error);
             this.NotificationsService.showError(
               "Impossible d'accéder à l'API",
-              error.message
+              error.error
             );
           });
       }

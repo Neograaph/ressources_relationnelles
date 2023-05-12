@@ -2,6 +2,7 @@ import { compileNgModule } from '@angular/compiler';
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-bloc-inscription',
@@ -11,7 +12,10 @@ import { AuthService } from 'src/app/services/auth.service';
 export class BlocInscriptionComponent {
   inscriptionForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder,private AuthService: AuthService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private AuthService: AuthService
+  ) {
     this.createForm();
   }
 
@@ -43,7 +47,12 @@ export class BlocInscriptionComponent {
           prenom: prenom,
           nom: nom,
           email: email,
-          password: password,
+          motDePasse: password,
+          telephone: '0123456789',
+          utilisateurActif: true,
+          dateCreation: '2023-05-12T07:54:12.862Z',
+          derniereConnexion: '2023-05-12T07:54:12.862Z',
+          role: 'Administrateur',
         };
         // Stocker les données dans un tableau pour les envoyer à l'API en C#
         const tableauDonnees: any[] = [];
@@ -53,7 +62,7 @@ export class BlocInscriptionComponent {
         console.log(tableauDonnees);
 
         // Envoyer les données à l'API
-        this.AuthService.envoyerDonnees(tableauDonnees);
+        this.AuthService.envoyerDonnees(donneesFormulaire);
       }
     } else {
       // Affichez des messages d'erreur ou effectuez d'autres actions appropriées si le formulaire n'est pas valide.

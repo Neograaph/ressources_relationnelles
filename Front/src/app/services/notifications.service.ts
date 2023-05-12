@@ -14,6 +14,8 @@ export class NotificationsService {
       progressBar: true, // Affiche une barre de progression
       newestOnTop: true, // Les nouveaux messages apparaissent en haut
       countDuplicates: true, // Compte les doublons
+      timeOut: 10000,
+      preventDuplicates: true,
     };
 
     this.toastr.error(message, title, config);
@@ -26,6 +28,8 @@ export class NotificationsService {
       progressBar: true, // Affiche une barre de progression
       newestOnTop: true, // Les nouveaux messages apparaissent en haut
       countDuplicates: true, // Compte les doublons
+      timeOut: 10000,
+      preventDuplicates: true,
     };
 
     this.toastr.success(message, title, config);

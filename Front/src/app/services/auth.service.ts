@@ -37,14 +37,14 @@ export class AuthService {
     return token !== null;
   }
 
-  envoyerDonnees(data: any) {
+  envoyerDonnees(data: any): Promise<any> {
     // Définir les en-têtes de la requête (optionnel)
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     console.log("Envoi des données à l'API");
 
     //Envoyer la requête POST à l'API avec les données JSON
     return this.http
-      .post(this.apiUrl, data, { headers })
+      .post(this.apiUrl + 'api/utilisateurs', data, { headers })
       .toPromise()
       .then((response) => {
         // Traiter la réponse de l'API si nécessaire

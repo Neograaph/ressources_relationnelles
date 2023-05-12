@@ -63,7 +63,7 @@ export class BlocInscriptionComponent {
         console.log(tableauDonnees);
 
         // Envoyer les données à l'API
-        this.AuthService.envoyerDonnees(donneesFormulaire);
+        this.AuthService.register(donneesFormulaire);
       }
     } else {
       // Affichez des messages d'erreur ou effectuez d'autres actions appropriées si le formulaire n'est pas valide.

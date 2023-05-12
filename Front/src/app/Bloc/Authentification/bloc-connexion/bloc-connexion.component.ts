@@ -46,7 +46,7 @@ export class BlocConnexionComponent {
         };
 
         // Envoyer les données à l'API
-        this.AuthService.verifierDonnees(donneesFormulaire);
+        this.AuthService.login(donneesFormulaire);
       }
     } else {
       // Affichez des messages d'erreur ou effectuez d'autres actions appropriées si le formulaire n'est pas valide.

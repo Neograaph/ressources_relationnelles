@@ -11,11 +11,6 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  login(credentials: any): Observable<any> {
-    // Envoyer les identifiants de connexion à votre API pour obtenir le token
-    return this.http.post(`${this.apiUrl}/api/login`, credentials);
-  }
-
   // Méthode pour enregistrer le token dans le stockage local (localStorage)
   saveToken(token: string): void {
     localStorage.setItem('token', token);
@@ -37,7 +32,7 @@ export class AuthService {
     return token !== null;
   }
 
-  envoyerDonnees(data: any): Promise<any> {
+  register(data: any): Promise<any> {
     // Définir les en-têtes de la requête (optionnel)
     const headers = new HttpHeaders().set('Content-Type', 'text/json');
     console.log("Envoi des données à l'API");
@@ -53,6 +48,27 @@ export class AuthService {
       .catch((error) => {
         // Gérer les erreurs
         console.error("Erreur lors de l'envoi de la requête:", error);
+      });
+  }
+
+  login(params?: any): Promise<any> {
+    // Définir les en-têtes de la requête (optionnel)
+    const headers = new HttpHeaders().set('Content-Type', 'text/json');
+    console.log("Envoi de la requête GET à l'API");
+
+    // Envoyer la requête GET à l'API avec les paramètres
+    return this.http
+      .post(this.apiUrl + 'api/utilisateurs/authenticate', { headers, params })
+      .toPromise()
+      .then((response) => {
+        // Traiter la réponse de l'API si nécessaire
+        console.log("Réponse de l'API:", response);
+        return response; // Renvoyer la réponse
+      })
+      .catch((error) => {
+        // Gérer les erreurs
+        console.error("Erreur lors de l'envoi de la requête GET:", error);
+        throw error; // Renvoyer l'erreur
       });
   }
 }

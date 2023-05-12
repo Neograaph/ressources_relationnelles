@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
+import { NotificationsService } from 'src/app/notifications.service';
 
 @Component({
   selector: 'app-bloc-connexion',
@@ -19,8 +20,7 @@ export class BlocConnexionComponent {
   constructor(
     private formBuilder: FormBuilder,
     private AuthService: AuthService,
-    private injector: EnvironmentInjector,
-    private toastr: ToastrService
+    private NotificationsService: NotificationsService
   ) {
     this.createForm();
   }
@@ -37,7 +37,7 @@ export class BlocConnexionComponent {
   }
 
   submitForm() {
-    this.toastr.success('Hello world!', 'Toastr fun!');
+    //this.toastr.success('Hello world!', 'Toastr fun!');
     if (this.connexionForm.valid) {
       const champEmail = this.connexionForm.get('email');
       const champPassword = this.connexionForm.get('password');
@@ -62,14 +62,26 @@ export class BlocConnexionComponent {
             // Affichage du token
             //console.log(token);
             this.AuthService.saveToken(token);
+            this.NotificationsService.showSuccess(
+              "Connexion à l'application validée",
+              'token enregistré'
+            );
           })
           .catch((error) => {
-            console.error(error);
+            //console.error(error);
+            this.NotificationsService.showError(
+              "Impossible d'accéder à l'API",
+              error.message
+            );
           });
       }
     } else {
       // Affichez des messages d'erreur ou effectuez d'autres actions appropriées si le formulaire n'est pas valide.
-      console.log("Le formulaire d'inscription est invalide.");
+      //console.log("Le formulaire d'inscription est invalide.");
+      this.NotificationsService.showError(
+        'Erreur de connexion',
+        'Le formulaire de connexion est invalide.'
+      );
     }
   }
 }

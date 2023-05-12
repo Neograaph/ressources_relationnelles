@@ -1,6 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -22,7 +23,6 @@ import { BlocRessourcesComponent } from './Bloc/Feed/bloc-ressources/bloc-ressou
 import { MesInformationsComponent } from './Bloc/bloc-mes-informations/mes-informations.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,16 +41,16 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     BlocMesRelationsComponent,
     BlocRessourceComponent,
     BlocRessourcesComponent,
-    MesInformationsComponent
+    MesInformationsComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

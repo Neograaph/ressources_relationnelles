@@ -1,24 +1,30 @@
 import { compileNgModule } from '@angular/compiler';
-import { Component } from '@angular/core';
+import { Component, EnvironmentInjector, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrService } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-bloc-connexion',
   templateUrl: './bloc-connexion.component.html',
   styleUrls: ['./bloc-connexion.component.css'],
+  providers: [ToastrService],
 })
 export class BlocConnexionComponent {
   connexionForm!: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
-    private AuthService: AuthService
+    private AuthService: AuthService,
+    private injector: EnvironmentInjector,
+    private toastr: ToastrService
   ) {
     this.createForm();
   }
+  OnInit(): void {}
 
   createForm() {
     // j'ai mis des valeurs par défaut ici pour les tests pour éviter de remplir le formulaire à chaque fois
@@ -31,6 +37,7 @@ export class BlocConnexionComponent {
   }
 
   submitForm() {
+    this.toastr.success('Hello world!', 'Toastr fun!');
     if (this.connexionForm.valid) {
       const champEmail = this.connexionForm.get('email');
       const champPassword = this.connexionForm.get('password');

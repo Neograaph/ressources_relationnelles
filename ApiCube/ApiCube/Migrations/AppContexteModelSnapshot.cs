@@ -360,7 +360,7 @@ namespace ApiCube.Migrations
                             RessourceId = 1,
                             CategorieLibelle = "Catégorie",
                             Contenu = "Contenu de la ressource",
-                            DateCreation = new DateTime(2023, 5, 12, 10, 23, 26, 162, DateTimeKind.Local).AddTicks(5866),
+                            DateCreation = new DateTime(2023, 5, 12, 11, 45, 26, 97, DateTimeKind.Local).AddTicks(2677),
                             DocumentId = 1,
                             Titre = "Titre de la ressource",
                             UtilisateurId = 1,
@@ -372,7 +372,7 @@ namespace ApiCube.Migrations
                             RessourceId = 2,
                             CategorieLibelle = "Culture",
                             Contenu = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec sapien sed odio malesuada lobortis sed ut ex. Vestibulum facilisis scelerisque elit, ac commodo magna eleifend id.",
-                            DateCreation = new DateTime(2023, 5, 12, 10, 23, 26, 162, DateTimeKind.Local).AddTicks(5879),
+                            DateCreation = new DateTime(2023, 5, 12, 11, 45, 26, 97, DateTimeKind.Local).AddTicks(2689),
                             Titre = "Ressource random",
                             UtilisateurId = 1,
                             Valider = true,
@@ -392,6 +392,9 @@ namespace ApiCube.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateCreation")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateNaissance")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime?>("DerniereConnexion")
@@ -435,8 +438,9 @@ namespace ApiCube.Migrations
                         {
                             UtilisateurId = 1,
                             AdresseId = 1,
-                            DateCreation = new DateTime(2023, 5, 12, 10, 23, 26, 162, DateTimeKind.Local).AddTicks(5706),
-                            DerniereConnexion = new DateTime(2023, 5, 12, 10, 23, 26, 162, DateTimeKind.Local).AddTicks(5738),
+                            DateCreation = new DateTime(2023, 5, 12, 11, 45, 26, 97, DateTimeKind.Local).AddTicks(2478),
+                            DateNaissance = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DerniereConnexion = new DateTime(2023, 5, 12, 11, 45, 26, 97, DateTimeKind.Local).AddTicks(2513),
                             Email = "john.doe@example.com",
                             MotDePasse = "123456",
                             Nom = "John",

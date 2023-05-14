@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'inscription', component: PageAuthentificationComponent },
   { path: 'connexion', component: PageAuthentificationComponent },
   { path: 'accueil', component: PageHomeComponent },
-  { path: '**', component: PageVitrineComponent }
+  { path: '', component: PageVitrineComponent }
 ];
 
 @NgModule({

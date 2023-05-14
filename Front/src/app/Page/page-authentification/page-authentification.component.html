@@ -1,24 +1,14 @@
-<div *ngIf="estRoute('/inscription')">
-  <div
-    class="bg-custom-inscription h-screen w-screen overflow-hidden bg-cover bg-no-repeat"
-  >
+<div [ngClass]="{'bg-custom-inscription': estRoute('/inscription'), 'bg-custom-connexion': estRoute('/connexion')}" class="h-screen w-screen overflow-hidden bg-cover bg-no-repeat">
+    <a class="font-bold " routerLink="/">
+        <img src="assets/img/logo.png" class="max-h-16" alt="Logo" />
+    </a>
     <div class="flex items-center justify-center h-screen">
-      <app-bloc-inscription></app-bloc-inscription>
-    </div>
-  </div>
-
-  <!-- <app-bloc-footer></app-bloc-footer> -->
-</div>
-
-<div *ngIf="estRoute('/connexion')">
-  <div
-    class="bg-custom-connexion h-screen w-screen overflow-hidden bg-cover bg-no-repeat"
-  >
-    <div class="flex items-center justify-center h-screen">
-      <app-bloc-connexion></app-bloc-connexion>
+        <ng-container *ngIf="estRoute('/inscription')">
+            <app-bloc-inscription></app-bloc-inscription>
+        </ng-container>
+        <ng-container *ngIf="estRoute('/connexion')">
+            <app-bloc-connexion></app-bloc-connexion>
+        </ng-container>
     </div>
     <app-bloc-footer></app-bloc-footer>
-  </div>
-
-  <!-- <app-bloc-footer></app-bloc-footer> -->
 </div>

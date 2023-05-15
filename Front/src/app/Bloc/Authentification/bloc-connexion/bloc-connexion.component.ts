@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { NotificationsService } from 'src/app/services/notifications.service';
 import { UtilisateurConnexion } from 'src/app/Models/UtilisateurConnexion.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-bloc-connexion',
@@ -21,7 +22,8 @@ export class BlocConnexionComponent {
   constructor(
     private formBuilder: FormBuilder,
     private AuthService: AuthService,
-    private NotificationsService: NotificationsService
+    private NotificationsService: NotificationsService,
+    private router: Router
   ) {
     this.createForm();
   }
@@ -59,6 +61,7 @@ export class BlocConnexionComponent {
               "Connexion à l'application validée",
               'token enregistré'
             );
+            this.router.navigate(['/accueil']);
           })
           .catch((error) => {
             //console.error(error);

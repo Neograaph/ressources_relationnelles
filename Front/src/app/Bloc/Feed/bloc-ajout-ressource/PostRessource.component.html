@@ -1,37 +1,28 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>Formulaire</title>
-  <link rel="stylesheet" href="PostRessource.component.css">
-</head>
-<body>
-  <form>
-    <div>
-        <select id="category">
-          <option value="">Choisir une catégorie</option>
-          <option value="cat1">Catégorie 1</option>
-          <option value="cat2">Catégorie 2</option>
-          <option value="cat3">Catégorie 3</option>
-        </select>
+<div class="flex justify-center">
+  <form class="w-full max-w-sm">
+    <div class="mx-auto">
+      <select id="category" class="w-full mb-4">
+        <option value="">Choisir une catégorie</option>
+        <option value="cat1">Catégorie 1</option>
+        <option value="cat2">Catégorie 2</option>
+        <option value="cat3">Catégorie 3</option>
+      </select>
 
-        <select id="type">
-          <option value="">Choisir un type de ressource</option>
-          <option value="type1">Type 1</option>
-          <option value="type2">Type 2</option>
-          <option value="type3">Type 3</option>
-        </select>
+      <select id="type" class="w-full mb-4">
+        <option value="">Choisir un type de ressource</option>
+        <option value="type1">Type 1</option>
+        <option value="type2">Type 2</option>
+        <option value="type3">Type 3</option>
+      </select>
 
-        <div class="input-zone">
-          <input type="text" placeholder="Publier une ressource...">
-        </div>
-        <div class="boutons-container">
-          <button type="button" id="ajouter-photo-video">Ajouter une photo / vidéo</button>
-        <button type="submit" id="publier">Publier</button>
-        </div>
-  </div>
+      <div class="input-zone">
+        <input type="text" placeholder="Publier une ressource..." class="w-full mb-4">
+      </div>
+
+      <div class="boutons-container">
+        <button type="button" id="ajouter-photo-video" class="w-full mb-4">Ajouter une photo / vidéo</button>
+        <button type="submit" id="publier" class="w-full">Publier</button>
+      </div>
+    </div>
   </form>
-
-  <script src="script.js"></script>
-</body>
-</html>
+</div>

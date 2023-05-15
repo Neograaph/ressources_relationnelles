@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotificationsService } from 'src/app/services/notifications.service';
+import { Utilisateur } from 'src/app/Models/Utilisateurs.model';
 
 @Component({
   selector: 'app-bloc-inscription',
@@ -17,7 +18,8 @@ export class BlocInscriptionComponent {
   constructor(
     private formBuilder: FormBuilder,
     private AuthService: AuthService,
-    private NotificationsService: NotificationsService
+    private NotificationsService: NotificationsService,
+    //private Utilisateur: Utilisateur
   ) {
     this.createForm();
   }
@@ -52,16 +54,19 @@ export class BlocInscriptionComponent {
         const prenom = champPrenom.value;
         const telephone = champTelephone.value;
         const email = champEmail.value;
-        const password = champPassword.value;
+        const motDePasse = champPassword.value;
+
+        // Créer un objet Utilisateur
+        const utilisateur = new Utilisateur(prenom, nom, email, motDePasse, telephone);
 
         // Créer un objet avec les données récupérées
-        const donneesFormulaire = {
-          prenom: prenom,
-          nom: nom,
-          email: email,
-          motDePasse: password,
-          telephone: telephone,
-        };
+        // const donneesFormulaire = {
+        //   prenom: prenom,
+        //   nom: nom,
+        //   email: email,
+        //   motDePasse: password,
+        //   telephone: telephone,
+        // };
         // Stocker les données dans un tableau pour les envoyer à l'API en C#
         //const tableauDonnees: any[] = [];
 
@@ -70,13 +75,14 @@ export class BlocInscriptionComponent {
         //console.log(tableauDonnees);
 
         // Envoyer les données à l'API
-        this.AuthService.register(donneesFormulaire)
+        this.AuthService.register(utilisateur)
           .then((response) => {
             // Récupération du token depuis la réponse
             const token = response.token;
 
             // Affichage du token
-            //console.log(response);
+            // console.log(utilisateur);
+            // console.log(response);
             this.AuthService.saveToken(token);
             this.NotificationsService.showSuccess(
               'Inscription validée',
@@ -84,7 +90,8 @@ export class BlocInscriptionComponent {
             );
           })
           .catch((error) => {
-            //console.error(error);
+            // console.log(utilisateur);
+            // console.error(error);
             this.NotificationsService.showError(
               "Impossible d'accéder à l'API",
               error.error

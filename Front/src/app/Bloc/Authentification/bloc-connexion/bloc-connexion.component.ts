@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { NotificationsService } from 'src/app/services/notifications.service';
+import { UtilisateurConnexion } from 'src/app/Models/UtilisateurConnexion.model';
 
 @Component({
   selector: 'app-bloc-connexion',
@@ -37,29 +38,21 @@ export class BlocConnexionComponent {
   }
 
   submitForm() {
-    //this.toastr.success('Hello world!', 'Toastr fun!');
     if (this.connexionForm.valid) {
       const champEmail = this.connexionForm.get('email');
       const champPassword = this.connexionForm.get('password');
       // Vérifier si les champs sont ok
       if (champEmail && champPassword) {
         const email = champEmail.value;
-        const password = champPassword.value;
+        const motDePasse = champPassword.value;
 
-        // Créer un objet avec les données récupérées
-        const donneesFormulaire = {
-          email: email,
-          motDePasse: password,
-        };
+        // Créer un objet Utilisateur
+        const utilisateur = new UtilisateurConnexion(email, motDePasse);
 
         // Envoyer les données à l'API
-        //console.log(donneesFormulaire);
-        const response = this.AuthService.login(donneesFormulaire)
+        const response = this.AuthService.login(utilisateur)
           .then((response) => {
-            // Récupération du token depuis la réponse
             const token = response.token;
-
-            // Affichage du token
             //console.log(token);
             this.AuthService.saveToken(token);
             this.NotificationsService.showSuccess(
@@ -76,7 +69,6 @@ export class BlocConnexionComponent {
           });
       }
     } else {
-      // Affichez des messages d'erreur ou effectuez d'autres actions appropriées si le formulaire n'est pas valide.
       //console.log("Le formulaire d'inscription est invalide.");
       this.NotificationsService.showError(
         'Erreur de connexion',

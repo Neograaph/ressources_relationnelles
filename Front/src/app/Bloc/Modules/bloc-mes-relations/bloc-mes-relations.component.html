@@ -1,11 +1,11 @@
 <form>
   <div class="shadow-lg border rounded-lg p-4">
-    <h3 class="text-base">Mes relations</h3>
+    <h3 class="text-base font-bold">Mes relations</h3>
     <hr class="separator border-t border-gray-300 my-4">
     <div *ngFor="let produit of data" class="flex items-center p-2 h-50">
       <!-- <img class="max-h-14 rounded-lg" [src]="produit.image" alt="{{ produit.title }}" /> -->
       <div class="flex flex-col flex-grow ml-2">
-          <h3 class="text-truncate font-bold">{{ produit.name }}</h3>
+          <h3 class="text-truncate">{{ produit.name }}</h3>
           <!-- <p class="text-truncate">{{ produit.description }}</p> -->
       </div>
     </div>

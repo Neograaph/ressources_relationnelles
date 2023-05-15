@@ -5,7 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotificationsService } from 'src/app/services/notifications.service';
-import { Utilisateur } from 'src/app/Models/Utilisateurs.model';
+import { UtilisateurInscription } from 'src/app/Models/UtilisateurInscription.model';
 
 @Component({
   selector: 'app-bloc-inscription',
@@ -19,7 +19,6 @@ export class BlocInscriptionComponent {
     private formBuilder: FormBuilder,
     private AuthService: AuthService,
     private NotificationsService: NotificationsService,
-    //private Utilisateur: Utilisateur
   ) {
     this.createForm();
   }
@@ -57,7 +56,7 @@ export class BlocInscriptionComponent {
         const motDePasse = champPassword.value;
 
         // Créer un objet Utilisateur
-        const utilisateur = new Utilisateur(prenom, nom, email, motDePasse, telephone);
+        const utilisateur = new UtilisateurInscription(prenom, nom, email, motDePasse, telephone);
 
         // Créer un objet avec les données récupérées
         // const donneesFormulaire = {

@@ -1,4 +1,4 @@
-export class Utilisateur {
+export class UtilisateurInscription {
     constructor(
       public prenom: string,
       public nom: string,

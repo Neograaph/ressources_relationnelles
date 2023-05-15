@@ -15,6 +15,4 @@ export class FavRessourceComponent implements OnInit {
     //   console.log(response)
     // });
   }
-
 }
-

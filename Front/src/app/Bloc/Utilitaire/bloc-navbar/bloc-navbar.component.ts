@@ -26,6 +26,20 @@ export class NavbarComponent implements OnInit {
 
   }
 
+  // Ne fonctionne pas
+  // ngOnChanges(): void {
+  //   this.router.events.subscribe((routerData) => {
+  //     if(routerData instanceof ResolveEnd){
+  //         this.currentRoute = routerData.url;
+  //         if (this.currentRoute === '/') {
+  //           console.log(this.currentRoute)
+  //           this.navbarClass = 'bg-noir'; // Applique la classe CSS pour la navbar noire
+  //         } else if (this.currentRoute === '/connexion' || this.currentRoute === '/inscription' ) {
+  //           this.navbarClass = 'hidden'; // Applique la classe CSS pour rendre la navbar invisible
+  //         }
+  //       }
+  //   })
+  // }
   ngOnInit(): void {
     this.router.events.subscribe((routerData) => {
       if(routerData instanceof ResolveEnd){

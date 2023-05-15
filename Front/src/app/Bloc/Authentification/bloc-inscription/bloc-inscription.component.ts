@@ -58,28 +58,10 @@ export class BlocInscriptionComponent {
         // Créer un objet Utilisateur
         const utilisateur = new UtilisateurInscription(prenom, nom, email, motDePasse, telephone);
 
-        // Créer un objet avec les données récupérées
-        // const donneesFormulaire = {
-        //   prenom: prenom,
-        //   nom: nom,
-        //   email: email,
-        //   motDePasse: password,
-        //   telephone: telephone,
-        // };
-        // Stocker les données dans un tableau pour les envoyer à l'API en C#
-        //const tableauDonnees: any[] = [];
-
-        //tableauDonnees.push(donneesFormulaire);
-        //console.log("Le formulaire d'inscription est valide + tableau créé");
-        //console.log(tableauDonnees);
-
         // Envoyer les données à l'API
         this.AuthService.register(utilisateur)
           .then((response) => {
-            // Récupération du token depuis la réponse
             const token = response.token;
-
-            // Affichage du token
             // console.log(utilisateur);
             // console.log(response);
             this.AuthService.saveToken(token);
@@ -98,7 +80,6 @@ export class BlocInscriptionComponent {
           });
       }
     } else {
-      // Affichez des messages d'erreur ou effectuez d'autres actions appropriées si le formulaire n'est pas valide.
       //console.log("Le formulaire d'inscription est invalide.");
       this.NotificationsService.showError(
         'Veuillez vérifier les champs',

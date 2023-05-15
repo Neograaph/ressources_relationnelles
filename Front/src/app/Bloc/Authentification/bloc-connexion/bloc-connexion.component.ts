@@ -38,7 +38,6 @@ export class BlocConnexionComponent {
   }
 
   submitForm() {
-    //this.toastr.success('Hello world!', 'Toastr fun!');
     if (this.connexionForm.valid) {
       const champEmail = this.connexionForm.get('email');
       const champPassword = this.connexionForm.get('password');
@@ -47,21 +46,13 @@ export class BlocConnexionComponent {
         const email = champEmail.value;
         const motDePasse = champPassword.value;
 
-        // Créer un objet avec les données récupérées
-        // const donneesFormulaire = {
-        //   email: email,
-        //   motDePasse: password,
-        // };
+        // Créer un objet Utilisateur
         const utilisateur = new UtilisateurConnexion(email, motDePasse);
 
         // Envoyer les données à l'API
-        //console.log(donneesFormulaire);
         const response = this.AuthService.login(utilisateur)
           .then((response) => {
-            // Récupération du token depuis la réponse
             const token = response.token;
-
-            // Affichage du token
             //console.log(token);
             this.AuthService.saveToken(token);
             this.NotificationsService.showSuccess(
@@ -78,7 +69,6 @@ export class BlocConnexionComponent {
           });
       }
     } else {
-      // Affichez des messages d'erreur ou effectuez d'autres actions appropriées si le formulaire n'est pas valide.
       //console.log("Le formulaire d'inscription est invalide.");
       this.NotificationsService.showError(
         'Erreur de connexion',

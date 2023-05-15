@@ -10,10 +10,10 @@ export class FiltreRechercheComponent implements OnInit {
 
   constructor(public actiontype: ActionsTypeService) { }
   ngOnInit(): void {
-    this.actiontype.getActionType().subscribe((response: any) => {
+    // this.actiontype.getActionType().subscribe((response: any) => {
 
-      console.log(response)
-    });
+    //   console.log(response)
+    // });
   }
 
 }

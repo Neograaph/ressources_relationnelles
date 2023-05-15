@@ -1,28 +1,39 @@
-<nav class="flex items-center justify-between bg-bleufonce text-white">
-  <a class="font-bold" href="#">
-    <img src="assets/img/logo.png" class="max-h-16" alt="Logo" />
-  </a>
-  <div class="flex items-center">
-    <input
-      type="text"
-      placeholder="Rechercher sur RE..."
-      class="border-2 border-blue-500 rounded px-8 py-2"
-    />
-  </div>
-  <div class="flex items-center">
-    <div>
-      <a href="/inscription" class="ml-4 text-blanc">Inscription</a>
-      <a href="#" class="ml-4 text-blanc">Mon profil</a>
+<nav [ngClass]="navbarClass" class="flex items-center justify-between text-white px-4">
+
+    <a class="font-bold" routerLink="/">
+        <img src="assets/img/logo.png" class="max-h-12" alt="Logo" />
+    </a>
+    <div class="flex-grow"></div>
+    <div class="flex items-center">
+        <input type="text" placeholder="Rechercher sur RE..." class="border-2 border-blue-500 rounded px-8 py-2" />
     </div>
-    <div class="flex">
-      <a href="#" class="ml-4">
-        <img
-          src="assets/img/utilisateur.png"
-          class="max-h-16"
-          alt="Utilisateur"
-        />
-      </a>
+    <div class="flex-grow"></div>
+    <div class="flex items-center hidden sm:flex">
+        <div>
+            <a [routerLink]="['/inscription']" class="ml-4 text-blanc">Inscription</a>
+            <a [routerLink]="'/profil'" class="ml-4 text-blanc">Mon profil</a>
+
+        </div>
+        <div class="flex">
+            <a href="#" class="ml-4">
+                <img src="assets/img/utilisateur.png" class="max-h-16" alt="Utilisateur" />
+            </a>
+        </div>
     </div>
-  </div>
+
+
+    <div class="sm:flex sm:items-center sm:ml-auto" [class.hidden]="!isMenuOpen">
+        <!-- Éléments du menu ici -->
+        <div class=" lg:flex  bg-blanc bottom-500 left-50">
+            <p class="sm:flex">test</p>
+        </div>
+    </div>
+
+    <button class="block sm:hidden" (click)="toggleMenu()">
+      <!-- Icône du menu hamburger ici -->
+      <svg xmlns="http://www.w3.org/2000/svg" style="color: white;" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+      </svg>
+    </button>
 </nav>
 {{ utilisateurs | json }}

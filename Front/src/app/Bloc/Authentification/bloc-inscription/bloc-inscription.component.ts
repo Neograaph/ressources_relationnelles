@@ -4,6 +4,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NotificationsService } from 'src/app/services/notifications.service';
+import { UtilisateurInscription } from 'src/app/Models/UtilisateurInscription.model';
 
 @Component({
   selector: 'app-bloc-inscription',
@@ -15,7 +17,8 @@ export class BlocInscriptionComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private AuthService: AuthService
+    private AuthService: AuthService,
+    private NotificationsService: NotificationsService,
   ) {
     this.createForm();
   }
@@ -50,40 +53,38 @@ export class BlocInscriptionComponent {
         const prenom = champPrenom.value;
         const telephone = champTelephone.value;
         const email = champEmail.value;
-        const password = champPassword.value;
+        const motDePasse = champPassword.value;
 
-        // Créer un objet avec les données récupérées
-        const donneesFormulaire = {
-          prenom: prenom,
-          nom: nom,
-          email: email,
-          motDePasse: password,
-          telephone: telephone,
-        };
-        // Stocker les données dans un tableau pour les envoyer à l'API en C#
-        //const tableauDonnees: any[] = [];
-
-        //tableauDonnees.push(donneesFormulaire);
-        //console.log("Le formulaire d'inscription est valide + tableau créé");
-        //console.log(tableauDonnees);
+        // Créer un objet Utilisateur
+        const utilisateur = new UtilisateurInscription(prenom, nom, email, motDePasse, telephone);
 
         // Envoyer les données à l'API
-        this.AuthService.register(donneesFormulaire)
+        this.AuthService.register(utilisateur)
           .then((response) => {
-            // Récupération du token depuis la réponse
             const token = response.token;
-
-            // Affichage du token
-            console.log(response);
+            // console.log(utilisateur);
+            // console.log(response);
             this.AuthService.saveToken(token);
+            this.NotificationsService.showSuccess(
+              'Inscription validée',
+              'token enregistré'
+            );
           })
           .catch((error) => {
-            console.error(error);
+            // console.log(utilisateur);
+            // console.error(error);
+            this.NotificationsService.showError(
+              "Impossible d'accéder à l'API",
+              error.error
+            );
           });
       }
     } else {
-      // Affichez des messages d'erreur ou effectuez d'autres actions appropriées si le formulaire n'est pas valide.
-      console.log("Le formulaire d'inscription est invalide.");
+      //console.log("Le formulaire d'inscription est invalide.");
+      this.NotificationsService.showError(
+        'Veuillez vérifier les champs',
+        "Le formulaire d'inscription est invalide."
+      );
     }
   }
 }

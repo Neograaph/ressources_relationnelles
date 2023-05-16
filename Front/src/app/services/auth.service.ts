@@ -103,7 +103,7 @@ export class AuthService {
       .toPromise()
       .then((response) => {
         // Traiter la réponse de l'API si nécessaire
-        console.log("Réponse de l'API:", response);
+        // console.log("Réponse de l'API:", response);
         return response; // Renvoyer la réponse
       })
       .catch((error) => {

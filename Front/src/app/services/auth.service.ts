@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 import { UtilisateurInscription } from '../Models/UtilisateurInscription.model';
 import { UtilisateurConnexion } from '../Models/UtilisateurConnexion.model';
+import { UtilisateurProfil } from '../Models/UtilisateurProfil.model';
+import jwtDecode, * as jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
@@ -75,4 +77,37 @@ export class AuthService {
         throw error; // Renvoyer l'erreur
       });
   }
+  
+  decodeToken(token: string): any {
+    try {
+      const decodedToken = jwtDecode(token);
+      return decodedToken;
+    } catch (error) {
+      console.error('Erreur lors du décodage du token :', error);
+      return null;
+    }
+  }
+  
+  
+  
+  // getUtilisateurProfil(token: string): Promise<any> {
+  //   // Définir les en-têtes de la requête (optionnel)
+  //   const headers = new HttpHeaders().set('Content-Type', 'text/json');
+  //   //console.log("Envoi de la requête GET à l'API");
+
+  //   // Envoyer la requête POST à l'API avec les paramètres
+  //   return this.http
+  //     .post(this.apiUrl + 'api/utilisateurs/authenticate', params, { headers })
+  //     .toPromise()
+  //     .then((response) => {
+  //       // Traiter la réponse de l'API si nécessaire
+  //       console.log("Réponse de l'API:", response);
+  //       return response; // Renvoyer la réponse
+  //     })
+  //     .catch((error) => {
+  //       // Gérer les erreurs
+  //       console.error("Erreur lors de l'envoi de la requête GET:", error);
+  //       throw error; // Renvoyer l'erreur
+  //     });
+  // }
 }

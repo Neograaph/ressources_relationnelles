@@ -25,7 +25,19 @@ export class MesInformationsComponent {
     this.createForm();
   }
 
-  OnInit(): void { }
+  OnInit(): void { 
+    // const utilisateur = this.AuthService.getUtilisateurProfil(token);
+    const token = this.AuthService.getToken();
+
+    if (token) {
+      this.AuthService.decodeToken(token);
+      console.log('Token : ' + token);
+    } else {
+      console.log('Pas de token');
+      this.router.navigate(['/connexion']);
+    }
+
+  }
 
   createForm() {
     // j'ai mis des valeurs par défaut ici pour les tests pour éviter de remplir le formulaire à chaque fois
@@ -34,6 +46,8 @@ export class MesInformationsComponent {
       prenom: ['graph', Validators.required],
       email: ['admin@admin.com', [Validators.required, Validators.email]],
       telephone: ['06 06 06 06 06', [Validators.required]],
+      adresse: ['1 rue de la paix', [Validators.required]],
+      ville: ['75000', [Validators.required]],
       password: ['azertyui', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['azertyui', [Validators.required, Validators.minLength(6)]],
     });

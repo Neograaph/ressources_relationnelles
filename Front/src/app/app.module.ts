@@ -25,6 +25,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { PageNotFoundComponent } from './Page/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { ToastrModule } from 'ngx-toastr';
     BlocRessourceComponent,
     BlocRessourcesComponent,
     MesInformationsComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

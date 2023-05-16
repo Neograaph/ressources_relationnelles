@@ -1,6 +1,9 @@
 {
   "dependencies": {
     "@angular/animations": "^16.0.1",
+    "@types/jwt-decode": "^3.1.0",
+    "jsonwebtoken": "^9.0.0",
+    "jwt-decode": "^3.1.2",
     "ngx-toastr": "^16.2.0",
     "toastr": "^2.1.4"
   }

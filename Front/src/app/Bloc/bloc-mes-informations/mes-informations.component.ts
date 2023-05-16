@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
   providers: [ToastrService],
 
 })
-export class MesInformationsComponent {
+export class MesInformationsComponent implements OnInit {
   profilForm!: FormGroup;
 
   constructor(
@@ -25,13 +25,16 @@ export class MesInformationsComponent {
     this.createForm();
   }
 
-  OnInit(): void { 
-    // const utilisateur = this.AuthService.getUtilisateurProfil(token);
+  ngOnInit(): void { 
     const token = this.AuthService.getToken();
-
+    
     if (token) {
       this.AuthService.decodeToken(token);
       console.log('Token : ' + token);
+      
+      // const utilisateur = this.AuthService.getUtilisateurProfil(token);
+      
+
     } else {
       console.log('Pas de token');
       this.router.navigate(['/connexion']);

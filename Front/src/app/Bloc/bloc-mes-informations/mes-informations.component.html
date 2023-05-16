@@ -1,47 +1,133 @@
-<div class="bg-gray-100 p-8">
-  <div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-lg">
-    <h1 class="text-2xl font-bold mb-4">Informations personnelles</h1>
+<!-- <div class="flex flex-grow"> -->
 
-    <div class="grid grid-cols-2 gap-4">
+
+<div class="bg-gray-100 p-8 bg-white p-6 rounded-lg shadow-lg">
+    <div class="underline p-4">Mes Informations</div>
+
+    <div class="flex flex-grow">
       <div>
-        <label for="nom" class="block text-sm font-medium text-gray-700 mb-1">Nom :</label>
-        <input type="text" id="nom" class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500">
+        <div>
+          <label for="nom" class="text-sm font-medium text-gray-700 mb-1"
+            >Nom :</label
+          >
+          <input
+            type="text"
+            id="nom"
+            class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+
+        <div>
+          <label
+            for="prenom"
+            class="block text-sm font-medium text-gray-700 mb-1"
+            >Prénom :</label
+          >
+          <input
+            type="text"
+            id="prenom"
+            class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+
+        <div>
+          <label
+            for="email"
+            class="block text-sm font-medium text-gray-700 mb-1"
+            >Email :</label
+          >
+          <input
+            type="email"
+            id="email"
+            class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+
+        <div>
+          <label
+            for="telephone"
+            class="block text-sm font-medium text-gray-700 mb-1"
+            >Téléphone :</label
+          >
+          <input
+            type="tel"
+            id="telephone"
+            class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+
+        <div>
+          <label
+            for="adresse"
+            class="block text-sm font-medium text-gray-700 mb-1"
+            >Rue</label
+          >
+          <input
+            type="text"
+            id="adresse"
+            class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+
+        <div>
+          <label
+            for="ville"
+            class="block text-sm font-medium text-gray-700 mb-1"
+            >CP, Ville</label
+          >
+          <input
+            type="text"
+            id="ville"
+            class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+
+        <div>
+          <label
+            for="Mot de passe"
+            class="block text-sm font-medium text-gray-700 mb-1"
+            >Mot de passe</label
+          >
+          <input
+            type="text"
+            id="Mot de passe"
+            class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+
+        <div>
+          <label
+            for="Mot de passe2"
+            class="block text-sm font-medium text-gray-700 mb-1"
+            >Confirmer le mot de passe</label
+          >
+          <input
+            type="text"
+            id="Mot de passe2"
+            class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+          />
+        </div>
+
+        <div class="mt-6">
+          <button
+            type="submit"
+            class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600"
+          >
+            Valider
+          </button>
+        </div>
       </div>
 
-      <div>
-        <label for="prenom" class="block text-sm font-medium text-gray-700 mb-1">Prénom :</label>
-        <input type="text" id="prenom" class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500">
-      </div>
-
-      <div>
-        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email :</label>
-        <input type="email" id="email" class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500">
-      </div>
-
-      <div>
-        <label for="telephone" class="block text-sm font-medium text-gray-700 mb-1">Téléphone :</label>
-        <input type="tel" id="telephone" class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500">
-      </div>
-
-      <div>
-        <label for="adresse" class="block text-sm font-medium text-gray-700 mb-1">Rue</label>
-        <input type="text" id="adresse" class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500">
-      </div>
-
-      <div>
-        <label for="ville" class="block text-sm font-medium text-gray-700 mb-1">CP</label>
-        <input type="text" id="ville" class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500">
-      </div>
-
-      <div>
-        <label for="codepostal" class="block text-sm font-medium text-gray-700 mb-1">Code postal :</label>
-        <input type="text" id="codepostal" class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500">
-      </div>
-
-      <div>
-        <label for="pays" class="block text-sm font-medium text-gray-700 mb-1">Pays :</label>
-        <input type="text" id="pays" class="w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500">
+      <div class="flex flex-col">
+        <img
+          src="../../../assets/img/utilisateur.png"
+          alt="image de profil"
+          class="max-h-28 object-contain"
+        />
+        <div class="text-center">date de création du compte : 01/01/2021</div>
+        <a href="#" class="underline text-center">supprimer le compte</a>
       </div>
     </div>
   </div>
-</div>
+
+<!-- </div> -->

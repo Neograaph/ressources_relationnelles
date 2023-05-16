@@ -8,16 +8,6 @@ import { ActionsTypeService } from 'src/app/services/actions-type.service';
 })
 export class FavRessourceComponent {
 
-<<<<<<< HEAD
-  constructor(public actiontype: ActionsTypeService) { }
-  ngOnInit(): void {
-    // this.actiontype.getActionType().subscribe((response: any) => {
-
-    //   console.log(response)
-    // });
-  }
-}
-=======
   data = [
     {
       title: "Ressources 1",
@@ -43,4 +33,3 @@ export class FavRessourceComponent {
 
 }
 
->>>>>>> 6c46378b2da5bb8f62d729b4104cd1d4a9756422

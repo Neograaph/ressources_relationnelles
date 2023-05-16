@@ -86,43 +86,30 @@ export class AuthService {
     try {
       // console.log(jwt_decode(token));
       const decodedToken = jwt_decode(token)
-
       return decodedToken;
     } catch(Error) {
       return null;
     }
   }
-  // decodeToken(token: string): any {
-  //   try {
-  //     const decodedToken = JWK.createDecrypt(token);
-  //     return decodedToken;
-  //   } catch (error) {
-  //     console.error('Erreur lors du décodage du token :', error);
-  //     return null;
-  //   }
-  // }
-
-
-
     
-  // getUtilisateurProfil(token: string): Promise<any> {
-  //   // Définir les en-têtes de la requête (optionnel)
-  //   const headers = new HttpHeaders().set('Content-Type', 'text/json');
-  //   //console.log("Envoi de la requête GET à l'API");
+  getUtilisateurProfil(id: string): Promise<any> {
+    // Définir les en-têtes de la requête (optionnel)
+    const headers = new HttpHeaders().set('Content-Type', 'text/json');
+    //console.log("Envoi de la requête GET à l'API");
 
-  //   // Envoyer la requête POST à l'API avec les paramètres
-  //   return this.http
-  //     .post(this.apiUrl + 'api/utilisateurs/authenticate', params, { headers })
-  //     .toPromise()
-  //     .then((response) => {
-  //       // Traiter la réponse de l'API si nécessaire
-  //       console.log("Réponse de l'API:", response);
-  //       return response; // Renvoyer la réponse
-  //     })
-  //     .catch((error) => {
-  //       // Gérer les erreurs
-  //       console.error("Erreur lors de l'envoi de la requête GET:", error);
-  //       throw error; // Renvoyer l'erreur
-  //     });
-  // }
+    // Envoyer la requête POST à l'API avec les paramètres
+    return this.http
+      .get(this.apiUrl + 'api/utilisateurs/'+id, { headers })
+      .toPromise()
+      .then((response) => {
+        // Traiter la réponse de l'API si nécessaire
+        console.log("Réponse de l'API:", response);
+        return response; // Renvoyer la réponse
+      })
+      .catch((error) => {
+        // Gérer les erreurs
+        console.error("Erreur lors de l'envoi de la requête GET:", error);
+        throw error; // Renvoyer l'erreur
+      });
+  }
 }

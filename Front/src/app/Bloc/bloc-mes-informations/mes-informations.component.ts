@@ -31,16 +31,13 @@ export class MesInformationsComponent implements OnInit {
     if (token) {
       const decodedToken = this.AuthService.getDecodedAccessToken(token);
       console.log(decodedToken);
-      console.log(decodedToken.name);
-      
-      // const utilisateur = this.AuthService.getUtilisateurProfil(token);
-      
-
+      // console.log(decodedToken.name);
+      const utilisateur = this.AuthService.getUtilisateurProfil(decodedToken.UtilisateurId);
+      console.log(utilisateur);
     } else {
       console.log('Pas de token');
       this.router.navigate(['/connexion']);
     }
-
   }
 
   createForm() {

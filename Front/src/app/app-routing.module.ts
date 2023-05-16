@@ -4,11 +4,13 @@ import { PageAuthentificationComponent } from './Page/page-authentification/page
 import { PageHomeComponent } from './Page/page-home/page-home.component';
 import { PageVitrineComponent } from './Page/page-vitrine/page-vitrine.component';
 import { PageNotFoundComponent } from './Page/page-not-found/page-not-found.component';
+import { PageProfilComponent } from './Page/page-profil/page-profil.component';
 
 const routes: Routes = [
   { path: 'inscription', component: PageAuthentificationComponent },
   { path: 'connexion', component: PageAuthentificationComponent },
   { path: 'accueil', component: PageHomeComponent },
+  { path: 'profil', component: PageProfilComponent },
   { path: '', component: PageVitrineComponent },
   { path: '**', component: PageNotFoundComponent }
 

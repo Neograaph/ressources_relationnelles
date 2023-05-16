@@ -13,6 +13,7 @@ module.exports = {
             gris: "#747474",
             bleubtn: "#0A3A5B",
             noir: "#1c1c1c",
+            // "background-gris": "C9B3B3",
         },
         extend: {
             backgroundImage: {

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,13 @@ namespace ApiCube.Controllers
         {
             _config = config;
             _context = context;
+        }
+        // GET: api/Utilisateurs/5
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Utilisateur>>> GetUtilisateur()
+        {
+            return await _context.Utilisateurs.ToListAsync();
         }
 
         [HttpPost("authenticate")]
@@ -69,20 +77,52 @@ namespace ApiCube.Controllers
 
         // POST: api/Utilisateurs
         [HttpPost]
-        public async Task<ActionResult<Utilisateur>> PostUtilisateur(Utilisateur utilisateur)
+        public async Task<ActionResult<Utilisateur>> PostUtilisateur(AjoutUtilisateur utilisateur)
         {
             if (_context.Utilisateurs.Any(u => u.Email == utilisateur.Email))
             {
                 return BadRequest("Email déjà utilisé.");
             }
+            var nouvelUtilisateur = new Utilisateur
+            {
+                Email = utilisateur.Email,
+                MotDePasse = BCrypt.Net.BCrypt.HashPassword(utilisateur.MotDePasse),
+                DateNaissance= utilisateur.DateNaissance,
+                Prenom = utilisateur.Prenom,
+                Nom = utilisateur.Nom,
+                Telephone = utilisateur.Telephone,
+                Role = "Citoyen",
+                DateCreation = DateTime.Now
+            };
 
-            utilisateur.DateCreation = DateTime.Now;
-            utilisateur.MotDePasse = BCrypt.Net.BCrypt.HashPassword(utilisateur.MotDePasse);
 
-            _context.Utilisateurs.Add(utilisateur);
+            //utilisateur.DateCreation = DateTime.Now;
+            //utilisateur.MotDePasse = BCrypt.Net.BCrypt.HashPassword(utilisateur.MotDePasse);
+
+            _context.Utilisateurs.Add(nouvelUtilisateur);
             await _context.SaveChangesAsync();
+            // Appeler la fonction Authenticate pour générer le token
+            var authRequest = new AuthentificationRequest
+            {
+                Email = nouvelUtilisateur.Email,
+                MotDePasse = utilisateur.MotDePasse
+            };
 
-            return CreatedAtAction("GetUtilisateur", new { id = utilisateur.UtilisateurId }, utilisateur);
+            var authenticationResult = Authenticate(authRequest) as ObjectResult;
+
+            if (authenticationResult?.StatusCode == (int)HttpStatusCode.OK)
+            {
+                var tokenResponse = authenticationResult.Value as dynamic;
+                var token = tokenResponse.Token;
+
+                // Faire quelque chose avec le token, par exemple le retourner dans la réponse
+                return CreatedAtAction("GetUtilisateur", new { id = nouvelUtilisateur.UtilisateurId }, new { Token = token });
+            }
+            else
+            {
+                // Gérer les erreurs d'authentification
+                return BadRequest("Erreur lors de l'authentification.");
+            }
         }
 
         // GET: api/Utilisateurs/5
@@ -146,7 +186,7 @@ namespace ApiCube.Controllers
 
         // DELETE: api/Utilisateurs/5
         [HttpDelete("{id}")]
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public async Task<ActionResult<Utilisateur>> DeleteUtilisateur(int id)
         {
             var utilisateur = await _context.Utilisateurs.FindAsync(id);

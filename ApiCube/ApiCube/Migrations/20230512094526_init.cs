@@ -66,7 +66,8 @@ namespace ApiCube.Migrations
                     Email = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
                     UtilisateurActif = table.Column<bool>(type: "bit", nullable: false),
                     DateCreation = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DerniereConnexion = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DerniereConnexion = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DateNaissance = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Role = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     AdresseId = table.Column<int>(type: "int", nullable: true)
                 },
@@ -290,6 +291,31 @@ namespace ApiCube.Migrations
                         principalColumn: "CommentaireId",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Adresses",
+                columns: new[] { "AdresseId", "AdresseNum", "Cp", "Rue", "Ville" },
+                values: new object[] { 1, 123, "12345", "Rue de l'Exemple", "Ville de l'Exemple" });
+
+            migrationBuilder.InsertData(
+                table: "Documents",
+                columns: new[] { "DocumentId", "Chemin", "Extension", "Poids" },
+                values: new object[] { 1, "/chemin/vers/document.pdf", ".pdf", 100 });
+
+            migrationBuilder.InsertData(
+                table: "Utilisateurs",
+                columns: new[] { "UtilisateurId", "AdresseId", "DateCreation", "DateNaissance", "DerniereConnexion", "Email", "MotDePasse", "Nom", "Prenom", "Role", "Telephone", "UtilisateurActif" },
+                values: new object[] { 1, 1, new DateTime(2023, 5, 12, 11, 45, 26, 97, DateTimeKind.Local).AddTicks(2478), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 5, 12, 11, 45, 26, 97, DateTimeKind.Local).AddTicks(2513), "john.doe@example.com", "123456", "John", "Doe", "Utilisateur", "0123456789", true });
+
+            migrationBuilder.InsertData(
+                table: "Ressources",
+                columns: new[] { "RessourceId", "CategorieLibelle", "Contenu", "DateCreation", "DocumentId", "Titre", "UtilisateurId", "Valider", "VisibiliteLibelle" },
+                values: new object[] { 1, "Catégorie", "Contenu de la ressource", new DateTime(2023, 5, 12, 11, 45, 26, 97, DateTimeKind.Local).AddTicks(2677), 1, "Titre de la ressource", 1, true, "Publique" });
+
+            migrationBuilder.InsertData(
+                table: "Ressources",
+                columns: new[] { "RessourceId", "CategorieLibelle", "Contenu", "DateCreation", "DocumentId", "Titre", "UtilisateurId", "Valider", "VisibiliteLibelle" },
+                values: new object[] { 2, "Culture", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec sapien sed odio malesuada lobortis sed ut ex. Vestibulum facilisis scelerisque elit, ac commodo magna eleifend id.", new DateTime(2023, 5, 12, 11, 45, 26, 97, DateTimeKind.Local).AddTicks(2689), null, "Ressource random", 1, true, "Publique" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Aimers_RessourceId",

@@ -1,41 +1,31 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>Formulaire</title>
-  <link rel="stylesheet" href="FiltreRecherche.component.css">
-</head>
-<body>
-  <form>
-    <div>
-      <h3>Filtre de Recherche</h3>
-        <hr class="separator">
-        <select id="category">
-          <option value="">Catégorie</option>
-          <option value="cat1">Catégorie 1</option>
-          <option value="cat2">Catégorie 2</option>
-          <option value="cat3">Catégorie 3</option>
-        </select>
+<form>
+  <div class="shadow-lg border-none rounded-lg p-4">
+    <h3 class="text-base font-bold">Filtre de recherche</h3>
+    <hr class="separator border-t border-gray-300 my-4">
+    <select id="category" class="bg-gray-200 py-2 px-4 rounded-full w-full">
+      <option value="">Catégorie</option>
+      <option value="cat1">Catégorie 1</option>
+      <option value="cat2">Catégorie 2</option>
+      <option value="cat3">Catégorie 3</option>
+    </select>
 
-        <select id="type">
-          <option value="">Type de ressource</option>
-          <option value="type1">Type 1</option>
-          <option value="type2">Type 2</option>
-          <option value="type3">Type 3</option>
-        </select>
+    <select id="type" class="bg-gray-200 py-2 px-4 rounded-full w-full">
+      <option value="">Type de ressource</option>
+      <option value="type1">Type 1</option>
+      <option value="type2">Type 2</option>
+      <option value="type3">Type 3</option>
+    </select>
 
-        <div class="input-zone">
-          <input type="text" placeholder="Nom de la publication">
-          <input type="text" placeholder="Auteur">
-          <input type="date" placeholder="Date de publication">
-        </div>
+    <div class="input-zone">
+      <input type="text" placeholder="Nom de la publication" class="bg-gray-200 rounded-lg w-full py-2 px-4 text-sm">
+      <input type="text" placeholder="Auteur" class="bg-gray-200 rounded-lg w-full py-2 px-4 text-sm">
+      <input type="date" placeholder="Date de publication" class="bg-gray-200 rounded-lg w-full py-2 px-4 text-sm">
+    </div>
 
-        <div class="boutons-container">
-          <button type="button" id="Rechercher">Rechercher</button>
-        </div>
+    <div class="boutons-container">
+      <button type="button" id="Rechercher" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-full">
+        Rechercher
+      </button>
+    </div>
   </div>
-  </form>
-
-  <script src="script.js"></script>
-</body>
-</html>
+</form>

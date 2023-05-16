@@ -14,13 +14,18 @@ import { PageAuthentificationComponent } from './Page/page-authentification/page
 import { PageHomeComponent } from './Page/page-home/page-home.component';
 import { PageProfilComponent } from './Page/page-profil/page-profil.component';
 import { BlocFooterComponent } from './Bloc/Utilitaire/bloc-footer/bloc-footer.component';
-import { BlocConnexionComponent } from './Bloc/Authentification/bloc-connexion/bloc-connexion.component';
 import { BlocInscriptionComponent } from './Bloc/Authentification/bloc-inscription/bloc-inscription.component';
+import { BlocConnexionComponent } from './Bloc/Authentification/bloc-connexion/bloc-connexion.component';
 import { BlocMesRelationsComponent } from './Bloc/Modules/bloc-mes-relations/bloc-mes-relations.component';
 import { BlocRessourceComponent } from './Bloc/Feed/bloc-ressource/bloc-ressource.component';
 import { BlocRessourcesComponent } from './Bloc/Feed/bloc-ressources/bloc-ressources.component';
 import { MesInformationsComponent } from './Bloc/bloc-mes-informations/mes-informations.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { PageNotFoundComponent } from './Page/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -40,14 +45,19 @@ import { MesInformationsComponent } from './Bloc/bloc-mes-informations/mes-infor
     BlocMesRelationsComponent,
     BlocRessourceComponent,
     BlocRessourcesComponent,
-    MesInformationsComponent
+    MesInformationsComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    CommonModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({ timeOut: 2000, enableHtml: true }),
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [ToastrModule],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

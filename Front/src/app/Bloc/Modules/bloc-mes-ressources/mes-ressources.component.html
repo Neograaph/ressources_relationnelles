@@ -1,18 +1,14 @@
-<div class="bg-background-panel p-2 rounded-md">
-  <div>
-    <h2 class="text-2xl font-bold text-center p-2">Mes ressources</h2>
-  </div>
-  <div class="p-2" *ngFor="let produit of data">
-    <div class="flex">
-      <img
-        class="max-h-14 rounded-lg"
-        [src]="produit.image"
-        alt="{{ produit.title }}"
-      />
-      <div class="p-2">
-        <h3>{{ produit.title }}</h3>
-        <p>{{ produit.description }}</p>
-      </div>
+<form>
+    <div class="shadow-lg border-none rounded-lg p-4">
+      <h3 class="text-base font-bold">Mes ressources</h3>
+      <hr class="separator border-t border-gray-300 my-4">
+      <div *ngFor="let produit of data" class="flex items-center p-2 h-50">
+        <!-- <img class="max-h-14 rounded-lg" [src]="produit.image" alt="{{ produit.title }}" /> -->
+        <div class="flex flex-col flex-grow ml-2">
+            <h3 class="text-truncate font-bold">{{ produit.title }}</h3>
+            <p class="text-truncate">{{ produit.description }}</p>
+        </div>
     </div>
-  </div>
-</div>
+    </div>
+  </form>
+  

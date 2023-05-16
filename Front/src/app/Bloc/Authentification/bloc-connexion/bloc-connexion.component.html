@@ -1,1 +1,40 @@
-<p>bloc-connexion works!</p>
+<div class="">
+  <form
+    [formGroup]="connexionForm"
+    (ngSubmit)="submitForm()"
+    class="w-full max-w-md mx-auto p-5 rounded-lg shadow-md bg-gris bg-opacity-50"
+  >
+    <div class="mb-4">
+      <input
+        type="email"
+        id="email"
+        formControlName="email"
+        required
+        placeholder="Email"
+        class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+      />
+    </div>
+
+    <div class="mb-4">
+      <input
+        type="password"
+        id="password"
+        formControlName="password"
+        required
+        placeholder="Mot de passe"
+        class="shadow appearance-none border rounded w-full py-2 px-3 leading-tight focus:outline-none focus:shadow-outline"
+      />
+    </div>
+    <div class="flex flex-col text-center">
+      <button
+        type="submit"
+        class="rounded bg-bleubtn rounded text-blanc py-2 px-4"
+      >
+        Se connecter
+      </button>
+      <a class="pt-4 underline text-blanc text-opacity-70" href="/inscription"
+        >Je n'ai pas de compte</a
+      >
+    </div>
+  </form>
+</div>

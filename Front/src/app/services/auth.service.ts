@@ -1,21 +1,15 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   private apiUrl = environment.apiURL; // Remplacez par l'URL de votre API
 
-  constructor(private http: HttpClient) { }
-
-  login(credentials: any): Observable<any> {
-    // Envoyer les identifiants de connexion à votre API pour obtenir le token
-    return this.http.post(`${this.apiUrl}/api/login`, credentials);
-  }
+  constructor(private http: HttpClient) {}
 
   // Méthode pour enregistrer le token dans le stockage local (localStorage)
   saveToken(token: string): void {
@@ -36,5 +30,47 @@ export class AuthService {
   isAuthenticated(): boolean {
     const token = this.getToken();
     return token !== null;
+  }
+
+  register(data: any): Promise<any> {
+    // Définir les en-têtes de la requête (optionnel)
+    const headers = new HttpHeaders().set('Content-Type', 'text/json');
+    //console.log("Envoi des données à l'API");
+
+    //Envoyer la requête POST à l'API avec les données JSON
+    return this.http
+      .post(this.apiUrl + 'api/utilisateurs', data, { headers })
+      .toPromise()
+      .then((response) => {
+        // Traiter la réponse de l'API si nécessaire
+        console.log("Réponse de l'API:", response);
+        return response; // Renvoyer la réponse
+      })
+      .catch((error) => {
+        // Gérer les erreurs
+        console.error("Erreur lors de l'envoi de la requête:", error);
+        throw error; // Renvoyer l'erreur
+      });
+  }
+
+  login(params?: any): Promise<any> {
+    // Définir les en-têtes de la requête (optionnel)
+    const headers = new HttpHeaders().set('Content-Type', 'text/json');
+    //console.log("Envoi de la requête GET à l'API");
+
+    // Envoyer la requête POST à l'API avec les paramètres
+    return this.http
+      .post(this.apiUrl + 'api/utilisateurs/authenticate', params, { headers })
+      .toPromise()
+      .then((response) => {
+        // Traiter la réponse de l'API si nécessaire
+        console.log("Réponse de l'API:", response);
+        return response; // Renvoyer la réponse
+      })
+      .catch((error) => {
+        // Gérer les erreurs
+        console.error("Erreur lors de l'envoi de la requête GET:", error);
+        throw error; // Renvoyer l'erreur
+      });
   }
 }

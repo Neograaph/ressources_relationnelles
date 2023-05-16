@@ -5,7 +5,10 @@ import { environment } from 'src/environments/environment.prod';
 import { UtilisateurInscription } from '../Models/UtilisateurInscription.model';
 import { UtilisateurConnexion } from '../Models/UtilisateurConnexion.model';
 import { UtilisateurProfil } from '../Models/UtilisateurProfil.model';
-import jwtDecode, * as jwt_decode from 'jwt-decode';
+// import * as jwt_decode from "jwt-decode";
+import jwt_decode from 'jwt-decode';
+
+// Utilisez les fonctions et les classes de la bibliothèque jose selon vos besoins
 
 @Injectable({
   providedIn: 'root',
@@ -78,18 +81,30 @@ export class AuthService {
       });
   }
   
-  decodeToken(token: string): any {
+
+  getDecodedAccessToken(token: string): any {
     try {
-      const decodedToken = jwtDecode(token);
+      // console.log(jwt_decode(token));
+      const decodedToken = jwt_decode(token)
+
       return decodedToken;
-    } catch (error) {
-      console.error('Erreur lors du décodage du token :', error);
+    } catch(Error) {
       return null;
     }
   }
-  
-  
-  
+  // decodeToken(token: string): any {
+  //   try {
+  //     const decodedToken = JWK.createDecrypt(token);
+  //     return decodedToken;
+  //   } catch (error) {
+  //     console.error('Erreur lors du décodage du token :', error);
+  //     return null;
+  //   }
+  // }
+
+
+
+    
   // getUtilisateurProfil(token: string): Promise<any> {
   //   // Définir les en-têtes de la requête (optionnel)
   //   const headers = new HttpHeaders().set('Content-Type', 'text/json');

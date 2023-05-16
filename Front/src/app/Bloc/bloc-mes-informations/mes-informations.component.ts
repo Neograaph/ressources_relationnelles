@@ -29,8 +29,9 @@ export class MesInformationsComponent implements OnInit {
     const token = this.AuthService.getToken();
     
     if (token) {
-      this.AuthService.decodeToken(token);
-      console.log('Token : ' + token);
+      const decodedToken = this.AuthService.getDecodedAccessToken(token);
+      console.log(decodedToken);
+      console.log(decodedToken.name);
       
       // const utilisateur = this.AuthService.getUtilisateurProfil(token);
       

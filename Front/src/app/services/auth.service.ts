@@ -2,6 +2,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
+import { UtilisateurInscription } from '../Models/UtilisateurInscription.model';
+import { UtilisateurConnexion } from '../Models/UtilisateurConnexion.model';
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +34,7 @@ export class AuthService {
     return token !== null;
   }
 
-  register(data: any): Promise<any> {
+  register(data: UtilisateurInscription): Promise<any> {
     // Définir les en-têtes de la requête (optionnel)
     const headers = new HttpHeaders().set('Content-Type', 'text/json');
     //console.log("Envoi des données à l'API");
@@ -53,7 +55,7 @@ export class AuthService {
       });
   }
 
-  login(params?: any): Promise<any> {
+  login(params?: UtilisateurConnexion): Promise<any> {
     // Définir les en-têtes de la requête (optionnel)
     const headers = new HttpHeaders().set('Content-Type', 'text/json');
     //console.log("Envoi de la requête GET à l'API");

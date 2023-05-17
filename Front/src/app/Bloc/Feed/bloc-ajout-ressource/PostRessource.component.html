@@ -1,5 +1,5 @@
 <div class="flex justify-center shadow">
-  <form class="w-full bg-white">
+  <form class="w-full bg-white" [formGroup]="ajoutRessourceForm">
     <div class="m-2">
       <select id="category" class="w-full p-2 bg-grisclair rounded">
         <option value="">Choisir une catégorie</option>
@@ -19,8 +19,20 @@
     </div>
 
     <div class="m-2">
+      <input
+        type="text"
+        id="titre"
+        formControlName="titre"
+        placeholder="Titre de la ressource"
+        class="w-full bg-grisclair p-2"
+      />
+    </div>
+
+    <div class="m-2">
       <textarea
         type="text"
+        id="contenu"
+        formControlName="contenu"
         placeholder="Publier une ressource..."
         class="w-full bg-grisclair p-2"
       ></textarea>
@@ -38,6 +50,7 @@
         type="submit"
         id="publier"
         class="w-full bg-bleubtn text-blanc p-2 rounded"
+        (click)="publierRessource()"
       >
         Publier
       </button>

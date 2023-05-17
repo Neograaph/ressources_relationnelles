@@ -3,6 +3,8 @@ import { ActionsTypeService } from 'src/app/services/actions-type.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Ressource } from 'src/app/Models/Ressource.model';
+import { NotificationsService } from 'src/app/services/notifications.service';
+import { RessourcesService } from '../../../services/ressource.service';
 
 @Component({
   selector: 'app-PostRessource',
@@ -15,38 +17,39 @@ export class PostRessourceComponent implements OnInit {
 
   constructor(
     public actiontype: ActionsTypeService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private NotificationsService: NotificationsService,
+    private RessourcesService: RessourcesService
   ) {
     this.createForm();
   }
 
-  Ressource?: Ressource;
-  ngOnInit(): void {
-    // this.actiontype.getActionType().subscribe((response: any) => {
-    //   console.log(response)
-    // });
-  }
+  // Ressource?: Ressource;
+  ngOnInit(): void {}
   createForm() {
-    // j'ai mis des valeurs par défaut ici pour les tests pour éviter de remplir le formulaire à chaque fois
-    // console.log('test');
     this.ajoutRessourceForm = this.formBuilder.group({
-      titre: ['', Validators.required],
-      description: ['', [Validators.required]],
+      titre: ['montitredemo', Validators.required],
+      contenu: ['hellolemonde', [Validators.required]],
     });
   }
   publierRessource() {
     if (this.ajoutRessourceForm.valid) {
-      const formData = this.ajoutRessourceForm.value;
+      const formData: Ressource = this.ajoutRessourceForm.value;
+      formData.dateCreation = new Date();
+      formData.valider = true;
+      formData.utilisateurId = 1;
+      formData.visibiliteLibelle = 'Public';
+      formData.categorieLibelle = 'test';
+
+      this.NotificationsService.showSuccess('Succès', 'Ressource ajoutée');
       console.log(formData);
-      // Envoyer les données du formulaire à l'API ou effectuer toute autre action requise
-      // par exemple, vous pouvez utiliser this.actiontype pour appeler une méthode de votre service
-
-      // Afficher un message de succès
-
-      // Réinitialiser le formulaire après avoir envoyé les données
-      // this.ajoutRessourceForm.reset();
+      this.RessourcesService.createRessource(formData).subscribe();
+      this.ajoutRessourceForm.reset();
     } else {
-      // Afficher un message d'erreur si le formulaire est invalide
+      this.NotificationsService.showError(
+        'Erreur',
+        'Veuillez remplir tous les champs'
+      );
     }
   }
 }

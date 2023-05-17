@@ -28,6 +28,8 @@ import { ToastrModule } from 'ngx-toastr';
 import { PageNotFoundComponent } from './Page/page-not-found/page-not-found.component';
 import { PagePlanSiteComponent } from './Page/page-plan-site/page-plan-site.component';
 import { PageMentionsLegalesComponent } from './Page/page-mentions-legales/page-mentions-legales.component';
+import { PageDonneesPersonnellesComponent } from './Page/page-donnees-personnelles/page-donnees-personnelles.component';
+import { PageCookiesComponent } from './Page/page-cookies/page-cookies.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +53,8 @@ import { PageMentionsLegalesComponent } from './Page/page-mentions-legales/page-
     PageNotFoundComponent,
     PagePlanSiteComponent,
     PageMentionsLegalesComponent,
+    PageDonneesPersonnellesComponent,
+    PageCookiesComponent,
   ],
   imports: [
     BrowserModule,

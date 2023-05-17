@@ -33,7 +33,7 @@ export class MesRessourcesComponent {
   getRessources() {
     this.RessourcesService.getRessources().subscribe((data) => {
       this.Ressources = this.sortRessourcesByDate(data);
-      console.log(data);
+      // console.log(data);
     });
   }
   // sortRessourcesByDate(ressources: Ressource[]): Ressource[] {

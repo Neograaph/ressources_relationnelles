@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Ressource } from 'src/app/Models/Ressource.model';
 import { NotificationsService } from 'src/app/services/notifications.service';
 import { RessourcesService } from '../../../services/ressource.service';
+import { RefreshService } from 'src/app/services/refresh-service.service';
 
 @Component({
   selector: 'app-PostRessource',
@@ -19,7 +20,8 @@ export class PostRessourceComponent implements OnInit {
     public actiontype: ActionsTypeService,
     private formBuilder: FormBuilder,
     private NotificationsService: NotificationsService,
-    private RessourcesService: RessourcesService
+    private RessourcesService: RessourcesService,
+    private refreshService: RefreshService
   ) {
     this.createForm();
   }
@@ -44,11 +46,15 @@ export class PostRessourceComponent implements OnInit {
       console.log(this.ressource);
       this.RessourcesService.createRessource(this.ressource).subscribe();
       this.ajoutRessourceForm.reset();
+      this.triggerRefresh();
     } else {
       this.NotificationsService.showError(
         'Erreur',
         'Veuillez remplir tous les champs'
       );
     }
+  }
+  triggerRefresh(): void {
+    this.refreshService.triggerRefresh();
   }
 }

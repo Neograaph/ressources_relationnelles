@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Ressource } from 'src/app/Models/Ressource.model';
 import { NotificationsService } from 'src/app/services/notifications.service';
 import { RessourcesService } from '../../../services/ressource.service';
+import { RefreshService } from 'src/app/services/refresh-service.service';
 
 @Component({
   selector: 'app-mes-ressources',
@@ -15,12 +16,19 @@ import { RessourcesService } from '../../../services/ressource.service';
 export class MesRessourcesComponent {
   constructor(
     private NotificationsService: NotificationsService,
-    private RessourcesService: RessourcesService
+    private RessourcesService: RessourcesService,
+    private refreshService: RefreshService
   ) {}
   ressource!: Ressource;
   Ressources: Array<Ressource> = [];
   ngOnInit(): void {
     this.getRessources();
+    this.refreshService.refresh$.subscribe(() => {
+      // console.log('refresh222');
+      // Effectuez les actions de rafraîchissement nécessaires dans ce composant
+      // par exemple, rechargez les données ou exécutez une fonction spécifique
+      this.getRessources();
+    });
   }
   getRessources() {
     this.RessourcesService.getRessources().subscribe((data) => {

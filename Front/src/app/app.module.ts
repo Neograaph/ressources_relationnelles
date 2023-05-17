@@ -30,6 +30,7 @@ import { PagePlanSiteComponent } from './Page/page-plan-site/page-plan-site.comp
 import { PageMentionsLegalesComponent } from './Page/page-mentions-legales/page-mentions-legales.component';
 import { PageDonneesPersonnellesComponent } from './Page/page-donnees-personnelles/page-donnees-personnelles.component';
 import { PageCookiesComponent } from './Page/page-cookies/page-cookies.component';
+import { RefreshService } from './services/refresh-service.service';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,7 @@ import { PageCookiesComponent } from './Page/page-cookies/page-cookies.component
     BrowserAnimationsModule,
     ToastrModule.forRoot({ timeOut: 2000, enableHtml: true }),
   ],
-  providers: [ToastrModule],
+  providers: [ToastrModule, RefreshService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

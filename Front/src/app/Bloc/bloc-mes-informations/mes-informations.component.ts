@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Utilisateur } from '../../Models/Utilisateur.model';
 import { UtilisateurService } from '../../services/utilisateur.service';
+import { Observable, Subject } from 'rxjs';
+
 
 @Component({
   selector: 'app-mes-informations',
@@ -72,7 +74,11 @@ export class MesInformationsComponent implements OnInit {
       adresse: utilisateur.adresse,
       ville: utilisateur.ville,
       password: '*********',
-      confirmPassword: '*********'
+      confirmPassword: '*********',
     });
+  }
+  deleteAccount(): void {
+    // Envoyer une notification à tous les observateurs que le compte doit être supprimé
+    this.NotificationsService.showError("Suppression du compte", "Votre compte va être supprimé.")
   }
 }

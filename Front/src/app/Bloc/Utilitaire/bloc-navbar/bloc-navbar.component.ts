@@ -46,7 +46,7 @@ export class NavbarComponent implements OnInit {
     this.router.events.subscribe((routerData) => {
       if(routerData instanceof ResolveEnd){
           this.currentRoute = routerData.url;
-          console.log(this.currentRoute)
+          // console.log(this.currentRoute)
           if (this.currentRoute === '/') {
             // console.log(this.currentRoute)
             this.navbarClass = 'bg-noir'; // Applique la classe CSS pour la navbar noire

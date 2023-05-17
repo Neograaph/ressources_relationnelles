@@ -26,6 +26,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { PageNotFoundComponent } from './Page/page-not-found/page-not-found.component';
+import { PagePlanSiteComponent } from './Page/page-plan-site/page-plan-site.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { PageNotFoundComponent } from './Page/page-not-found/page-not-found.comp
     BlocRessourcesComponent,
     MesInformationsComponent,
     PageNotFoundComponent,
+    PagePlanSiteComponent,
   ],
   imports: [
     BrowserModule,

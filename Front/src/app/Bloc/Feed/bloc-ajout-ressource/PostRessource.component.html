@@ -22,15 +22,17 @@
       <input
         type="text"
         id="titre"
+        formControlName="titre"
         placeholder="Titre de la ressource"
         class="w-full bg-grisclair p-2"
-      >
+      />
     </div>
 
     <div class="m-2">
       <textarea
         type="text"
         id="description"
+        formControlName="description"
         placeholder="Publier une ressource..."
         class="w-full bg-grisclair p-2"
       ></textarea>
@@ -48,6 +50,7 @@
         type="submit"
         id="publier"
         class="w-full bg-bleubtn text-blanc p-2 rounded"
+        (click)="publierRessource()"
       >
         Publier
       </button>

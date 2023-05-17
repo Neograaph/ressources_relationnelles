@@ -13,6 +13,8 @@ module.exports = {
             gris: "#747474",
             bleubtn: "#0A3A5B",
             noir: "#1c1c1c",
+            violetbtn: "#2c338e",
+            // "background-gris": "C9B3B3",
             grisclair: "#b1bac4",
             black: "##010101" // noir profond
                 // "background-gris": "C9B3B3",

@@ -6,12 +6,14 @@ import { PageVitrineComponent } from './Page/page-vitrine/page-vitrine.component
 import { PagePlanSiteComponent } from './Page/page-plan-site/page-plan-site.component';
 import { PageNotFoundComponent } from './Page/page-not-found/page-not-found.component';
 import { PageProfilComponent } from './Page/page-profil/page-profil.component';
+import { PageMentionsLegalesComponent } from './Page/page-mentions-legales/page-mentions-legales.component';
 
 const routes: Routes = [
   { path: 'inscription', component: PageAuthentificationComponent },
   { path: 'connexion', component: PageAuthentificationComponent },
   { path: 'accueil', component: PageHomeComponent },
   { path: 'planSite', component: PagePlanSiteComponent },
+  { path: 'mentionsLegales', component: PageMentionsLegalesComponent },
   { path: 'profil', component: PageProfilComponent },
   { path: '', component: PageVitrineComponent },
   { path: '**', component: PageNotFoundComponent }

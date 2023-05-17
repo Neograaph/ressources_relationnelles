@@ -1,31 +1,50 @@
-<form>
-  <div class="shadow-lg border-none rounded-lg p-4">
-    <h3 class="text-base font-bold">Filtre de recherche</h3>
-    <hr class="separator border-t border-gray-300 my-4">
-    <select id="category" class="bg-gray-200 py-2 px-4 rounded-full w-full">
-      <option value="">Catégorie</option>
-      <option value="cat1">Catégorie 1</option>
-      <option value="cat2">Catégorie 2</option>
-      <option value="cat3">Catégorie 3</option>
-    </select>
-
-    <select id="type" class="bg-gray-200 py-2 px-4 rounded-full w-full">
-      <option value="">Type de ressource</option>
-      <option value="type1">Type 1</option>
-      <option value="type2">Type 2</option>
-      <option value="type3">Type 3</option>
-    </select>
-
-    <div class="input-zone">
-      <input type="text" placeholder="Nom de la publication" class="bg-gray-200 rounded-lg w-full py-2 px-4 text-sm">
-      <input type="text" placeholder="Auteur" class="bg-gray-200 rounded-lg w-full py-2 px-4 text-sm">
-      <input type="date" placeholder="Date de publication" class="bg-gray-200 rounded-lg w-full py-2 px-4 text-sm">
+<div class="flex justify-center shadow">
+  <form class="w-full bg-white">
+    <div class="m-2 p-2 border-b-2">
+      <h3 class="font-bold">Filtre de recherche</h3>
+    </div>
+    <div class="m-2">
+      <select id="category" class="w-full p-2 bg-grisclair rounded">
+        <option value="">Catégorie</option>
+        <option value="cat1">Catégorie 1</option>
+        <option value="cat2">Catégorie 2</option>
+        <option value="cat3">Catégorie 3</option>
+      </select>
     </div>
 
-    <div class="boutons-container">
-      <button type="button" id="Rechercher" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full w-full">
+    <div class="m-2">
+      <select id="type" class="w-full p-2 bg-grisclair rounded">
+        <option value="">Type de ressource</option>
+        <option value="type1">Type 1</option>
+        <option value="type2">Type 2</option>
+        <option value="type3">Type 3</option>
+      </select>
+    </div>
+
+    <div class="m-2 flex flex-col gap-2">
+      <input
+        type="text"
+        placeholder="Nom de la publication"
+        class="w-full bg-grisclair p-2"
+      />
+      <input type="text" placeholder="Auteur" class="w-full bg-grisclair p-2" />
+      <input
+        type="date"
+        placeholder="Date de publication"
+        class="w-full bg-grisclair p-2"
+      />
+    </div>
+
+    <div class="m-2">
+      <button
+        type="button"
+        id="Rechercher"
+        class="w-full bg-bleubtn text-blanc p-2 rounded"
+      >
         Rechercher
       </button>
     </div>
-  </div>
-</form>
+
+    <!-- </div> -->
+  </form>
+</div>

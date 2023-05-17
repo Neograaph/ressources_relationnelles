@@ -23,27 +23,26 @@ export class PostRessourceComponent implements OnInit {
   ) {
     this.createForm();
   }
-
-  // Ressource?: Ressource;
+  ressource!: Ressource;
   ngOnInit(): void {}
   createForm() {
     this.ajoutRessourceForm = this.formBuilder.group({
-      titre: ['montitredemo', Validators.required],
-      contenu: ['hellolemonde', [Validators.required]],
+      titre: ['', Validators.required],
+      contenu: ['', [Validators.required]],
     });
   }
   publierRessource() {
     if (this.ajoutRessourceForm.valid) {
-      const formData: Ressource = this.ajoutRessourceForm.value;
-      formData.dateCreation = new Date();
-      formData.valider = true;
-      formData.utilisateurId = 1;
-      formData.visibiliteLibelle = 'Public';
-      formData.categorieLibelle = 'test';
+      this.ressource = this.ajoutRessourceForm.value;
+      this.ressource.dateCreation = new Date();
+      this.ressource.valider = true;
+      this.ressource.utilisateurId = 1;
+      this.ressource.visibiliteLibelle = 'Public';
+      this.ressource.categorieLibelle = 'test';
 
       this.NotificationsService.showSuccess('Succès', 'Ressource ajoutée');
-      console.log(formData);
-      this.RessourcesService.createRessource(formData).subscribe();
+      console.log(this.ressource);
+      this.RessourcesService.createRessource(this.ressource).subscribe();
       this.ajoutRessourceForm.reset();
     } else {
       this.NotificationsService.showError(

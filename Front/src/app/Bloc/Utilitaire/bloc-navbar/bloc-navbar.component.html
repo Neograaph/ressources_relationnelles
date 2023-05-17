@@ -11,7 +11,8 @@
     <div class="flex items-center hidden sm:flex">
         <div>
             <!-- <a [routerLink]="['/inscription']" class="ml-4 text-blanc">Inscription</a> -->
-            <a [routerLink]="'/profil'" class="ml-4 text-blanc">Mon profil</a>
+            <a [routerLink]="'/profil'" class="ml-4 text-blanc">{{ utilisateur?.prenom}}
+            </a>
 
         </div>
         <div class="flex">
@@ -36,4 +37,3 @@
       </svg>
     </button>
 </nav>
-{{ utilisateurs | json }}

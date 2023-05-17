@@ -24,8 +24,22 @@ export class MesRessourcesComponent {
   }
   getRessources() {
     this.RessourcesService.getRessources().subscribe((data) => {
-      this.Ressources = data;
+      this.Ressources = this.sortRessourcesByDate(data);
       console.log(data);
+    });
+  }
+  // sortRessourcesByDate(ressources: Ressource[]): Ressource[] {
+  //   return ressources.sort((a, b) => {
+  //     return (
+  //       new Date(b.dateCreation).getTime() - new Date(a.dateCreation).getTime()
+  //     );
+  //   });
+  // }
+  sortRessourcesByDate(ressources: Ressource[]): Ressource[] {
+    return ressources.sort((a, b) => {
+      return (
+        new Date(a.dateCreation).getTime() - new Date(b.dateCreation).getTime()
+      );
     });
   }
 }

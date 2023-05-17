@@ -4,6 +4,9 @@ import { AuthService } from 'src/app/services/auth.service';
 import { NotificationsService } from 'src/app/services/notifications.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { Utilisateur } from '../../Models/Utilisateur.model';
+import { UtilisateurService } from '../../services/utilisateur.service';
+import { Observable, Subject } from 'rxjs';
 
 
 @Component({
@@ -11,7 +14,6 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './mes-informations.component.html',
   styleUrls: ['./mes-informations.component.css'],
   providers: [ToastrService],
-
 })
 export class MesInformationsComponent implements OnInit {
   profilForm!: FormGroup;
@@ -20,25 +22,29 @@ export class MesInformationsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private AuthService: AuthService,
     private NotificationsService: NotificationsService,
+    private UtilisateurService: UtilisateurService,
     private router: Router
-  ) { 
+  ) {
     this.createForm();
   }
 
-  ngOnInit(): void { 
-    const token = this.AuthService.getToken();
-    
-    if (token) {
-      const decodedToken = this.AuthService.getDecodedAccessToken(token);
-      // console.log(decodedToken);
-      // console.log(decodedToken.name);
-      const utilisateur = this.AuthService.getUtilisateurProfil(decodedToken.UtilisateurId);
-      // console.log(utilisateur);
-      this.patchFormValues(utilisateur);
-    } else {
-      console.log('Pas de token');
-      this.router.navigate(['/connexion']);
-    }
+  utilisateur?: Utilisateur;
+  ngOnInit(): void {
+    this.UtilisateurService.getUtilisateur().subscribe(
+      (utilisateur: Utilisateur | null) => {
+        if (utilisateur !== null) {
+          this.utilisateur = utilisateur;
+          this.patchFormValues(utilisateur);
+        }
+      },
+      (error) => {
+        this.router.navigate(['/connexion']);
+        console.error(
+          "Une erreur s'est produite lors de la récupération de l'utilisateur :",
+          error
+        );
+      }
+    );
   }
 
   createForm() {
@@ -51,22 +57,28 @@ export class MesInformationsComponent implements OnInit {
       adresse: ['1 rue de la paix', [Validators.required]],
       ville: ['75000', [Validators.required]],
       password: ['*******', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['*******', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: [
+        '*******',
+        [Validators.required, Validators.minLength(6)],
+      ],
     });
   }
   patchFormValues(utilisateur: any) {
     console.log(utilisateur);
 
-    // this.profilForm.patchValue({
-    //   nom: utilisateur.nom,
-    //   prenom: utilisateur.prenom,
-    //   email: utilisateur.email,
-    //   telephone: utilisateur.telephone,
-    //   adresse: utilisateur.adresse,
-    //   ville: utilisateur.ville,
-    //   password: '', 
-    //   confirmPassword: '' 
-    // });
+    this.profilForm.patchValue({
+      nom: utilisateur.nom,
+      prenom: utilisateur.prenom,
+      email: utilisateur.email,
+      telephone: utilisateur.telephone,
+      adresse: utilisateur.adresse,
+      ville: utilisateur.ville,
+      password: '*********',
+      confirmPassword: '*********',
+    });
+  }
+  deleteAccount(): void {
+    // Envoyer une notification à tous les observateurs que le compte doit être supprimé
+    this.NotificationsService.showError("Suppression du compte", "Votre compte va être supprimé.")
   }
 }
-

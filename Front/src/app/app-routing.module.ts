@@ -11,6 +11,7 @@ import { PageDonneesPersonnellesComponent } from './Page/page-donnees-personnell
 import { PageCookiesComponent } from './Page/page-cookies/page-cookies.component';
 
 const routes: Routes = [
+  { path: '', component: PageVitrineComponent },
   { path: 'inscription', component: PageAuthentificationComponent },
   { path: 'connexion', component: PageAuthentificationComponent },
   { path: 'accueil', component: PageHomeComponent },
@@ -19,7 +20,6 @@ const routes: Routes = [
   { path: 'donneesPersonnelles', component: PageDonneesPersonnellesComponent },
   { path: 'gestionCookies', component: PageCookiesComponent },
   { path: 'profil', component: PageProfilComponent },
-  { path: '', component: PageVitrineComponent },
   { path: '**', component: PageNotFoundComponent }
 
 ];

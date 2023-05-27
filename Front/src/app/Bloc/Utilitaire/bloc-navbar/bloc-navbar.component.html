@@ -1,5 +1,5 @@
-<nav [ngClass]="navbarClass" class="fixed top-0 w-screen flex items-center justify-between text-white px-4 py-2">
-
+<nav [ngClass]="navbarClass" class="fixed top-0 w-screen flex items-center justify-center text-white px-4 py-2 ">
+    <div class="container flex items-center justify-between text-white px-4 ">
     <a class="font-bold" routerLink="/accueil">
         <img src="assets/img/logo.png" class="max-h-12" alt="Logo" />
     </a>
@@ -24,7 +24,7 @@
             </div>
         </a>
     </div>
-    <div *ngIf="!utilisateur" class="text-blanc">
+    <div *ngIf="!utilisateur && this.currentRoute !== '/'" class="text-blanc">
         <a routerLink="/inscription" class="mr-4 hover:text-grisclair">S'inscrire</a>
         <a routerLink="/connexion" class="border p-2 rounded-md hover:text-grisclair">Se connecter</a>
     </div>
@@ -43,6 +43,7 @@
         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
       </svg>
     </button>
+</div>
 </nav>
 <div *ngIf="this.currentRoute !== '/connexion' && this.currentRoute !== '/inscription'" style="margin-top: 64px;">
 

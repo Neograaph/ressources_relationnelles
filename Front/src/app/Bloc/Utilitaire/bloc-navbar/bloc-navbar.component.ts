@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActionsTypeService } from 'src/app/services/actions-type.service';
 import { HttpClient } from '@angular/common/http';
-import { catchError } from 'rxjs/operators';
 import { ResolveEnd, Router } from '@angular/router';
 import { UtilisateurService } from 'src/app/services/utilisateur.service';
-import { UtilisateurProfil } from 'src/app/Models/UtilisateurProfil.model';
 import { Utilisateur } from 'src/app/Models/Utilisateur.model';
 
 @Component({
@@ -15,8 +13,8 @@ import { Utilisateur } from 'src/app/Models/Utilisateur.model';
 export class NavbarComponent implements OnInit {
   utilisateurs: any;
   resultatPost: any;
- currentRoute? : string; // Récupère l'URL de la route actuelle
- isMenuOpen = false;
+  currentRoute? : string; // Récupère l'URL de la route actuelle
+  isMenuOpen = false;
 
 
   navbarClass: string = "bg-bleufonce"; // bleufonce valeur par défaut

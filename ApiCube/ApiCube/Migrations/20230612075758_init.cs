@@ -305,17 +305,17 @@ namespace ApiCube.Migrations
             migrationBuilder.InsertData(
                 table: "Utilisateurs",
                 columns: new[] { "UtilisateurId", "AdresseId", "DateCreation", "DateNaissance", "DerniereConnexion", "Email", "MotDePasse", "Nom", "Prenom", "Role", "Telephone", "UtilisateurActif" },
-                values: new object[] { 1, 1, new DateTime(2023, 5, 12, 11, 45, 26, 97, DateTimeKind.Local).AddTicks(2478), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 5, 12, 11, 45, 26, 97, DateTimeKind.Local).AddTicks(2513), "john.doe@example.com", "123456", "John", "Doe", "Utilisateur", "0123456789", true });
+                values: new object[] { 1, 1, new DateTime(2023, 6, 12, 9, 57, 57, 872, DateTimeKind.Local).AddTicks(4119), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 6, 12, 9, 57, 57, 872, DateTimeKind.Local).AddTicks(4160), "john.doe@example.com", "123456", "John", "Doe", "Utilisateur", "0123456789", true });
 
             migrationBuilder.InsertData(
                 table: "Ressources",
                 columns: new[] { "RessourceId", "CategorieLibelle", "Contenu", "DateCreation", "DocumentId", "Titre", "UtilisateurId", "Valider", "VisibiliteLibelle" },
-                values: new object[] { 1, "Catégorie", "Contenu de la ressource", new DateTime(2023, 5, 12, 11, 45, 26, 97, DateTimeKind.Local).AddTicks(2677), 1, "Titre de la ressource", 1, true, "Publique" });
+                values: new object[] { 1, "Catégorie", "Contenu de la ressource", new DateTime(2023, 6, 12, 9, 57, 57, 872, DateTimeKind.Local).AddTicks(4296), 1, "Titre de la ressource", 1, true, "Publique" });
 
             migrationBuilder.InsertData(
                 table: "Ressources",
                 columns: new[] { "RessourceId", "CategorieLibelle", "Contenu", "DateCreation", "DocumentId", "Titre", "UtilisateurId", "Valider", "VisibiliteLibelle" },
-                values: new object[] { 2, "Culture", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec sapien sed odio malesuada lobortis sed ut ex. Vestibulum facilisis scelerisque elit, ac commodo magna eleifend id.", new DateTime(2023, 5, 12, 11, 45, 26, 97, DateTimeKind.Local).AddTicks(2689), null, "Ressource random", 1, true, "Publique" });
+                values: new object[] { 2, "Culture", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec sapien sed odio malesuada lobortis sed ut ex. Vestibulum facilisis scelerisque elit, ac commodo magna eleifend id.", new DateTime(2023, 6, 12, 9, 57, 57, 872, DateTimeKind.Local).AddTicks(4305), null, "Ressource random", 1, true, "Publique" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Aimers_RessourceId",

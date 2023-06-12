@@ -8,4 +8,5 @@ export interface Aimer {
   dateAimer: Date;
   utilisateurId: number;
   utilisateur?: Utilisateur;
+  titre ?: string; // Ajout du champ "titre" pour stocker le titre de la ressource
 }

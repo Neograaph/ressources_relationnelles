@@ -46,6 +46,7 @@ namespace ApiCube.Controllers
         }
 
 
+
         // GET: api/Aimers/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Aimer>> GetAimer(int id)
@@ -106,12 +107,11 @@ namespace ApiCube.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAimer(int id)
         {
-            var aimer = await _context.Aimers.FindAsync(id);
+            var aimer = await _context.Aimers.FirstOrDefaultAsync(a => a.RessourceId == id);
             if (aimer == null)
             {
                 return NotFound();
             }
-
             _context.Aimers.Remove(aimer);
             await _context.SaveChangesAsync();
 

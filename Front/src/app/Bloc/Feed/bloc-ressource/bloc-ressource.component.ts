@@ -63,6 +63,21 @@ export class BlocRessourceComponent {
           );
         } else {
           console.log('La ressource est déjà aimée par cet utilisateur.');
+          this.FavRessourceService.deleteAimer(
+            // utilisateurId,
+            ressourceId
+          ).subscribe(
+            () => {
+              console.log('Ressource aimée supprimée avec succès.');
+              // Effectuez d'autres actions si nécessaire
+            },
+            (error) => {
+              console.error(
+                "Une erreur s'est produite lors de la suppression de la ressource aimée:",
+                error
+              );
+            }
+          );
         }
       },
       (error) => {

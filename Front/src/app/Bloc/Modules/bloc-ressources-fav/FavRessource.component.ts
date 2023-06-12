@@ -15,7 +15,7 @@ import { Ressource } from '../../../Models/Ressource.model';
 export class FavRessourceComponent implements OnInit {
   utilisateur!: Utilisateur;
   FavRessource: Array<Aimer> = [];
-  favRessourceTitles: Array<string> = [];
+  // favRessourceTitles: Array<string> = [];
   constructor(
     private utilisateurService: UtilisateurService,
     private FavRessourceService: AimerService,
@@ -49,7 +49,7 @@ export class FavRessourceComponent implements OnInit {
           this.ressourceService
             .getRessource(fav.ressourceId)
             .subscribe((ressource) => {
-              this.favRessourceTitles.push(ressource.titre);
+              fav.titre = ressource.titre; // Assigner le titre à l'attribut "titre" de l'objet "fav"
             });
         });
       }

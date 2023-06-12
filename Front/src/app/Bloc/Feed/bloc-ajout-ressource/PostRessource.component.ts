@@ -6,6 +6,8 @@ import { Ressource } from 'src/app/Models/Ressource.model';
 import { NotificationsService } from 'src/app/services/notifications.service';
 import { RessourcesService } from '../../../services/ressource.service';
 import { RefreshService } from 'src/app/services/refresh-service.service';
+import { UtilisateurService } from 'src/app/services/utilisateur.service';
+import { Utilisateur } from 'src/app/Models/Utilisateur.model';
 
 @Component({
   selector: 'app-PostRessource',
@@ -15,18 +17,31 @@ import { RefreshService } from 'src/app/services/refresh-service.service';
 })
 export class PostRessourceComponent implements OnInit {
   ajoutRessourceForm!: FormGroup;
+  utilisateur!: Utilisateur;
 
   constructor(
     public actiontype: ActionsTypeService,
     private formBuilder: FormBuilder,
     private NotificationsService: NotificationsService,
     private RessourcesService: RessourcesService,
-    private refreshService: RefreshService
+    private refreshService: RefreshService,
+    private utilisateurService: UtilisateurService,
   ) {
     this.createForm();
   }
   ressource!: Ressource;
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.utilisateurService.getUtilisateur().subscribe(
+      (utilisateur: Utilisateur | null) => {
+        if (utilisateur !== null) {
+          this.utilisateur = utilisateur;
+        }
+      },
+      (error) => {
+        console.error("Une erreur s'est produite lors de la récupération de l'utilisateur :", error);
+      }
+    );
+  }
   createForm() {
     this.ajoutRessourceForm = this.formBuilder.group({
       titre: ['', Validators.required],
@@ -38,7 +53,7 @@ export class PostRessourceComponent implements OnInit {
       this.ressource = this.ajoutRessourceForm.value;
       this.ressource.dateCreation = new Date();
       this.ressource.valider = true;
-      this.ressource.utilisateurId = 1;
+      this.ressource.utilisateurId = this.utilisateur.utilisateurId;
       this.ressource.visibiliteLibelle = 'Public';
       this.ressource.categorieLibelle = 'test';
 

@@ -40,7 +40,7 @@ export class PostRessourceComponent implements OnInit {
       this.ressource.valider = true;
       this.ressource.utilisateurId = 1;
       this.ressource.visibiliteLibelle = 'Public';
-      this.ressource.categorieLibelle = 'test';
+      this.ressource.categorie.libelle = 'test';
 
       this.NotificationsService.showSuccess('Succès', 'Ressource ajoutée');
       console.log(this.ressource);

@@ -3,6 +3,7 @@ import { Categorie } from 'src/app/Models/Categorie.model';
 import { TypeRessource } from 'src/app/Models/TypeRessource.model';
 import { ActionsTypeService } from 'src/app/services/actions-type.service';
 import { CategorieService } from 'src/app/services/categorie.service';
+import { FiltreRechercheService } from 'src/app/services/filtre-recherche.service';
 import { TypeRessourceService } from 'src/app/services/type-ressource.service';
 
 @Component({
@@ -23,7 +24,8 @@ export class FiltreRechercheComponent implements OnInit {
   constructor(
     public actiontype: ActionsTypeService,
     public categorieService: CategorieService,
-    public typeRessService: TypeRessourceService
+    public typeRessService: TypeRessourceService,
+    private filtreService: FiltreRechercheService
   ) {}
 
   ngOnInit(): void {
@@ -42,6 +44,22 @@ export class FiltreRechercheComponent implements OnInit {
     console.log('Nom de la publication :', this.publicationName);
     console.log('Auteur :', this.author);
     console.log('Date de publication :', this.publicationDate);
+    this.filterResources();
+  }
+  filterResources(): void {
+    // Effectuez le filtrage en fonction des valeurs des filtres
+
+    // ...
+
+    // Mettez à jour le filtre en utilisant le service de partage de données
+    const filter = {
+      selectedCategoryId: this.selectedCategoryId,
+      selectedTypeRessourceId: this.selectedTypeRessourceId,
+      publicationName: this.publicationName,
+      author: this.author,
+      publicationDate: this.publicationDate
+    };
+    this.filtreService.updateFilter(filter);
   }
 }
 

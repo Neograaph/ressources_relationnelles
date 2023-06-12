@@ -24,8 +24,12 @@ namespace ApiCube.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Ressource>>> GetRessources()
         {
-            return await _context.Ressources.ToListAsync();
+            return await _context.Ressources
+                .Include(r => r.TypeRessource) // Charger les données associées du type de ressource
+                .Include(r => r.Categorie) // Charger les données associées de la catégorie
+                .ToListAsync();
         }
+
 
         // GET: api/Ressources/5
         [HttpGet("{id}")]

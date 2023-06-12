@@ -1,7 +1,6 @@
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './Bloc/Utilitaire/bloc-navbar/bloc-navbar.component';
@@ -64,6 +63,7 @@ import { RefreshService } from './services/refresh-service.service';
     ReactiveFormsModule,
     CommonModule,
     BrowserAnimationsModule,
+    FormsModule,
     ToastrModule.forRoot({ timeOut: 2000, enableHtml: true }),
   ],
   providers: [ToastrModule, RefreshService],

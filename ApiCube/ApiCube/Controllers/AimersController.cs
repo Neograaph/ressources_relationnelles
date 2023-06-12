@@ -34,11 +34,6 @@ namespace ApiCube.Controllers
         {
             var aimers = await _context.Aimers.Where(a => a.UtilisateurId == id).ToListAsync();
 
-            if (aimers == null || aimers.Count == 0)
-            {
-                return NotFound();
-            }
-
             return aimers;
         }
 

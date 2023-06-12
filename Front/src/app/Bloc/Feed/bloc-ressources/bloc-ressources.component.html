@@ -1,1 +1,4 @@
-<app-bloc-ressource [name]="name"></app-bloc-ressource>
+<!-- <app-bloc-ressource [name]="name"></app-bloc-ressource> -->
+<ng-container *ngFor="let ressource of ressources">
+  <app-bloc-ressource [data]="ressource" class="p-2"></app-bloc-ressource>
+</ng-container>

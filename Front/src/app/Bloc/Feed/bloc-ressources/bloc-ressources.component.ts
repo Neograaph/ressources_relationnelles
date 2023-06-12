@@ -24,7 +24,7 @@ export class BlocRessourcesComponent {
       (utilisateur: Utilisateur | null) => {
         if (utilisateur !== null) {
           this.utilisateur = utilisateur;
-          console.log(this.utilisateur);
+          // console.log(this.utilisateur);
         }
       },
       (error) => {
@@ -38,6 +38,7 @@ export class BlocRessourcesComponent {
       (ressources: Ressource[]) => {
         this.ressources = ressources;
         console.log(this.ressources);
+        // console.log(this.ressources[0].titre);
         // Autres actions à effectuer avec les ressources
       },
       (error) => {

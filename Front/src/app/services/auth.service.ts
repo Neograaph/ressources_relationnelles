@@ -32,6 +32,7 @@ export class AuthService {
   // Méthode pour supprimer le token du stockage local
   removeToken(): void {
     localStorage.removeItem('token');
+    console.log('Token supprimé');
   }
 
   // Méthode pour vérifier si l'utilisateur est connecté en vérifiant la présence du token

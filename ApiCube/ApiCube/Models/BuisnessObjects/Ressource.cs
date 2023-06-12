@@ -19,8 +19,12 @@ namespace ApiCube.Models.BuisnessObjects
         [MaxLength(50)]
         public string? VisibiliteLibelle { get; set; }
 
-        [MaxLength(50)]
-        public string? CategorieLibelle { get; set; }
+
+        public int CategorieId { get; set; }
+        public Categorie? Categorie { get; set; }
+
+        public int TypeRessourceId { get; set; }
+        public TypeRessource? TypeRessource { get; set; }
 
         public int? DocumentId { get; set; }
         public Document? Document { get; set; }

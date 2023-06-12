@@ -10,7 +10,7 @@ namespace ApiCube.Models.BuisnessObjects
         [Key]
         public int AimerId { get; set; }
         [Required]
-        public int RessourceId { get; set; }
+        public int RessourceId   { get; set; }
         public Ressource? Ressource { get; set; }
         [Required]
         public DateTime DateAimer { get; set; }

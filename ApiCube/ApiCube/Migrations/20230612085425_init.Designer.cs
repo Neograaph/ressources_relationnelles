@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiCube.Migrations
 {
     [DbContext(typeof(AppContexte))]
-    [Migration("20230512094526_init")]
+    [Migration("20230612085425_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -107,6 +107,89 @@ namespace ApiCube.Migrations
                     b.HasIndex("UtilisateurId");
 
                     b.ToTable("Aimers");
+                });
+
+            modelBuilder.Entity("ApiCube.Models.BuisnessObjects.Categorie", b =>
+                {
+                    b.Property<int>("CategorieId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategorieId"), 1L, 1);
+
+                    b.Property<string>("Libelle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CategorieId");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategorieId = 1,
+                            Libelle = "Communication"
+                        },
+                        new
+                        {
+                            CategorieId = 2,
+                            Libelle = "Cultures"
+                        },
+                        new
+                        {
+                            CategorieId = 3,
+                            Libelle = "Développement personnel"
+                        },
+                        new
+                        {
+                            CategorieId = 4,
+                            Libelle = "Intelligence émotionnelle"
+                        },
+                        new
+                        {
+                            CategorieId = 5,
+                            Libelle = "Loisirs"
+                        },
+                        new
+                        {
+                            CategorieId = 6,
+                            Libelle = "Monde professionnel"
+                        },
+                        new
+                        {
+                            CategorieId = 7,
+                            Libelle = "Parentalité"
+                        },
+                        new
+                        {
+                            CategorieId = 8,
+                            Libelle = "Qualité de vie"
+                        },
+                        new
+                        {
+                            CategorieId = 9,
+                            Libelle = "Recherche de sens"
+                        },
+                        new
+                        {
+                            CategorieId = 10,
+                            Libelle = "Santé physique"
+                        },
+                        new
+                        {
+                            CategorieId = 11,
+                            Libelle = "Santé psychique"
+                        },
+                        new
+                        {
+                            CategorieId = 12,
+                            Libelle = "Spiritualité"
+                        },
+                        new
+                        {
+                            CategorieId = 13,
+                            Libelle = "Vie affective"
+                        });
                 });
 
             modelBuilder.Entity("ApiCube.Models.BuisnessObjects.Commentaire", b =>
@@ -320,9 +403,8 @@ namespace ApiCube.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RessourceId"), 1L, 1);
 
-                    b.Property<string>("CategorieLibelle")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("CategorieId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Contenu")
                         .HasMaxLength(255)
@@ -338,6 +420,9 @@ namespace ApiCube.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("nvarchar(150)");
 
+                    b.Property<int>("TypeRessourceId")
+                        .HasColumnType("int");
+
                     b.Property<int>("UtilisateurId")
                         .HasColumnType("int");
 
@@ -350,7 +435,11 @@ namespace ApiCube.Migrations
 
                     b.HasKey("RessourceId");
 
+                    b.HasIndex("CategorieId");
+
                     b.HasIndex("DocumentId");
+
+                    b.HasIndex("TypeRessourceId");
 
                     b.HasIndex("UtilisateurId");
 
@@ -359,26 +448,86 @@ namespace ApiCube.Migrations
                     b.HasData(
                         new
                         {
-                            RessourceId = 1,
-                            CategorieLibelle = "Catégorie",
-                            Contenu = "Contenu de la ressource",
-                            DateCreation = new DateTime(2023, 5, 12, 11, 45, 26, 97, DateTimeKind.Local).AddTicks(2677),
-                            DocumentId = 1,
-                            Titre = "Titre de la ressource",
+                            RessourceId = 2,
+                            CategorieId = 2,
+                            Contenu = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec sapien sed odio malesuada lobortis sed ut ex. Vestibulum facilisis scelerisque elit, ac commodo magna eleifend id.",
+                            DateCreation = new DateTime(2023, 6, 12, 10, 54, 24, 780, DateTimeKind.Local).AddTicks(4419),
+                            Titre = "Ressource random",
+                            TypeRessourceId = 1,
                             UtilisateurId = 1,
                             Valider = true,
                             VisibiliteLibelle = "Publique"
                         },
                         new
                         {
-                            RessourceId = 2,
-                            CategorieLibelle = "Culture",
-                            Contenu = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec sapien sed odio malesuada lobortis sed ut ex. Vestibulum facilisis scelerisque elit, ac commodo magna eleifend id.",
-                            DateCreation = new DateTime(2023, 5, 12, 11, 45, 26, 97, DateTimeKind.Local).AddTicks(2689),
-                            Titre = "Ressource random",
+                            RessourceId = 1,
+                            CategorieId = 2,
+                            Contenu = "Contenu de la ressource",
+                            DateCreation = new DateTime(2023, 6, 12, 10, 54, 24, 780, DateTimeKind.Local).AddTicks(4424),
+                            DocumentId = 1,
+                            Titre = "Titre de la ressource",
+                            TypeRessourceId = 1,
                             UtilisateurId = 1,
                             Valider = true,
                             VisibiliteLibelle = "Publique"
+                        });
+                });
+
+            modelBuilder.Entity("ApiCube.Models.BuisnessObjects.TypeRessource", b =>
+                {
+                    b.Property<int>("TypeRessourceId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TypeRessourceId"), 1L, 1);
+
+                    b.Property<string>("Libelle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TypeRessourceId");
+
+                    b.ToTable("TypeRessources");
+
+                    b.HasData(
+                        new
+                        {
+                            TypeRessourceId = 1,
+                            Libelle = "Activité / Jeu à réaliser"
+                        },
+                        new
+                        {
+                            TypeRessourceId = 2,
+                            Libelle = "Article"
+                        },
+                        new
+                        {
+                            TypeRessourceId = 3,
+                            Libelle = "Carte défi"
+                        },
+                        new
+                        {
+                            TypeRessourceId = 4,
+                            Libelle = "Cours au format PDF"
+                        },
+                        new
+                        {
+                            TypeRessourceId = 5,
+                            Libelle = "Exercice / Atelier"
+                        },
+                        new
+                        {
+                            TypeRessourceId = 6,
+                            Libelle = "Fiche de lecture"
+                        },
+                        new
+                        {
+                            TypeRessourceId = 7,
+                            Libelle = "Jeu en ligne"
+                        },
+                        new
+                        {
+                            TypeRessourceId = 8,
+                            Libelle = "Vidéo"
                         });
                 });
 
@@ -440,9 +589,9 @@ namespace ApiCube.Migrations
                         {
                             UtilisateurId = 1,
                             AdresseId = 1,
-                            DateCreation = new DateTime(2023, 5, 12, 11, 45, 26, 97, DateTimeKind.Local).AddTicks(2478),
+                            DateCreation = new DateTime(2023, 6, 12, 10, 54, 24, 780, DateTimeKind.Local).AddTicks(4237),
                             DateNaissance = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DerniereConnexion = new DateTime(2023, 5, 12, 11, 45, 26, 97, DateTimeKind.Local).AddTicks(2513),
+                            DerniereConnexion = new DateTime(2023, 6, 12, 10, 54, 24, 780, DateTimeKind.Local).AddTicks(4271),
                             Email = "john.doe@example.com",
                             MotDePasse = "123456",
                             Nom = "John",
@@ -580,9 +729,21 @@ namespace ApiCube.Migrations
 
             modelBuilder.Entity("ApiCube.Models.BuisnessObjects.Ressource", b =>
                 {
+                    b.HasOne("ApiCube.Models.BuisnessObjects.Categorie", "Categorie")
+                        .WithMany("Ressources")
+                        .HasForeignKey("CategorieId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("ApiCube.Models.BuisnessObjects.Document", "Document")
                         .WithMany()
                         .HasForeignKey("DocumentId");
+
+                    b.HasOne("ApiCube.Models.BuisnessObjects.TypeRessource", "TypeRessource")
+                        .WithMany("Ressources")
+                        .HasForeignKey("TypeRessourceId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("ApiCube.Models.BuisnessObjects.Utilisateur", "Utilisateur")
                         .WithMany()
@@ -590,7 +751,11 @@ namespace ApiCube.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Categorie");
+
                     b.Navigation("Document");
+
+                    b.Navigation("TypeRessource");
 
                     b.Navigation("Utilisateur");
                 });
@@ -604,6 +769,11 @@ namespace ApiCube.Migrations
                     b.Navigation("Adresse");
                 });
 
+            modelBuilder.Entity("ApiCube.Models.BuisnessObjects.Categorie", b =>
+                {
+                    b.Navigation("Ressources");
+                });
+
             modelBuilder.Entity("ApiCube.Models.BuisnessObjects.Ressource", b =>
                 {
                     b.Navigation("Aimers");
@@ -611,6 +781,11 @@ namespace ApiCube.Migrations
                     b.Navigation("Consulters");
 
                     b.Navigation("Recherchers");
+                });
+
+            modelBuilder.Entity("ApiCube.Models.BuisnessObjects.TypeRessource", b =>
+                {
+                    b.Navigation("Ressources");
                 });
 
             modelBuilder.Entity("ApiCube.Models.BuisnessObjects.Utilisateur", b =>

@@ -1,4 +1,4 @@
-<footer class="bg-transparent" [ngClass]="footerClass">
+<footer [ngClass]="footerClass">
   <div
     class="border-t border-gray-400 flex flex-col md:flex-row justify-between items-center h-16"
   >
@@ -26,7 +26,9 @@
     </div>
     <div class="text-gray-500 text-sm mr-4 mt-2 md:mt-0">
       <a routerLink="/">©</a>
-      2023 GROUPE1 CESI
+      2023 GROUPE
+      <span (click)="removeToken()">1</span>
+      CESI
     </div>
   </div>
 </footer>

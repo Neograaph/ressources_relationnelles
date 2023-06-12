@@ -39,6 +39,19 @@ namespace ApiCube.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Categories",
+                columns: table => new
+                {
+                    CategorieId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Libelle = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Categories", x => x.CategorieId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Documents",
                 columns: table => new
                 {
@@ -51,6 +64,19 @@ namespace ApiCube.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Documents", x => x.DocumentId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TypeRessources",
+                columns: table => new
+                {
+                    TypeRessourceId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Libelle = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TypeRessources", x => x.TypeRessourceId);
                 });
 
             migrationBuilder.CreateTable(
@@ -120,7 +146,8 @@ namespace ApiCube.Migrations
                     Contenu = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true),
                     Valider = table.Column<bool>(type: "bit", nullable: false),
                     VisibiliteLibelle = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    CategorieLibelle = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    CategorieId = table.Column<int>(type: "int", nullable: false),
+                    TypeRessourceId = table.Column<int>(type: "int", nullable: false),
                     DocumentId = table.Column<int>(type: "int", nullable: true),
                     UtilisateurId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -128,10 +155,22 @@ namespace ApiCube.Migrations
                 {
                     table.PrimaryKey("PK_Ressources", x => x.RessourceId);
                     table.ForeignKey(
+                        name: "FK_Ressources_Categories_CategorieId",
+                        column: x => x.CategorieId,
+                        principalTable: "Categories",
+                        principalColumn: "CategorieId",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Ressources_Documents_DocumentId",
                         column: x => x.DocumentId,
                         principalTable: "Documents",
                         principalColumn: "DocumentId");
+                    table.ForeignKey(
+                        name: "FK_Ressources_TypeRessources_TypeRessourceId",
+                        column: x => x.TypeRessourceId,
+                        principalTable: "TypeRessources",
+                        principalColumn: "TypeRessourceId",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Ressources_Utilisateurs_UtilisateurId",
                         column: x => x.UtilisateurId,
@@ -298,24 +337,59 @@ namespace ApiCube.Migrations
                 values: new object[] { 1, 123, "12345", "Rue de l'Exemple", "Ville de l'Exemple" });
 
             migrationBuilder.InsertData(
+                table: "Categories",
+                columns: new[] { "CategorieId", "Libelle" },
+                values: new object[,]
+                {
+                    { 1, "Communication" },
+                    { 2, "Cultures" },
+                    { 3, "Développement personnel" },
+                    { 4, "Intelligence émotionnelle" },
+                    { 5, "Loisirs" },
+                    { 6, "Monde professionnel" },
+                    { 7, "Parentalité" },
+                    { 8, "Qualité de vie" },
+                    { 9, "Recherche de sens" },
+                    { 10, "Santé physique" },
+                    { 11, "Santé psychique" },
+                    { 12, "Spiritualité" },
+                    { 13, "Vie affective" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Documents",
                 columns: new[] { "DocumentId", "Chemin", "Extension", "Poids" },
                 values: new object[] { 1, "/chemin/vers/document.pdf", ".pdf", 100 });
 
             migrationBuilder.InsertData(
+                table: "TypeRessources",
+                columns: new[] { "TypeRessourceId", "Libelle" },
+                values: new object[,]
+                {
+                    { 1, "Activité / Jeu à réaliser" },
+                    { 2, "Article" },
+                    { 3, "Carte défi" },
+                    { 4, "Cours au format PDF" },
+                    { 5, "Exercice / Atelier" },
+                    { 6, "Fiche de lecture" },
+                    { 7, "Jeu en ligne" },
+                    { 8, "Vidéo" }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Utilisateurs",
                 columns: new[] { "UtilisateurId", "AdresseId", "DateCreation", "DateNaissance", "DerniereConnexion", "Email", "MotDePasse", "Nom", "Prenom", "Role", "Telephone", "UtilisateurActif" },
-                values: new object[] { 1, 1, new DateTime(2023, 5, 12, 11, 45, 26, 97, DateTimeKind.Local).AddTicks(2478), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 5, 12, 11, 45, 26, 97, DateTimeKind.Local).AddTicks(2513), "john.doe@example.com", "123456", "John", "Doe", "Utilisateur", "0123456789", true });
+                values: new object[] { 1, 1, new DateTime(2023, 6, 12, 10, 54, 24, 780, DateTimeKind.Local).AddTicks(4237), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 6, 12, 10, 54, 24, 780, DateTimeKind.Local).AddTicks(4271), "john.doe@example.com", "123456", "John", "Doe", "Utilisateur", "0123456789", true });
 
             migrationBuilder.InsertData(
                 table: "Ressources",
-                columns: new[] { "RessourceId", "CategorieLibelle", "Contenu", "DateCreation", "DocumentId", "Titre", "UtilisateurId", "Valider", "VisibiliteLibelle" },
-                values: new object[] { 1, "Catégorie", "Contenu de la ressource", new DateTime(2023, 5, 12, 11, 45, 26, 97, DateTimeKind.Local).AddTicks(2677), 1, "Titre de la ressource", 1, true, "Publique" });
+                columns: new[] { "RessourceId", "CategorieId", "Contenu", "DateCreation", "DocumentId", "Titre", "TypeRessourceId", "UtilisateurId", "Valider", "VisibiliteLibelle" },
+                values: new object[] { 1, 2, "Contenu de la ressource", new DateTime(2023, 6, 12, 10, 54, 24, 780, DateTimeKind.Local).AddTicks(4424), 1, "Titre de la ressource", 1, 1, true, "Publique" });
 
             migrationBuilder.InsertData(
                 table: "Ressources",
-                columns: new[] { "RessourceId", "CategorieLibelle", "Contenu", "DateCreation", "DocumentId", "Titre", "UtilisateurId", "Valider", "VisibiliteLibelle" },
-                values: new object[] { 2, "Culture", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec sapien sed odio malesuada lobortis sed ut ex. Vestibulum facilisis scelerisque elit, ac commodo magna eleifend id.", new DateTime(2023, 5, 12, 11, 45, 26, 97, DateTimeKind.Local).AddTicks(2689), null, "Ressource random", 1, true, "Publique" });
+                columns: new[] { "RessourceId", "CategorieId", "Contenu", "DateCreation", "DocumentId", "Titre", "TypeRessourceId", "UtilisateurId", "Valider", "VisibiliteLibelle" },
+                values: new object[] { 2, 2, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec sapien sed odio malesuada lobortis sed ut ex. Vestibulum facilisis scelerisque elit, ac commodo magna eleifend id.", new DateTime(2023, 6, 12, 10, 54, 24, 780, DateTimeKind.Local).AddTicks(4419), null, "Ressource random", 1, 1, true, "Publique" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Aimers_RessourceId",
@@ -383,9 +457,19 @@ namespace ApiCube.Migrations
                 column: "UtilisateurRelationId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Ressources_CategorieId",
+                table: "Ressources",
+                column: "CategorieId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Ressources_DocumentId",
                 table: "Ressources",
                 column: "DocumentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Ressources_TypeRessourceId",
+                table: "Ressources",
+                column: "TypeRessourceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ressources_UtilisateurId",
@@ -428,7 +512,13 @@ namespace ApiCube.Migrations
                 name: "Ressources");
 
             migrationBuilder.DropTable(
+                name: "Categories");
+
+            migrationBuilder.DropTable(
                 name: "Documents");
+
+            migrationBuilder.DropTable(
+                name: "TypeRessources");
 
             migrationBuilder.DropTable(
                 name: "Utilisateurs");

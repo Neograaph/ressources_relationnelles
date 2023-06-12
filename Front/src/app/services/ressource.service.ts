@@ -15,6 +15,9 @@ export class RessourcesService {
   getRessources(): Observable<Ressource[]> {
     return this.http.get<Ressource[]>(this.baseUrl);
   }
+  getRessourcesUtilisateur(id: number): Observable<Ressource[]> {
+    return this.http.get<Ressource[]>(`${this.baseUrl}/utilisateur/${id}`);
+  }
 
   getRessource(id: number): Observable<Ressource> {
     return this.http.get<Ressource>(`${this.baseUrl}/${id}`);

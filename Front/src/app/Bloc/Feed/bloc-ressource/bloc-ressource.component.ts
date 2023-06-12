@@ -12,6 +12,8 @@ import { Aimer } from 'src/app/Models/Aimer.model';
 export class BlocRessourceComponent {
   @Input() data!: Ressource;
   utilisateur!: Utilisateur;
+  isLiked: boolean = false;
+
   constructor(
     private utilisateurService: UtilisateurService,
     private FavRessourceService: AimerService
@@ -35,6 +37,7 @@ export class BlocRessourceComponent {
   }
   like() {
     console.log('like');
+    this.isLiked = !this.isLiked;
     const ressourceId = this.data.ressourceId; // Supposons que RessourceId est l'identifiant de la ressource actuelle
     const utilisateurId = this.utilisateur.utilisateurId;
 

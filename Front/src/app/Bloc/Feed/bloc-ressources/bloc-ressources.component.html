@@ -1,8 +1,7 @@
-<!-- <app-bloc-ressource [name]="name"></app-bloc-ressource> -->
 <div class="hover:overflow-y-scroll max-h-screen">
   <div class="flex flex-col vh-screen">
-    <ng-container *ngFor="let ressource of ressources">
-      <app-bloc-ressource [data]="ressource" class="pb-2"></app-bloc-ressource>
-    </ng-container>
+    <ng-container *ngFor="let ressource of filteredResources ? filteredResources : ressources">
+  <app-bloc-ressource [data]="ressource" class="p-2"></app-bloc-ressource>
+</ng-container>
   </div>
 </div>

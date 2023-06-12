@@ -30,6 +30,12 @@ namespace ApiCube.Controllers
                 .ToListAsync();
         }
 
+        // GET: api/Ressources/utilisateur/2
+        [HttpGet("utilisateur/{utilisateurId}")]
+        public async Task<ActionResult<IEnumerable<Ressource>>> GetRessources(int utilisateurId)
+        {
+            return await _context.Ressources.Where(r => r.UtilisateurId == utilisateurId).ToListAsync();
+        }
 
         // GET: api/Ressources/5
         [HttpGet("{id}")]

@@ -4,7 +4,7 @@ import { Utilisateur } from "./Utilisateur.model";
 
 export class Ressource {
   ressourceId!: number;
-  titre!: string | null;
+  titre!: string;
   dateCreation!: Date;
   contenu!: string | null;
   valider?: boolean;

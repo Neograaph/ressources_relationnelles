@@ -3,9 +3,12 @@
     <div class="m-2 p-2 border-b-2">
       <h3 class="font-bold">Ressources favorites</h3>
     </div>
-    <div *ngFor="let like of FavRessource" class="flex items-center w-full m-2 p-2">
+    <div
+      *ngFor="let like of favRessourceTitles"
+      class="flex items-center w-full m-2 p-2"
+    >
       <div class="flex flex-col">
-        <h3 class="font-bold">{{ like.ressourceId }}</h3>
+        <h3 class="font-bold">{{ like }}</h3>
         <!-- <p>{{ produit.date }}</p> -->
       </div>
     </div>

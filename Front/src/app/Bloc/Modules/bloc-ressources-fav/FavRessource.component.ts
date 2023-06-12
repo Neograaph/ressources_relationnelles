@@ -4,6 +4,8 @@ import { Utilisateur } from 'src/app/Models/Utilisateur.model';
 import { UtilisateurService } from 'src/app/services/utilisateur.service';
 import { AimerService } from 'src/app/services/favressource.service';
 import { Aimer } from 'src/app/Models/Aimer.model';
+import { RessourcesService } from 'src/app/services/ressource.service';
+import { Ressource } from '../../../Models/Ressource.model';
 
 @Component({
   selector: 'app-FavRessource',
@@ -13,9 +15,11 @@ import { Aimer } from 'src/app/Models/Aimer.model';
 export class FavRessourceComponent implements OnInit {
   utilisateur!: Utilisateur;
   FavRessource: Array<Aimer> = [];
+  favRessourceTitles: Array<string> = [];
   constructor(
     private utilisateurService: UtilisateurService,
-    private FavRessourceService: AimerService
+    private FavRessourceService: AimerService,
+    private ressourceService: RessourcesService
   ) {}
 
   ngOnInit(): void {
@@ -39,6 +43,15 @@ export class FavRessourceComponent implements OnInit {
       if (Array.isArray(data)) {
         this.FavRessource = data;
         console.log(this.FavRessource);
+
+        // Obtenir les titres des ressources associées
+        this.FavRessource.forEach((fav) => {
+          this.ressourceService
+            .getRessource(fav.ressourceId)
+            .subscribe((ressource) => {
+              this.favRessourceTitles.push(ressource.titre);
+            });
+        });
       }
     });
   }

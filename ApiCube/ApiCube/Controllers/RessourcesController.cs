@@ -1,6 +1,7 @@
 
 ﻿using ApiCube.Models;
 using ApiCube.Models.BuisnessObjects;
+using ApiCube.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -49,6 +50,58 @@ namespace ApiCube.Controllers
             }
 
             return ressource;
+        }
+        [HttpPost("publier")]
+        public async Task<ActionResult<Ressource>> PostRessource([FromForm] PublierRessource postRessource)
+        {
+            // Vérifier si le fichier est présent dans la requête
+            if (postRessource.Document != null && postRessource.Document.Length > 0)
+            {
+                // Obtenir le chemin absolu du répertoire de destination
+                var directoryPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "Front", "src", "assets", "documents"));
+
+                // Vérifier si le répertoire existe, sinon le créer
+                if (!Directory.Exists(directoryPath))
+                {
+                    Directory.CreateDirectory(directoryPath);
+                }
+
+                // Lire le flux du document et effectuer les opérations nécessaires
+                var fileName = Guid.NewGuid().ToString(); // Générer un nom de fichier unique
+                var filePath = Path.Combine(directoryPath, fileName); // Chemin complet du fichier
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await postRessource.Document.CopyToAsync(fileStream);
+                }
+
+                // Créer un objet Document avec les informations du document
+                var document = new Document
+                {
+                    Poids = (int)postRessource.Document.Length,
+                    Extension = Path.GetExtension(postRessource.Document.FileName),
+                    Chemin = filePath
+                };
+
+                // Créer un objet Ressource avec les informations de la requête
+                var ressource = new Ressource
+                {
+                    CategorieId = postRessource.CategorieId,
+                    TypeRessourceId = postRessource.TypeRessourceId,
+                    Titre = postRessource.Titre,
+                    Contenu = postRessource.Contenu,
+                    Document = document
+                };
+
+                // Ajouter la ressource à la base de données
+                _context.Ressources.Add(ressource);
+                await _context.SaveChangesAsync();
+
+                return CreatedAtAction("GetRessource", new { id = ressource.RessourceId }, ressource);
+            }
+
+            // Retourner une erreur si aucun fichier n'a été fourni
+            return BadRequest("Aucun fichier n'a été fourni.");
         }
 
 

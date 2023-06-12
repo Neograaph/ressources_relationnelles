@@ -32,12 +32,22 @@ export class AuthService {
   // Méthode pour supprimer le token du stockage local
   removeToken(): void {
     localStorage.removeItem('token');
+    console.log('Token supprimé');
   }
 
   // Méthode pour vérifier si l'utilisateur est connecté en vérifiant la présence du token
   isAuthenticated(): boolean {
     const token = this.getToken();
-    return token !== null;
+    if (token) {
+      const decodedToken = this.getDecodedAccessToken(token);
+      if (decodedToken && decodedToken.exp) {
+        const expirationDate = new Date(0);
+        expirationDate.setUTCSeconds(decodedToken.exp);
+        const currentDate = new Date();
+        return currentDate < expirationDate;
+      }
+    }
+    return false;
   }
 
   register(data: UtilisateurInscription): Promise<any> {

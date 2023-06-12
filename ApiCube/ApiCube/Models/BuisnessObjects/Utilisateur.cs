@@ -37,49 +37,7 @@ namespace ApiCube.Models.BuisnessObjects
         public ICollection<Consulter>? Consulters { get; set; }
         [NotMapped]
         public ICollection<Rechercher>? Recherchers { get; set; }
-        //[NotMapped]
 
-        //[JsonIgnore]
-        //public virtual ICollection<ModererCom>? ModererComs { get; set; }
-        //[NotMapped]
-        //[JsonIgnore]
-        //public virtual ICollection<ModererRes>? ModererRess { get; set; }
-        //[NotMapped]
-        //[JsonIgnore]
-
-        //private ICollection<ModererCom>? _modererComs;
-        //[NotMapped]
-        //public virtual ICollection<ModererCom> ModererComs
-        //{
-        //    get
-        //    {
-        //        if (Role == "3")
-        //        {
-        //            return _modererComs ??= new List<ModererCom>();
-        //        }
-        //        else
-        //        {
-        //            throw new UnauthorizedAccessException("L'utilisateur n'a pas le rôle requis pour accéder à cette propriété.");
-        //        }
-        //    }
-        //}
-        //[NotMapped]
-        //private ICollection<ModererRes>? _modererRess;
-        //[NotMapped]
-        //public virtual ICollection<ModererRes> ModererRess
-        //{
-        //    get
-        //    {
-        //        if (Role == "3")
-        //        {
-        //            return _modererRess ??= new List<ModererRes>();
-        //        }
-        //        else
-        //        {
-        //            throw new UnauthorizedAccessException("L'utilisateur n'a pas le rôle requis pour accéder à cette propriété.");
-        //        }
-        //    }
-        //}
 
         [NotMapped]
 

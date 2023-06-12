@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Ressource } from 'src/app/Models/Ressource.model';
 import { Utilisateur } from 'src/app/Models/Utilisateur.model';
 import { UtilisateurService } from 'src/app/services/utilisateur.service';
 
@@ -8,9 +9,9 @@ import { UtilisateurService } from 'src/app/services/utilisateur.service';
   styleUrls: ['./bloc-ressource.component.css'],
 })
 export class BlocRessourceComponent {
-  constructor(private utilisateurService: UtilisateurService) {}
-
+  @Input() data!: Ressource;
   utilisateur?: Utilisateur;
+  constructor(private utilisateurService: UtilisateurService) {}
 
   ngOnInit(): void {
     this.utilisateurService.getUtilisateur().subscribe(
@@ -28,5 +29,4 @@ export class BlocRessourceComponent {
       }
     );
   }
-  
 }

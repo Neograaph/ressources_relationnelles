@@ -7,8 +7,8 @@
         class="max-h-12"
       />
       <div>
-        <h3 class="font-bold">Utilisateur (famille)</h3>
-        <p>Publié le 12/12/2020</p>
+        <h3 class="font-bold">Auteur (famille)</h3>
+        <p>Publié le {{ data.dateCreation }}</p>
       </div>
       <div class="ml-auto">
         <a routerLink="/accueil">...</a>
@@ -16,14 +16,11 @@
     </div>
 
     <div class="flex flex-col gap-2">
-      <h1 class="font-bold">Titre de la ressource</h1>
-      <span class="italic">Catégorie : intelligence</span>
+      <h1 class="font-bold">{{ data.titre }}</h1>
+      <span class="italic">Catégorie : {{ data.categorieLibelle }}</span>
       <span class="italic">Type de ressource : Exercices / Atelier</span>
       <p>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas
-        repellendus consequuntur deserunt voluptate illo eos harum beatae error
-        recusandae perspiciatis obcaecati magnam possimus quas, ducimus
-        excepturi animi porro cupiditate officia!
+        {{ data.contenu }}
       </p>
       <span class="underline">Annexe.pdf</span>
     </div>

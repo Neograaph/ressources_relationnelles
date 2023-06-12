@@ -1,6 +1,7 @@
 import { OnInit } from '@angular/core';
 import { Component } from '@angular/core';
 import { ResolveEnd, Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-bloc-footer',
@@ -12,7 +13,9 @@ export class BlocFooterComponent implements OnInit {
 
   constructor(
     private router : Router,
-  ) {
+    private AuthService: AuthService,
+
+    ) {
 
   }
   footerClass: string = ""; // bleufonce valeur par défaut
@@ -33,6 +36,9 @@ export class BlocFooterComponent implements OnInit {
           }
         }
     })
+  }
+  removeToken(): void {
+    this.AuthService.removeToken();
   }
 }
 

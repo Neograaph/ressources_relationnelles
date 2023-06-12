@@ -35,7 +35,10 @@ export class MesRessourcesComponent implements OnInit {
         }
       },
       (error) => {
-        console.error("Une erreur s'est produite lors de la récupération de l'utilisateur :", error);
+        console.error(
+          "Une erreur s'est produite lors de la récupération de l'utilisateur :",
+          error
+        );
       }
     );
 
@@ -46,7 +49,7 @@ export class MesRessourcesComponent implements OnInit {
 
   getRessources(id: number) {
     this.RessourcesService.getRessourcesUtilisateur(id).subscribe((data) => {
-   // this.RessourcesService.getRessources().subscribe((data) => {
+      // this.RessourcesService.getRessources().subscribe((data) => {
       if (Array.isArray(data)) {
         this.Ressources = data;
 

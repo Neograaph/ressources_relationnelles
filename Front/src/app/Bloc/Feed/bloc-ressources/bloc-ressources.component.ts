@@ -28,7 +28,7 @@ export class BlocRessourcesComponent {
       // Utilisez le filtre pour filtrer les ressources
       // et mettez à jour la liste de ressources
       this.filterResources(filter);
-      console.log(filter)
+      console.log(filter);
     });
     this.utilisateurService.getUtilisateur().subscribe(
       (utilisateur: Utilisateur | null) => {
@@ -47,7 +47,7 @@ export class BlocRessourcesComponent {
     this.RessourcesService.getRessources().subscribe(
       (ressources: Ressource[]) => {
         this.ressources = ressources;
-        console.log(this.ressources);
+        // console.log(this.ressources);
         // console.log(this.ressources[0].titre);
         // Autres actions à effectuer avec les ressources
       },
@@ -66,28 +66,38 @@ export class BlocRessourcesComponent {
     const author = filter.author;
     const publicationDate = filter.publicationDate;
 
-
-
     // Effectuez le filtrage des ressources en fonction du filtre
     if (this.ressources) {
-      this.filteredResources = this.ressources.filter(resource => {
+      this.filteredResources = this.ressources.filter((resource) => {
         // Filtre sur la catégorie
-        if (selectedCategoryId && resource.categorieId !== Number(selectedCategoryId)) {
+        if (
+          selectedCategoryId &&
+          resource.categorieId !== Number(selectedCategoryId)
+        ) {
           return false;
         }
 
         // Filtre sur le type de ressource
-        if (selectedTypeRessourceId && resource.typeRessourceId !== Number(selectedTypeRessourceId)) {
+        if (
+          selectedTypeRessourceId &&
+          resource.typeRessourceId !== Number(selectedTypeRessourceId)
+        ) {
           return false;
         }
 
         // Filtre sur le nom de l'auteur
-        if (author && resource.utilisateur?.nom?.toLowerCase() !== author.toLowerCase()) {
+        if (
+          author &&
+          resource.utilisateur?.nom?.toLowerCase() !== author.toLowerCase()
+        ) {
           return false;
         }
 
         // Filtre sur le nom de la publication
-        if (publicationName && !resource.titre?.toLowerCase().includes(publicationName.toLowerCase())) {
+        if (
+          publicationName &&
+          !resource.titre?.toLowerCase().includes(publicationName.toLowerCase())
+        ) {
           return false;
         }
         // Filtre sur la date de publication
@@ -112,5 +122,4 @@ export class BlocRessourcesComponent {
     const day = ('0' + date.getDate()).slice(-2);
     return `${year}-${month}-${day}`;
   }
-
 }

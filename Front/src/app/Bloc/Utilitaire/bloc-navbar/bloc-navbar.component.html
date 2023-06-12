@@ -1,6 +1,6 @@
-<nav [ngClass]="navbarClass" class="flex items-center justify-between text-white px-4">
-
-    <a class="font-bold" routerLink="/">
+<nav [ngClass]="navbarClass" class="fixed top-0 w-screen flex items-center justify-center text-white px-4 py-2 ">
+    <div class="container flex items-center justify-between text-white px-4 ">
+    <a class="font-bold" routerLink="/accueil">
         <img src="assets/img/logo.png" class="max-h-12" alt="Logo" />
     </a>
     <div class="flex-grow"></div>
@@ -8,17 +8,25 @@
         <input type="text" placeholder="Rechercher sur RE..." class="border-2 border-blue-500 rounded px-8 py-2" />
     </div>
     <div class="flex-grow"></div>
-    <div class="flex items-center hidden sm:flex">
-        <div>
-            <!-- <a [routerLink]="['/inscription']" class="ml-4 text-blanc">Inscription</a> -->
-            <a [routerLink]="'/profil'" class="ml-4 text-blanc">Mon profil</a>
-
-        </div>
-        <div class="flex">
-            <a href="#" class="ml-4">
-                <img src="assets/img/utilisateur.png" class="max-h-16" alt="Utilisateur" />
-            </a>
-        </div>
+    <div *ngIf="currentRoute === '/'">
+        <a class=" border-black rounded-2xl p-2 flex hover:bg-gris shadow" routerLink="/accueil">
+            <p style="color: rgb(255, 255, 255) !important;">Accéder au site </p>
+        </a>
+    </div>
+    <div class="flex items-center hidden sm:flex " *ngIf="utilisateur">
+        <!-- <a [routerLink]="['/inscription']" class="ml-4 text-blanc">Inscription</a> -->
+        <a [routerLink]="'/profil'" class="hover:text-grisclair p-2 ml-4 text-blanc flex items-center">
+            <p>
+                {{ utilisateur.prenom}}
+            </p>
+            <div class="shadow ml-2 p-2 " style="background-color: rgba(192, 192, 192, 0.336);">
+                <img src="assets/img/user-icon.svg" class="max-h-12" alt="Utilisateur" />
+            </div>
+        </a>
+    </div>
+    <div *ngIf="!utilisateur && this.currentRoute !== '/'" class="text-blanc">
+        <a routerLink="/inscription" class="mr-4 hover:text-grisclair">S'inscrire</a>
+        <a routerLink="/connexion" class="border p-2 rounded-md hover:text-grisclair">Se connecter</a>
     </div>
 
 
@@ -35,5 +43,8 @@
         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
       </svg>
     </button>
+</div>
 </nav>
-{{ utilisateurs | json }}
+<div *ngIf="this.currentRoute !== '/connexion' && this.currentRoute !== '/inscription'" style="margin-top: 64px;">
+
+</div>

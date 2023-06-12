@@ -26,6 +26,11 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { PageNotFoundComponent } from './Page/page-not-found/page-not-found.component';
+import { PagePlanSiteComponent } from './Page/page-plan-site/page-plan-site.component';
+import { PageMentionsLegalesComponent } from './Page/page-mentions-legales/page-mentions-legales.component';
+import { PageDonneesPersonnellesComponent } from './Page/page-donnees-personnelles/page-donnees-personnelles.component';
+import { PageCookiesComponent } from './Page/page-cookies/page-cookies.component';
+import { RefreshService } from './services/refresh-service.service';
 
 @NgModule({
   declarations: [
@@ -47,6 +52,10 @@ import { PageNotFoundComponent } from './Page/page-not-found/page-not-found.comp
     BlocRessourcesComponent,
     MesInformationsComponent,
     PageNotFoundComponent,
+    PagePlanSiteComponent,
+    PageMentionsLegalesComponent,
+    PageDonneesPersonnellesComponent,
+    PageCookiesComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,7 +66,7 @@ import { PageNotFoundComponent } from './Page/page-not-found/page-not-found.comp
     BrowserAnimationsModule,
     ToastrModule.forRoot({ timeOut: 2000, enableHtml: true }),
   ],
-  providers: [ToastrModule],
+  providers: [ToastrModule, RefreshService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

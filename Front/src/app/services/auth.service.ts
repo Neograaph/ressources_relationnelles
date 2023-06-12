@@ -2,6 +2,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.prod';
+import { UtilisateurInscription } from '../Models/UtilisateurInscription.model';
+import { UtilisateurConnexion } from '../Models/UtilisateurConnexion.model';
+import { UtilisateurProfil } from '../Models/UtilisateurProfil.model';
+// import * as jwt_decode from "jwt-decode";
+import jwt_decode from 'jwt-decode';
+import { Utilisateur } from '../Models/Utilisateur.model';
+
+// Utilisez les fonctions et les classes de la bibliothèque jose selon vos besoins
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +40,7 @@ export class AuthService {
     return token !== null;
   }
 
-  register(data: any): Promise<any> {
+  register(data: UtilisateurInscription): Promise<any> {
     // Définir les en-têtes de la requête (optionnel)
     const headers = new HttpHeaders().set('Content-Type', 'text/json');
     //console.log("Envoi des données à l'API");
@@ -53,7 +61,7 @@ export class AuthService {
       });
   }
 
-  login(params?: any): Promise<any> {
+  login(params?: UtilisateurConnexion): Promise<any> {
     // Définir les en-têtes de la requête (optionnel)
     const headers = new HttpHeaders().set('Content-Type', 'text/json');
     //console.log("Envoi de la requête GET à l'API");
@@ -72,5 +80,22 @@ export class AuthService {
         console.error("Erreur lors de l'envoi de la requête GET:", error);
         throw error; // Renvoyer l'erreur
       });
+  }
+
+
+  getDecodedAccessToken(token: string): any {
+    try {
+      // console.log(jwt_decode(token));
+      const decodedToken = jwt_decode(token)
+      return decodedToken;
+    } catch(Error) {
+      return null;
+    }
+  }
+
+  getUtilisateurProfil(id: string): Observable<Utilisateur> {
+    const headers = new HttpHeaders().set('Content-Type', 'text/json');
+
+    return this.http.get<Utilisateur>(this.apiUrl + 'api/utilisateurs/' + id, { headers });
   }
 }

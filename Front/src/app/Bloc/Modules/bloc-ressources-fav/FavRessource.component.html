@@ -1,14 +1,13 @@
-<form>
-    <div class="shadow-lg border-none rounded-lg p-4">
-      <h3 class="text-base font-bold">Ressources favorites</h3>
-      <hr class="separator border-t border-gray-300 my-4">
-      <div *ngFor="let produit of data" class="flex items-center p-2 h-50">
-        <!-- <img class="max-h-14 rounded-lg" [src]="produit.image" alt="{{ produit.title }}" /> -->
-        <div class="flex flex-col flex-grow ml-2">
-            <h3 class="text-truncate font-bold">{{ produit.title }}</h3>
-            <p class="text-truncate">{{ produit.date }}</p>
-        </div>
+<div class="flex justify-center shadow bg-blanc">
+  <form class="w-full bg-white">
+    <div class="m-2 p-2 border-b-2">
+      <h3 class="font-bold">Ressources favorites</h3>
     </div>
+    <div *ngFor="let produit of data" class="flex items-center w-full m-2 p-2">
+      <div class="flex flex-col">
+        <h3 class="font-bold">{{ produit.title }}</h3>
+        <p>{{ produit.date }}</p>
+      </div>
     </div>
   </form>
-  
+</div>

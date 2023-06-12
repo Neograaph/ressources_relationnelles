@@ -1,1 +1,32 @@
-<p>bloc-footer works!</p>
+<footer class="bg-transparent" [ngClass]="footerClass">
+  <div
+    class="border-t border-gray-400 flex flex-col md:flex-row justify-between items-center h-16"
+  >
+    <div class="flex flex-wrap justify-center md:justify-start">
+      <a
+        [routerLink]="'/planSite'"
+        class="text-gray-500 hover:text-gray-900 mr-6 mb-2 pl-4"
+        >Plan du site</a
+      >
+      <a
+        [routerLink]="'/mentionsLegales'"
+        class="text-gray-500 hover:text-gray-900 mr-4 mb-2"
+        >Mentions légales</a
+      >
+      <a
+        [routerLink]="'/donneesPersonnelles'"
+        class="text-gray-500 hover:text-gray-900 mr-4 mb-2"
+        >Données personnelles</a
+      >
+      <a
+        [routerLink]="'/gestionCookies'"
+        class="text-gray-500 hover:text-gray-900 mb-2"
+        >Gestion des cookies</a
+      >
+    </div>
+    <div class="text-gray-500 text-sm mr-4 mt-2 md:mt-0">
+      <a routerLink="/">©</a>
+      2023 GROUPE1 CESI
+    </div>
+  </div>
+</footer>

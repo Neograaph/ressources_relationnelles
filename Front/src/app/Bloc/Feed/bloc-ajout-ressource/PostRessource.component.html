@@ -1,28 +1,59 @@
-<div class="flex justify-center">
-  <form class="w-full max-w-sm bg-white shadow-md rounded-md p-4">
-    <div class="mx-auto">
-      <select id="category" class="w-full mb-4 bg-gray-200 px-4 py-2 rounded-md">
+<div class="flex justify-center shadow bg-blanc mb-2">
+  <form class="w-full bg-white" [formGroup]="ajoutRessourceForm">
+    <div class="m-2">
+      <select id="category" class="w-full p-2 bg-grisclair rounded">
         <option value="">Choisir une catégorie</option>
         <option value="cat1">Catégorie 1</option>
         <option value="cat2">Catégorie 2</option>
         <option value="cat3">Catégorie 3</option>
       </select>
+    </div>
 
-      <select id="type" class="w-full mb-4 bg-gray-200 px-4 py-2 rounded-md">
+    <div class="m-2">
+      <select id="type" class="w-full p-2 bg-grisclair rounded">
         <option value="">Choisir un type de ressource</option>
         <option value="type1">Type 1</option>
         <option value="type2">Type 2</option>
         <option value="type3">Type 3</option>
       </select>
+    </div>
 
-      <div class="text-zone bg-gray-200 p-4 rounded-md mb-4">
-        <input type="text" placeholder="Publier une ressource..." class="w-full h-20 bg-gray-200 border-2 border-gray-200 rounded-md p-2 text-sm">
-      </div>
+    <div class="m-2">
+      <input
+        type="text"
+        id="titre"
+        formControlName="titre"
+        placeholder="Titre de la ressource"
+        class="w-full bg-grisclair p-2"
+      />
+    </div>
 
-      <div class="boutons-container flex flex-row">
-        <button type="button" id="ajouter-photo-video" class="w-full mb-4 bg-blue-600 text-white px-4 py-2 rounded-md">Ajouter une photo / vidéo</button>
-        <button type="submit" id="publier" class="w-full bg-blue-600 text-white px-4 py-2 rounded-md">Publier</button>
-      </div>
+    <div class="m-2">
+      <textarea
+        type="text"
+        id="contenu"
+        formControlName="contenu"
+        placeholder="Publier une ressource..."
+        class="w-full bg-grisclair p-2"
+      ></textarea>
+    </div>
+
+    <div class="flex flex-row m-2 gap-2">
+      <button
+        type="button"
+        id="ajouter-photo-video"
+        class="w-full bg-bleubtn text-blanc p-2 rounded"
+      >
+        Ajouter une photo / vidéo
+      </button>
+      <button
+        type="submit"
+        id="publier"
+        class="w-full bg-bleubtn text-blanc p-2 rounded"
+        (click)="publierRessource()"
+      >
+        Publier
+      </button>
     </div>
   </form>
 </div>

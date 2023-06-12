@@ -18,7 +18,7 @@ export class BlocRessourceComponent {
       (utilisateur: Utilisateur | null) => {
         if (utilisateur !== null) {
           this.utilisateur = utilisateur;
-          console.log(this.utilisateur);
+          // console.log(this.utilisateur);
         }
       },
       (error) => {

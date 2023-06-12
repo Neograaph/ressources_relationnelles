@@ -28,6 +28,20 @@ namespace ApiCube.Controllers
             return await _context.Aimers.ToListAsync();
         }
 
+        // GET: api/Aimers/Utilisateur/{id}
+        [HttpGet("Utilisateur/{id}")]
+        public async Task<ActionResult<IEnumerable<Aimer>>> GetAimersByUtilisateur(int id)
+        {
+            var aimers = await _context.Aimers.Where(a => a.UtilisateurId == id).ToListAsync();
+
+            if (aimers == null || aimers.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return aimers;
+        }
+
         // GET: api/Aimers/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Aimer>> GetAimer(int id)

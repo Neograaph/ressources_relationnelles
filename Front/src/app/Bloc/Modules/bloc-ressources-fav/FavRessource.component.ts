@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActionsTypeService } from 'src/app/services/actions-type.service';
 import { Utilisateur } from 'src/app/Models/Utilisateur.model';
 import { UtilisateurService } from 'src/app/services/utilisateur.service';
+import { AimerService } from 'src/app/services/favressource.service';
+import { Aimer } from 'src/app/Models/Aimer.model';
 
 @Component({
   selector: 'app-FavRessource',
@@ -10,8 +12,11 @@ import { UtilisateurService } from 'src/app/services/utilisateur.service';
 })
 export class FavRessourceComponent implements OnInit {
   utilisateur!: Utilisateur;
-
-  constructor(private utilisateurService: UtilisateurService) {}
+  FavRessource: Array<Aimer> = [];
+  constructor(
+    private utilisateurService: UtilisateurService,
+    private FavRessourceService: AimerService
+  ) {}
 
   ngOnInit(): void {
     this.utilisateurService.getUtilisateur().subscribe(
@@ -29,7 +34,13 @@ export class FavRessourceComponent implements OnInit {
       }
     );
   }
-  getFavRessources(id: number) {}
+  getFavRessources(id: number) {
+    this.FavRessourceService.getAimerById(id).subscribe((data) => {
+      if (Array.isArray(data)) {
+        this.FavRessource = data;
+      }
+    });
+  }
 
   data = [
     {

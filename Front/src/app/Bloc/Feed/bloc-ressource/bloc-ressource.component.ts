@@ -36,7 +36,7 @@ export class BlocRessourceComponent {
     );
   }
   like() {
-    console.log('like');
+    // console.log('like');
     this.isLiked = !this.isLiked;
     const ressourceId = this.data.ressourceId; // Supposons que RessourceId est l'identifiant de la ressource actuelle
     const utilisateurId = this.utilisateur.utilisateurId;

@@ -38,6 +38,7 @@ export class FavRessourceComponent implements OnInit {
     this.FavRessourceService.getAimerById(id).subscribe((data) => {
       if (Array.isArray(data)) {
         this.FavRessource = data;
+        console.log(this.FavRessource);
       }
     });
   }

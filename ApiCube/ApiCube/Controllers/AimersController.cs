@@ -37,6 +37,15 @@ namespace ApiCube.Controllers
             return aimers;
         }
 
+        // GET: api/Aimers/CheckExists
+        [HttpGet("CheckExists")]
+        public async Task<ActionResult<bool>> CheckAimerExists(int utilisateurId, int ressourceId)
+        {
+            var exists = await _context.Aimers.AnyAsync(a => a.UtilisateurId == utilisateurId && a.RessourceId == ressourceId);
+            return exists;
+        }
+
+
         // GET: api/Aimers/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Aimer>> GetAimer(int id)

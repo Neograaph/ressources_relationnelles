@@ -42,27 +42,4 @@ export class FavRessourceComponent implements OnInit {
       }
     });
   }
-
-  data = [
-    {
-      title: 'Ressources 1',
-      date: '15/05/2023',
-    },
-    {
-      title: 'Produit 2',
-      date: '15/05/2023',
-    },
-    {
-      title: 'Produit 3',
-      date: '15/05/2023',
-    },
-    {
-      title: 'Produit 4',
-      date: '15/05/2023',
-    },
-    {
-      title: 'Produit 5',
-      date: '15/05/2023',
-    },
-  ];
 }

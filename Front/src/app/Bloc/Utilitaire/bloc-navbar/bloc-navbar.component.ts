@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { ResolveEnd, Router } from '@angular/router';
 import { UtilisateurService } from 'src/app/services/utilisateur.service';
 import { Utilisateur } from 'src/app/Models/Utilisateur.model';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'navbar',
@@ -23,7 +24,8 @@ export class NavbarComponent implements OnInit {
     public actiontype: ActionsTypeService,
     private http: HttpClient,
     private router : Router,
-    private utilisateurService : UtilisateurService
+    private utilisateurService : UtilisateurService,
+    private auth : AuthService
   ) {
 
   }
@@ -58,6 +60,10 @@ export class NavbarComponent implements OnInit {
   }
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
+  }
+  logout() {
+    this.auth.removeToken();
+    this.utilisateur = undefined;
   }
 
 

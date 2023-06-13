@@ -116,10 +116,9 @@ export class BlocRessourcesComponent {
       });
     }
   }
-  convertFilterDate(date: Date): string {
-    const year = date.getFullYear();
-    const month = ('0' + (date.getMonth() + 1)).slice(-2);
-    const day = ('0' + date.getDate()).slice(-2);
-    return `${year}-${month}-${day}`;
+
+  onScroll(): void {
+    console.log('test')
+    // Charger davantage de ressources ici, par exemple avec une requête HTTP ou en ajoutant des données à votre tableau `ressources`
   }
 }

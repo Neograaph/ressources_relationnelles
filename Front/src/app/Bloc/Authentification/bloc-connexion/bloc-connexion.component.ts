@@ -61,7 +61,8 @@ export class BlocConnexionComponent {
               "Connexion à l'application validée",
               'token enregistré'
             );
-            this.router.navigate(['/accueil']);
+            window.location.href = "http://localhost:4200/accueil";
+
           })
           .catch((error) => {
             //console.error(error);

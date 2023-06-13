@@ -159,6 +159,31 @@ namespace ApiCube.Models
                 TypeRessourceId = 1,
                 DocumentId = 1,
                 UtilisateurId = 1
+            }, new Ressource
+            {
+                RessourceId = 3,
+                Titre = "Test",
+                DateCreation = DateTime.Now,
+                Contenu = "Contenu de la ressource eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+                Valider = true,
+                VisibiliteLibelle = "Publique",
+                CategorieId = 3,
+                TypeRessourceId = 4,
+                DocumentId = 1,
+                UtilisateurId = 1
+            }
+            , new Ressource
+            {
+                RessourceId = 4,
+                Titre = "Another post",
+                DateCreation = DateTime.Now,
+                Contenu = "Contenu encore",
+                Valider = true,
+                VisibiliteLibelle = "Publique",
+                CategorieId = 5,
+                TypeRessourceId = 1,
+                DocumentId = 1,
+                UtilisateurId = 1
             });
 
             modelBuilder.Entity<Document>().HasData(new Document

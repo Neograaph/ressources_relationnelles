@@ -26,9 +26,9 @@
     </div>
 
     <div class="flex justify-around border-t pt-3">
-      <button class="flex gap-2">
+      <button class="flex gap-2" (click)="like()">
         <img
-          src="../../../../assets/img/ressource/coeurNotClick.png"
+          [src]="isLiked ? '../../../../assets/img/ressource/coeurClick.png' : '../../../../assets/img/ressource/coeurNotClick.png'"
           alt=""
           class="max-h-6"
         />

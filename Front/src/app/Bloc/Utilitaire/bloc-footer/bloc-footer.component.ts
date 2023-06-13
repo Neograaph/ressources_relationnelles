@@ -29,7 +29,7 @@ export class BlocFooterComponent implements OnInit {
         ) {
           this.footerClass = 'absolute bottom-0 text-blanc w-full bg-transparent';
         } else if (this.currentRoute === '/accueil') {
-          this.footerClass = 'fixed bottom-0 w-full';
+          this.footerClass = 'w-full';
         } else {
           this.footerClass = 'bg-transparent';
         }

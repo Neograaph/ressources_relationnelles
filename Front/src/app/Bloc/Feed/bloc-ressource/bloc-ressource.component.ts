@@ -11,10 +11,12 @@ import { Aimer } from 'src/app/Models/Aimer.model';
 })
 export class BlocRessourceComponent {
   @Input() data!: Ressource;
-  utilisateur?: Utilisateur;
+  utilisateur!: Utilisateur;
+  isLiked: boolean = false;
+
   constructor(
     private utilisateurService: UtilisateurService,
-    private aimerService: AimerService
+    private FavRessourceService: AimerService
   ) {}
 
   ngOnInit(): void {
@@ -34,20 +36,58 @@ export class BlocRessourceComponent {
     );
   }
   like() {
-    console.log('like');
-    const aimer: Aimer | any = {
-      RessourceId: this.data.ressourceId,
-      DateAimer: new Date(),
-      UtilisateurId: this.utilisateur?.utilisateurId || 0,
-    };
+    // console.log('like');
+    this.isLiked = !this.isLiked;
+    const ressourceId = this.data.ressourceId; // Supposons que RessourceId est l'identifiant de la ressource actuelle
+    const utilisateurId = this.utilisateur.utilisateurId;
 
-    this.aimerService.createAimer(aimer).subscribe(
-      (response: Aimer) => {
-        // La création de l'Aimer a réussi
-        console.log('Aimer créé avec succès', response);
+    this.FavRessourceService.checkAimerExists(
+      utilisateurId,
+      ressourceId
+    ).subscribe(
+      (exists: boolean) => {
+        if (!exists) {
+          const newAimer: Aimer = {
+            ressourceId: ressourceId,
+            utilisateurId: utilisateurId,
+            dateAimer: new Date(),
+          };
+          this.FavRessourceService.createAimer(newAimer).subscribe(
+            (aimer: Aimer) => {
+              console.log('Ressource aimée ajoutée avec succès:', aimer);
+              // Effectuez d'autres actions si nécessaire
+            },
+            (error) => {
+              console.error(
+                "Une erreur s'est produite lors de l'ajout de la ressource aimée:",
+                error
+              );
+            }
+          );
+        } else {
+          console.log('La ressource est déjà aimée par cet utilisateur.');
+          this.FavRessourceService.deleteAimer(
+            // utilisateurId,
+            ressourceId
+          ).subscribe(
+            () => {
+              console.log('Ressource aimée supprimée avec succès.');
+              // Effectuez d'autres actions si nécessaire
+            },
+            (error) => {
+              console.error(
+                "Une erreur s'est produite lors de la suppression de la ressource aimée:",
+                error
+              );
+            }
+          );
+        }
       },
       (error) => {
-        console.error("Erreur lors de la création de l'Aimer :", error);
+        console.error(
+          "Une erreur s'est produite lors de la vérification de la ressource aimée:",
+          error
+        );
       }
     );
   }

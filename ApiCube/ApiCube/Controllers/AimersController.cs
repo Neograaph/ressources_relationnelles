@@ -37,6 +37,16 @@ namespace ApiCube.Controllers
             return aimers;
         }
 
+        // GET: api/Aimers/CheckExists
+        [HttpGet("CheckExists")]
+        public async Task<ActionResult<bool>> CheckAimerExists(int utilisateurId, int ressourceId)
+        {
+            var exists = await _context.Aimers.AnyAsync(a => a.UtilisateurId == utilisateurId && a.RessourceId == ressourceId);
+            return exists;
+        }
+
+
+
         // GET: api/Aimers/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Aimer>> GetAimer(int id)
@@ -97,12 +107,11 @@ namespace ApiCube.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAimer(int id)
         {
-            var aimer = await _context.Aimers.FindAsync(id);
+            var aimer = await _context.Aimers.FirstOrDefaultAsync(a => a.RessourceId == id);
             if (aimer == null)
             {
                 return NotFound();
             }
-
             _context.Aimers.Remove(aimer);
             await _context.SaveChangesAsync();
 

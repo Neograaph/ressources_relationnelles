@@ -31,4 +31,12 @@ export class AimerService {
   deleteAimer(id: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/${id}`);
   }
+  checkAimerExists(
+    utilisateurId: number,
+    ressourceId: number
+  ): Observable<boolean> {
+    return this.http.get<boolean>(
+      `${this.baseUrl}/CheckExists?utilisateurId=${utilisateurId}&ressourceId=${ressourceId}`
+    );
+  }
 }

@@ -2,7 +2,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
 # Définissez le répertoire de travail dans le conteneur
 WORKDIR /app
-EXPOSE 7032
+# EXPOSE 7032
 
 # Copiez le fichier csproj et restaurer les dépendances
 COPY ApiCube/ApiCube.csproj ./

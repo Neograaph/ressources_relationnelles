@@ -1,11 +1,11 @@
-version: '1'
+version: "3"
 services:
   api:
     build:
       context: ./ApiCube
       dockerfile: Dockerfile
     ports:
-      - '7032:7032'
+      - "7032:7032"
     restart: always
     depends_on:
       - db
@@ -14,16 +14,16 @@ services:
 
   frontend:
     build:
-      context: ./Front
+      context: ./front
       dockerfile: Dockerfile
     ports:
-      - '4200:4200'
+      - "4200:80"
     restart: always
 
   db:
     image: mysql:latest
     ports:
-      - '3306:3306'
+      - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: 123
       MYSQL_DATABASE: cubeDatabase
@@ -36,7 +36,7 @@ services:
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     ports:
-      - '8080:80'
+      - "8080:80"
     environment:
       PMA_HOST: db
       PMA_PORT: 3306
@@ -47,3 +47,4 @@ services:
 
 volumes:
   db-data:
+# network: ressources_relationnelles_default

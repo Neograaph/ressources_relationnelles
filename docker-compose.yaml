@@ -11,6 +11,7 @@ services:
       - db
     environment:
       - DATABASE_URL=mysql://root:123@db:3306/cubeDatabase
+    command: bash -c "dotnet ef database update --connection-string $DATABASE_URL && dotnet run"
 
   frontend:
     build:

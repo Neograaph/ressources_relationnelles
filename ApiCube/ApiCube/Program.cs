@@ -3,8 +3,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Net;
+
 
 var builder = WebApplication.CreateBuilder(args);
+// builder.Listen(IPAddress.Any, 7032); // Spécifiez ici le port d'écoute de votre choix
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 // Add services to the container.
 builder.Services.AddCors(options =>

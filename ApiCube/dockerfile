@@ -1,22 +1,34 @@
-# Utilisez l'image officielle de .NET Core 6.0 comme image de base
+# Utilisez l'image de base contenant .NET Core SDK
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
-# Définissez le répertoire de travail dans le conteneur
-WORKDIR /app
-# EXPOSE 7032
 
-# Copiez le fichier csproj et restaurer les dépendances
+# Définir le répertoire de travail dans le conteneur
+WORKDIR /app
+
+# Copier les fichiers de projet et restaurer les dépendances
 COPY ApiCube/ApiCube.csproj ./
 RUN dotnet restore
 
-# Copiez tout le reste et construisez l'application
+# Copier le reste des fichiers de l'API
 COPY . ./
+
+# Exposer le port sur lequel l'API écoute
+EXPOSE 7032
+
+# Générer l'API
 RUN dotnet publish -c Release -o out
 
-# Utilisez l'image officielle de .NET Core 6.0 Runtime comme image de base pour l'exécution
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
+# Utiliser une image légère contenant .NET Core
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
+
+# Définir le répertoire de travail dans le conteneur
 WORKDIR /app
+
+# Copier les fichiers générés précédemment
 COPY --from=build-env /app/out .
 
+# Définir les variables d'environnement pour Swagger
+ENV ASPNETCORE_URLS=http://*:7032
+ENV ASPNETCORE_ENVIRONMENT=Production
 
-# Définissez la commande par défaut pour exécuter votre application
+# Exécuter l'API
 ENTRYPOINT ["dotnet", "ApiCube.dll"]

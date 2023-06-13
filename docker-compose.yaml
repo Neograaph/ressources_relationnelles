@@ -10,7 +10,7 @@ services:
     depends_on:
       - db
     environment:
-      - DATABASE_URL=mysql://admin:admin@db:3306/cubeDatabase
+      - DATABASE_URL=mysql://root:123@db:3306/cubeDatabase
 
   frontend:
     build:

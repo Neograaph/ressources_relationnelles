@@ -44,7 +44,7 @@ builder.Services.AddAuthorization(options =>
 });
 
 
-var connectionString = builder.Configuration.GetConnectionString("connexion");
+var connectionString = builder.Configuration.GetConnectionString("containerConnection");
 builder.Services.AddDbContext<AppContexte>(x => x.UseSqlServer(connectionString));
 var app = builder.Build();
 

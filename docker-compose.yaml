@@ -6,12 +6,12 @@ services:
       dockerfile: Dockerfile
     ports:
       - "7032:7032"
+      - "5128:5128"
     restart: always
     depends_on:
       - db
     environment:
       - DATABASE_URL=mysql://root:123@db:3306/cubeDatabase
-    command: bash -c "dotnet ef database update --connection-string $DATABASE_URL && dotnet run"
 
   frontend:
     build:
@@ -31,7 +31,7 @@ services:
       MYSQL_USER: admim
       MYSQL_PASSWORD: admin
     volumes:
-      - db-data:/var/lib/mysql
+      - cube-data:/var/lib/mysql
     restart: always
 
   phpmyadmin:
@@ -47,5 +47,4 @@ services:
       - db
 
 volumes:
-  db-data:
-# network: ressources_relationnelles_default
+  cube-data:

@@ -20,7 +20,6 @@ import { BlocRessourceComponent } from './Bloc/Feed/bloc-ressource/bloc-ressourc
 import { BlocRessourcesComponent } from './Bloc/Feed/bloc-ressources/bloc-ressources.component';
 import { MesInformationsComponent } from './Bloc/bloc-mes-informations/mes-informations.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';

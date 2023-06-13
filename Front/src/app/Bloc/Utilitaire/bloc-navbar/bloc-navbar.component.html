@@ -26,8 +26,10 @@
           <li class="hover:bg-grisclair"><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" [routerLink]="'/profil'">Mon profil</a></li>
           <li class="hover:bg-grisclair"><a class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" [routerLink]="'/mentionsLegales'">Mentions légales</a></li>
           <hr class="text-grisclair">
-          <li class="hover:bg-grisclair"><a class="rounded-b bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">Se déconnecter</a></li>
-        </ul>
+          <li class="hover:bg-grisclair">
+            <a class="rounded-b bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#" (click)="logout()">Se déconnecter</a>
+          </li>
+          </ul>
       </div>
 
     </div>

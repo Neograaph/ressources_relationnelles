@@ -1,0 +1,36 @@
+# Étape 1 : Utilisez l'image Node.js avec Angular CLI pour la construction de l'application
+FROM node:14 as builder
+
+# Définissez le répertoire de travail
+WORKDIR /src/app
+
+# Copiez les fichiers de l'application
+COPY package*.json ./
+COPY . .
+
+# Installez les dépendances
+RUN npm install
+
+# Installez Angular CLI globalement
+RUN npm install -g @angular/cli
+
+# Construisez l'application
+RUN ng build --prod
+
+# Étape 2 : Utilisez une image légère basée sur Nginx pour servir l'application construite
+FROM nginx:alpine
+
+# Copiez la configuration du serveur Nginx
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Copiez les fichiers construits à partir de l'étape précédente dans le répertoire approprié de l'image Nginx
+COPY --from=builder /app/dist/ressources_relationnelles /usr/share/nginx/html
+
+# Installez les dépendances nécessaires à l'exécution de l'application
+RUN apk update && apk add --no-cache bash
+
+# Exposez le port 80 pour accéder à l'application Angular
+EXPOSE 80
+
+# Démarrez le serveur Nginx lors du démarrage du conteneur
+CMD ["nginx", "-g", "daemon off;"]

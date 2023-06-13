@@ -1,25 +1,31 @@
-<div class="flex justify-center shadow bg-blanc">
+<div class="flex justify-center shadow bg-blanc rounded ">
   <div class="w-full bg-white m-2 p-2 flex flex-col gap-4">
-    <div class="flex gap-2">
-      <img
-        src="../../../../assets/img/utilisateur.png"
-        alt="image de profil"
-        class="max-h-12"
-      />
-      <div>
-        <h3 class="font-bold">Auteur (famille)</h3>
-        <p>Publié le {{ data.dateCreation }}</p>
+    <div class="flex content-around ">
+      <div class="flex items-center ">
+        <img
+          src="../../../../assets/img/utilisateur.png"
+          alt="image de profil"
+          class="max-h-12 mr-2"
+        />
+        <div>
+          <h3 class="font-bold">Auteur • (famille)</h3>
+          <div class="flex">
+            <span class="italic mr-4">{{ data.categorie.libelle }} •</span>
+             <span class="italic">{{ data.typeRessource.libelle }}</span>
+          </div>
+          <p class="italic text-xs">Publié le {{ data.dateCreation |  date: 'dd/MM/YYYY' }}</p>
+        </div>
       </div>
       <div class="ml-auto">
         <a routerLink="/accueil">...</a>
       </div>
     </div>
 
-    <div class="flex flex-col gap-2">
-      <h1 class="font-bold">{{ data.titre }}</h1>
-      <span class="italic">Catégorie : {{ data.categorie.libelle }}</span>
-      <span class="italic">Type de ressource : Exercices / Atelier</span>
-      <p>
+    <div class="flex flex-col gap-2 max-h-3xl">
+
+      <h1 class="font-bold text-xl">{{ data.titre }}</h1>
+
+      <p class="break-words">
         {{ data.contenu }}
       </p>
       <span class="underline">Annexe.pdf</span>

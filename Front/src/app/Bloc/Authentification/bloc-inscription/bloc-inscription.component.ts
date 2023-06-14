@@ -29,7 +29,7 @@ export class BlocInscriptionComponent {
       nom: ['neo', Validators.required],
       prenom: ['graph', Validators.required],
       telephone: ['', Validators.nullValidator],
-      email: ['admin@admin.com', [Validators.required, Validators.email]],
+      email: ['neo@graph.fr', [Validators.required, Validators.email]],
       password: ['azertyui', [Validators.required, Validators.minLength(6)]],
     });
   }

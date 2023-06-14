@@ -25,7 +25,10 @@
       <input type="date" placeholder="Date de publication" class="w-full bg-grisclair p-2" name="date" [(ngModel)]="publicationDate" />
     </div>
 
-    <div class="m-2">
+    <div class="m-2 ">
+      <button type="button" id="Rechercher" class="w-full bg-gris my-2 text-blanc p-1 rounded" (click)="Reset()">
+        Supprimer les filtres
+      </button>
       <button type="button" id="Rechercher" class="w-full bg-bleubtn text-blanc p-2 rounded" (click)="onSearch()">
         Rechercher
       </button>

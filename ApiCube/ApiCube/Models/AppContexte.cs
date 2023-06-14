@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 namespace ApiCube.Models
 {

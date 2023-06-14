@@ -3,7 +3,6 @@ using System;
 using ApiCube.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
@@ -12,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiCube.Migrations
 {
     [DbContext(typeof(AppContexte))]
-    [Migration("20230614075344_init")]
+    [Migration("20230614154036_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,9 +19,7 @@ namespace ApiCube.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.13")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
-
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("ApiCube.Models.BuisnessObjects.ActionType", b =>
                 {
@@ -30,12 +27,10 @@ namespace ApiCube.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ActionTypeId"), 1L, 1);
-
                     b.Property<string>("Libelle")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("ActionTypeId");
 
@@ -48,25 +43,23 @@ namespace ApiCube.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AdresseId"), 1L, 1);
-
                     b.Property<int>("AdresseNum")
                         .HasColumnType("int");
 
                     b.Property<string>("Cp")
                         .IsRequired()
                         .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                        .HasColumnType("varchar(5)");
 
                     b.Property<string>("Rue")
                         .IsRequired()
                         .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasColumnType("varchar(150)");
 
                     b.Property<string>("Ville")
                         .IsRequired()
                         .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasColumnType("varchar(150)");
 
                     b.HasKey("AdresseId");
 
@@ -89,10 +82,8 @@ namespace ApiCube.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AimerId"), 1L, 1);
-
                     b.Property<DateTime>("DateAimer")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("RessourceId")
                         .HasColumnType("int");
@@ -115,10 +106,8 @@ namespace ApiCube.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CategorieId"), 1L, 1);
-
                     b.Property<string>("Libelle")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("CategorieId");
 
@@ -198,19 +187,17 @@ namespace ApiCube.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CommentaireId"), 1L, 1);
-
                     b.Property<int?>("CommentaireReponse")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("DateCreation")
                         .IsRequired()
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Message")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<int>("RessourceId")
                         .HasColumnType("int");
@@ -230,8 +217,6 @@ namespace ApiCube.Migrations
                     b.Property<int>("ConsulterId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ConsulterId"), 1L, 1);
 
                     b.Property<int>("RessourceId")
                         .HasColumnType("int");
@@ -254,17 +239,15 @@ namespace ApiCube.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DocumentId"), 1L, 1);
-
                     b.Property<string>("Chemin")
                         .IsRequired()
                         .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasColumnType("varchar(150)");
 
                     b.Property<string>("Extension")
                         .IsRequired()
                         .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("varchar(10)");
 
                     b.Property<int>("Poids")
                         .HasColumnType("int");
@@ -289,8 +272,6 @@ namespace ApiCube.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ModererComId"), 1L, 1);
-
                     b.Property<int>("ActionTypeId")
                         .HasColumnType("int");
 
@@ -298,7 +279,7 @@ namespace ApiCube.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateModerCom")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.HasKey("ModererComId");
 
@@ -315,13 +296,11 @@ namespace ApiCube.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ModererResId"), 1L, 1);
-
                     b.Property<int>("ActionTypeId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateModerRes")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int>("RessourceId")
                         .HasColumnType("int");
@@ -341,15 +320,13 @@ namespace ApiCube.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RechercherId"), 1L, 1);
-
                     b.Property<DateTime?>("RechercheDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("RechercheLibelle")
                         .IsRequired()
                         .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<int>("RessourceId")
                         .HasColumnType("int");
@@ -372,10 +349,8 @@ namespace ApiCube.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RelationId"), 1L, 1);
-
                     b.Property<string>("Libelle")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
@@ -401,24 +376,22 @@ namespace ApiCube.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RessourceId"), 1L, 1);
-
                     b.Property<int>("CategorieId")
                         .HasColumnType("int");
 
                     b.Property<string>("Contenu")
                         .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
+                        .HasColumnType("varchar(255)");
 
                     b.Property<DateTime>("DateCreation")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<int?>("DocumentId")
                         .HasColumnType("int");
 
                     b.Property<string>("Titre")
                         .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasColumnType("varchar(150)");
 
                     b.Property<int>("TypeRessourceId")
                         .HasColumnType("int");
@@ -427,11 +400,11 @@ namespace ApiCube.Migrations
                         .HasColumnType("int");
 
                     b.Property<bool>("Valider")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.Property<string>("VisibiliteLibelle")
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("varchar(50)");
 
                     b.HasKey("RessourceId");
 
@@ -451,7 +424,7 @@ namespace ApiCube.Migrations
                             RessourceId = 2,
                             CategorieId = 2,
                             Contenu = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec sapien sed odio malesuada lobortis sed ut ex. Vestibulum facilisis scelerisque elit, ac commodo magna eleifend id.",
-                            DateCreation = new DateTime(2023, 6, 14, 9, 53, 44, 385, DateTimeKind.Local).AddTicks(4953),
+                            DateCreation = new DateTime(2023, 6, 14, 17, 40, 36, 327, DateTimeKind.Local).AddTicks(7060),
                             Titre = "Ressource random",
                             TypeRessourceId = 1,
                             UtilisateurId = 1,
@@ -463,7 +436,7 @@ namespace ApiCube.Migrations
                             RessourceId = 1,
                             CategorieId = 2,
                             Contenu = "Contenu de la ressource",
-                            DateCreation = new DateTime(2023, 6, 14, 9, 53, 44, 385, DateTimeKind.Local).AddTicks(4959),
+                            DateCreation = new DateTime(2023, 6, 14, 17, 40, 36, 327, DateTimeKind.Local).AddTicks(7065),
                             DocumentId = 1,
                             Titre = "Titre de la ressource",
                             TypeRessourceId = 1,
@@ -476,7 +449,7 @@ namespace ApiCube.Migrations
                             RessourceId = 3,
                             CategorieId = 3,
                             Contenu = "Contenu de la ressource eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
-                            DateCreation = new DateTime(2023, 6, 14, 9, 53, 44, 385, DateTimeKind.Local).AddTicks(4962),
+                            DateCreation = new DateTime(2023, 6, 14, 17, 40, 36, 327, DateTimeKind.Local).AddTicks(7068),
                             DocumentId = 1,
                             Titre = "Test",
                             TypeRessourceId = 4,
@@ -489,7 +462,7 @@ namespace ApiCube.Migrations
                             RessourceId = 4,
                             CategorieId = 5,
                             Contenu = "Contenu encore",
-                            DateCreation = new DateTime(2023, 6, 14, 9, 53, 44, 385, DateTimeKind.Local).AddTicks(4964),
+                            DateCreation = new DateTime(2023, 6, 14, 17, 40, 36, 327, DateTimeKind.Local).AddTicks(7071),
                             DocumentId = 1,
                             Titre = "Another post",
                             TypeRessourceId = 1,
@@ -505,10 +478,8 @@ namespace ApiCube.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TypeRessourceId"), 1L, 1);
-
                     b.Property<string>("Libelle")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("TypeRessourceId");
 
@@ -563,46 +534,44 @@ namespace ApiCube.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("UtilisateurId"), 1L, 1);
-
                     b.Property<int?>("AdresseId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateCreation")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime>("DateNaissance")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<DateTime?>("DerniereConnexion")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime(6)");
 
                     b.Property<string>("Email")
                         .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasColumnType("varchar(150)");
 
                     b.Property<string>("MotDePasse")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Nom")
                         .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasColumnType("varchar(150)");
 
                     b.Property<string>("Prenom")
                         .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasColumnType("varchar(150)");
 
                     b.Property<string>("Role")
                         .IsRequired()
                         .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasColumnType("varchar(50)");
 
                     b.Property<string>("Telephone")
                         .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasColumnType("varchar(15)");
 
                     b.Property<bool>("UtilisateurActif")
-                        .HasColumnType("bit");
+                        .HasColumnType("tinyint(1)");
 
                     b.HasKey("UtilisateurId");
 
@@ -615,9 +584,9 @@ namespace ApiCube.Migrations
                         {
                             UtilisateurId = 1,
                             AdresseId = 1,
-                            DateCreation = new DateTime(2023, 6, 14, 9, 53, 44, 385, DateTimeKind.Local).AddTicks(4590),
+                            DateCreation = new DateTime(2023, 6, 14, 17, 40, 36, 327, DateTimeKind.Local).AddTicks(6826),
                             DateNaissance = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DerniereConnexion = new DateTime(2023, 6, 14, 9, 53, 44, 385, DateTimeKind.Local).AddTicks(4688),
+                            DerniereConnexion = new DateTime(2023, 6, 14, 17, 40, 36, 327, DateTimeKind.Local).AddTicks(6861),
                             Email = "john.doe@example.com",
                             MotDePasse = "123456",
                             Nom = "John",

@@ -47,9 +47,15 @@ builder.Services.AddAuthorization(options =>
 });
 
 
+// var connectionString = builder.Configuration.GetConnectionString("containerConnection");
+// builder.Services.AddDbContext<AppContexte>(x => x.Use
+// Server(connectionString));
+// builder.Services.AddDbContext<AppContexte>(x => x.UseMySql(connectionString));
 var connectionString = builder.Configuration.GetConnectionString("containerConnection");
-// builder.Services.AddDbContext<AppContexte>(x => x.UseSqlServer(connectionString));
-builder.Services.AddDbContext<AppContexte>(x => x.UseMySql(connectionString));
+var serverVersion = new MySqlServerVersion(new Version(8, 0, 26)); // Remplacez la version par celle de votre serveur MySQL
+
+builder.Services.AddDbContext<AppContexte>(x => x.UseMySql(connectionString, serverVersion));
+
 
 var app = builder.Build();
 

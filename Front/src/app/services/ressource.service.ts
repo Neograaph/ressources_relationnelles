@@ -28,6 +28,11 @@ export class RessourcesService {
 
     return this.http.post<Ressource>(this.baseUrl, ressource, { headers });
   }
+   createPublier(ressource: Ressource): Observable<Ressource> {
+    const headers = new HttpHeaders().set('Content-Type', 'text/json');
+
+    return this.http.post<Ressource>(this.baseUrl, ressource, { headers });
+  }
 
   updateRessource(id: number, ressource: Ressource): Observable<any> {
     return this.http.put<any>(`${this.baseUrl}/${id}`, ressource);

@@ -1,139 +1,103 @@
-<!-- <div class="flex flex-grow"> -->
 
-<div class="bg-gray-100 bg-white rounded-lg shadow-lg">
-  <div class="underline p-4">Mes Informations</div>
+<div class="bg-gray-100 bg-white rounded shadow m-4 rounded ">
+  <div class="flex bg-grisclair items-center justify-around">
+      <img
+      src="../../../assets/img/utilisateur.png"
+      alt="image de profil"
+      class="max-h-24 object-contain"
+    />
+    <div class="flex flex-col">
+      <h1 class="text-xl font-bold">{{utilisateur?.prenom}} {{utilisateur?.nom}}</h1>
+      <p >
+        Membre depuis :
+        01/01/2021
+      </p>
+
+      <button class="btn bg-rouge rounded text-blanc" (click)="deleteAccount()"
+      >Supprimer mon compte</button>
+    </div>
+
+  </div>
+</div>
+
+<div class="bg-gray-100 bg-white rounded-lg shadow m-4">
+  <div class="p-4 text-xl">Modifier mes informations</div>
 
   <div class="flex p-4 gap-4">
     <form class="flex flex-col flex-grow" [formGroup]="profilForm">
       <div>
-        <label for="nom" class="text-sm font-medium text-gray-700 mb-1"
-          >Nom :</label
-        >
-        <input
-          type="text"
-          id="nom"
-          formControlName="nom"
-          class="bg-grisclair w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-        />
+        <label for="nom" class="text-sm font-medium text-gray-700 mb-1">Nom :</label>
+        <input type="text" id="nom" formControlName="nom" class="bg-grisclair w-full p-1" />
+        <div *ngIf="profilForm.get('nom')?.invalid && profilForm.get('nom')?.touched" class="text-red-500">
+          Le nom est obligatoire.
+        </div>
       </div>
 
       <div>
-        <label for="prenom" class="block text-sm font-medium text-gray-700 mb-1"
-          >Prénom :</label
-        >
-        <input
-          type="text"
-          id="prenom"
-          formControlName="prenom"
-          class="bg-grisclair w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-        />
+        <label for="prenom" class="block text-sm font-medium text-gray-700 mb-1">Prénom :</label>
+        <input type="text" id="prenom" formControlName="prenom" class="bg-grisclair w-full p-1" />
+        <div *ngIf="profilForm.get('prenom')?.invalid && profilForm.get('prenom')?.touched" class="text-red-500">
+          Le prénom est obligatoire.
+        </div>
       </div>
 
       <div>
-        <label for="email" class="block text-sm font-medium text-gray-700 mb-1"
-          >Email :</label
-        >
-        <input
-          type="email"
-          id="email"
-          formControlName="email"
-          class="bg-grisclair w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-        />
+        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email :</label>
+        <input type="email" id="email" formControlName="email" class="bg-grisclair w-full p-1" />
+        <div *ngIf="profilForm.get('email')?.invalid && profilForm.get('email')?.touched" class="text-red-500">
+          Veuillez entrer une adresse email valide.
+        </div>
       </div>
 
       <div>
-        <label
-          for="telephone"
-          class="block text-sm font-medium text-gray-700 mb-1"
-          >Téléphone :</label
-        >
-        <input
-          type="telephone"
-          id="telephone"
-          formControlName="telephone"
-          class="bg-grisclair w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-        />
+        <label for="telephone" class="block text-sm font-medium text-gray-700 mb-1">Téléphone :</label>
+        <input type="text" id="telephone" formControlName="telephone" class="bg-grisclair w-full p-1" />
+        <!-- <div *ngIf="profilForm.get('telephone')?.invalid && profilForm.get('telephone')?.touched" class="text-red-500">
+          Le numéro de téléphone est obligatoire.
+        </div> -->
       </div>
 
       <div>
-        <label
-          for="adresse"
-          class="block text-sm font-medium text-gray-700 mb-1"
-          >Rue</label
-        >
-        <input
-          type="text"
-          id="adresse"
-          formControlName="adresse"
-          class="bg-grisclair w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-        />
+        <label for="adresse" class="block text-sm font-medium text-gray-700 mb-1">Rue</label>
+        <input type="text" id="adresse" formControlName="adresse" class="bg-grisclair w-full p-1" />
+        <!-- <div *ngIf="profilForm.get('adresse')?.invalid && profilForm.get('adresse')?.touched" class="text-red-500">
+          L'adresse est obligatoire.
+        </div> -->
       </div>
 
       <div>
-        <label for="ville" class="block text-sm font-medium text-gray-700 mb-1"
-          >CP, Ville</label
-        >
-        <input
-          type="text"
-          id="ville"
-          formControlName="ville"
-          class="bg-grisclair w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-        />
+        <label for="ville" class="block text-sm font-medium text-gray-700 mb-1">CP, Ville</label>
+        <input type="text" id="ville" formControlName="ville" class="bg-grisclair w-full p-1" />
+        <!-- <div *ngIf="profilForm.get('ville')?.invalid && profilForm.get('ville')?.touched" class="text-red-500">
+          Le code postal et la ville sont obligatoires.
+        </div> -->
       </div>
 
       <div>
-        <label
-          for="password"
-          class="block text-sm font-medium text-gray-700 mb-1"
-          >Mot de passe</label
-        >
-        <input
-          type="text"
-          id="password"
-          formControlName="password"
-          class="bg-grisclair w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-        />
+        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Mot de passe</label>
+        <input type="password" id="password" formControlName="password" class="bg-grisclair w-full p-1" />
+        <div *ngIf="profilForm.get('password')?.invalid && profilForm.get('password')?.touched" class="text-red-500">
+          Le mot de passe doit contenir au moins 6 caractères.
+        </div>
       </div>
 
       <div>
-        <label
-          for="confirmPassword"
-          class="block text-sm font-medium text-gray-700 mb-1"
-          >Confirmer le mot de passe</label
-        >
-        <input
-          type="text"
-          id="confirmPassword"
-          formControlName="confirmPassword"
-          class="bg-grisclair w-full rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-        />
+        <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-1">Confirmer le mot de passe</label>
+        <input type="password" id="confirmPassword" formControlName="confirmPassword" class="bg-grisclair w-full p-1" />
+        <div *ngIf="profilForm.get('confirmPassword')?.invalid && profilForm.get('confirmPassword')?.touched" class="text-red-500">
+          Le mot de passe de confirmation doit contenir au moins 6 caractères.
+        </div>
       </div>
 
       <div class="mt-6 text-center">
-        <button
-          type="submit"
-          class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 bg-bleubtn text-blanc"
-        >
+        <button type="submit" [disabled]="profilForm.invalid" class="py-2 px-4 bg-blue-500 text-white rounded hover:bg-blue-600 bg-bleubtn text-blanc">
           Valider les modifications
         </button>
       </div>
     </form>
 
-    <div class="flex flex-col">
-      <img
-        src="../../../assets/img/utilisateur.png"
-        alt="image de profil"
-        class="max-h-28 object-contain"
-      />
-      <div class="text-center">
-        date de création du compte :<br />
-        01/01/2021
-      </div>
-      <a class="underline text-center" (click)="deleteAccount()"
-        >supprimer le compte</a
-      >
-    </div>
-  </div>
+
+
 </div>
 
 <!-- </div> -->

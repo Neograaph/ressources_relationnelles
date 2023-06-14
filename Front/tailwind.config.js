@@ -12,6 +12,8 @@ module.exports = {
       rouge: "#730217",
       gris: "#747474",
       bleubtn: "#0A3A5B",
+      bleuclair:"#54ABE4",
+      rouge:"#730217",
       noir: "#1c1c1c",
       violetbtn: "#2c338e",
       // "background-gris": "C9B3B3",

@@ -25,6 +25,8 @@
         <ul class="dropdown-menu absolute hidden bg-blanc text-gray-700 pt-1 shadow z-20 rounded">
           <li class="hover:bg-grisclair"><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" [routerLink]="'/profil'">Mon profil</a></li>
           <li class="hover:bg-grisclair"><a class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" [routerLink]="'/mentionsLegales'">Mentions légales</a></li>
+          <li *ngIf="utilisateur.role == 'Administrateur'" class="hover:bg-grisclair"><a class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" [routerLink]="'/mentionsLegales'">Page admin</a></li>
+
           <hr class="text-grisclair">
           <li class="hover:bg-grisclair">
             <a class="rounded-b bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#" (click)="logout()">Se déconnecter</a>

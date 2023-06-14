@@ -34,7 +34,7 @@ export class BlocConnexionComponent {
     this.connexionForm = this.formBuilder.group({
       nom: ['neograph', Validators.required],
       prenom: ['graphiste', Validators.required],
-      email: ['admin@admin.com', [Validators.required, Validators.email]],
+      email: ['neo@graph.fr', [Validators.required, Validators.email]],
       password: ['azertyui', [Validators.required, Validators.minLength(6)]],
     });
   }

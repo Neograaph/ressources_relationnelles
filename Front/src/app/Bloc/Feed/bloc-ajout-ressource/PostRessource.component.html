@@ -1,8 +1,7 @@
 <div class="flex justify-center shadow bg-blanc mb-2">
-  <form class="w-full bg-white" [formGroup]="ajoutRessourceForm">
+  <form class="w-full bg-white" [formGroup]="ajoutRessourceForm" (ngSubmit)="publierRessource()">
     <div class="m-2">
-      <select id="category" class="w-full p-2 bg-grisclair rounded" name="categorie"
-         >
+      <select id="category" class="w-full p-2 bg-grisclair rounded" formControlName="categorie">
         <option disabled selected value="undefined">Catégorie</option>
         <option *ngFor="let categorie of categories" [value]="categorie.categorieId">
           {{ categorie.libelle }}
@@ -11,11 +10,11 @@
     </div>
 
     <div class="m-2">
-      <select id="type" class="w-full p-2 bg-grisclair rounded">
-        <option value="">Choisir un type de ressource</option>
-        <option value="type1">Type 1</option>
-        <option value="type2">Type 2</option>
-        <option value="type3">Type 3</option>
+      <select id="type" class="w-full p-2 bg-grisclair rounded" formControlName="typeRessource">
+        <option disabled selected value="undefined">Type de ressource</option>
+        <option *ngFor="let type of typeRessources" [value]="type.typeRessourceId">
+          {{ type.libelle }}
+        </option>
       </select>
     </div>
 
@@ -26,6 +25,7 @@
         formControlName="titre"
         placeholder="Titre de la ressource"
         class="w-full bg-grisclair p-2"
+        required
       />
     </div>
 
@@ -36,22 +36,19 @@
         formControlName="contenu"
         placeholder="Publier une ressource..."
         class="w-full bg-grisclair p-2"
+        required
       ></textarea>
     </div>
 
     <div class="flex flex-row m-2 gap-2">
-      <button
-        type="button"
-        id="ajouter-photo-video"
-        class="w-full bg-bleubtn text-blanc p-2 rounded"
-      >
-        Ajouter une photo / vidéo
-      </button>
+      <input type="file" class="w-full bg-bleubtn text-blanc p-2 rounded" name="fichier" accept=".jpg, .jpeg, .png, .gif, .pdf" (change)="onFileSelect($event)">
+      <!-- <input type="file" class="w-full bg-bleubtn text-blanc p-2 rounded" name="fileselect" (change)="onFileSelect($event)"> -->
+
       <button
         type="submit"
         id="publier"
         class="w-full bg-bleubtn text-blanc p-2 rounded"
-        (click)="publierRessource()"
+        [disabled]="ajoutRessourceForm.invalid"
       >
         Publier
       </button>

@@ -27,7 +27,9 @@ namespace ApiCube.Controllers
         {
             return await _context.Ressources
                 .Include(r => r.TypeRessource) // Charger les données associées du type de ressource
-                .Include(r => r.Categorie) // Charger les données associées de la catégorie
+                .Include(r => r.Categorie)
+                .Include(r => r.Utilisateur)
+                .Include(r => r.Document)// Charger les données associées de la catégorie
                 .ToListAsync();
         }
 
@@ -55,10 +57,10 @@ namespace ApiCube.Controllers
         public async Task<ActionResult<Ressource>> PostRessource([FromForm] PublierRessource postRessource)
         {
             // Vérifier si le fichier est présent dans la requête
-            if (postRessource.Document != null && postRessource.Document.Length > 0)
+            if (postRessource.Fichier != null && postRessource.Fichier.Length > 0)
             {
                 // Obtenir le chemin absolu du répertoire de destination
-                var directoryPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "Front", "src", "assets", "documents"));
+                var directoryPath = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "Front", "src", "assets", "documents"));
 
                 // Vérifier si le répertoire existe, sinon le créer
                 if (!Directory.Exists(directoryPath))
@@ -67,30 +69,36 @@ namespace ApiCube.Controllers
                 }
 
                 // Lire le flux du document et effectuer les opérations nécessaires
-                var fileName = Guid.NewGuid().ToString(); // Générer un nom de fichier unique
+                var randomNumber = new Random().Next(1000, 9999); // Générer un numéro aléatoire entre 1000 et 9999
+                var fileName = $"{randomNumber}_{Path.GetFileName(postRessource.Fichier.FileName)}";
+
                 var filePath = Path.Combine(directoryPath, fileName); // Chemin complet du fichier
 
                 using (var fileStream = new FileStream(filePath, FileMode.Create))
                 {
-                    await postRessource.Document.CopyToAsync(fileStream);
+                    await postRessource.Fichier.CopyToAsync(fileStream);
                 }
 
                 // Créer un objet Document avec les informations du document
                 var document = new Document
                 {
-                    Poids = (int)postRessource.Document.Length,
-                    Extension = Path.GetExtension(postRessource.Document.FileName),
-                    Chemin = filePath
+                    Poids = (int)postRessource.Fichier.Length,
+                    Extension = Path.GetExtension(postRessource.Fichier.FileName),
+                    Chemin = fileName
                 };
-
+                _context.Documents.Add(document);
                 // Créer un objet Ressource avec les informations de la requête
                 var ressource = new Ressource
                 {
+                    DateCreation = DateTime.Now,
+                    Valider = true,
+                    VisibiliteLibelle = "Publique",
                     CategorieId = postRessource.CategorieId,
                     TypeRessourceId = postRessource.TypeRessourceId,
                     Titre = postRessource.Titre,
                     Contenu = postRessource.Contenu,
-                    Document = document
+                    Document = document,
+                    UtilisateurId = postRessource.UtilisateurId
                 };
 
                 // Ajouter la ressource à la base de données

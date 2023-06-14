@@ -8,10 +8,10 @@
           class="max-h-12 mr-2"
         />
         <div>
-          <h3 class="font-bold">Auteur • (famille)</h3>
+          <h3 class="font-bold">{{ data.utilisateur?.prenom }} {{data.utilisateur?.nom }} • (famille)</h3>
           <div class="flex">
-            <span class="italic mr-4">{{ data.categorie.libelle }} •</span>
-             <span class="italic">{{ data.typeRessource.libelle }}</span>
+            <span class="italic mr-4">{{ data.categorie?.libelle }} •</span>
+             <span class="italic">{{ data.typeRessource?.libelle }}</span>
           </div>
           <p class="italic text-xs">Publié le {{ data.dateCreation |  date: 'dd/MM/YYYY' }}</p>
         </div>
@@ -28,7 +28,16 @@
       <p class="break-words">
         {{ data.contenu }}
       </p>
-      <span class="underline">Annexe.pdf</span>
+      <div *ngIf="data.document && (data.document.extension === '.pdf' || data.document.extension === '.jpeg' || data.document.extension === '.jpg')
+      ">
+      <img [src]="'assets/documents/' + data.document.chemin" alt="Image">
+      </div>
+      <div *ngIf="data.document && data.document.extension && data.document.extension.toLowerCase() === '.pdf'" class="flex text-rouge items-center hover:text-bleu">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
+        </svg>
+        <a class="ml-2" [href]="'assets/documents/' + data.document.chemin" download="{{data.document.chemin}}">Télécharger le PDF</a>
+      </div>
     </div>
 
     <div class="flex justify-around border-t pt-3">

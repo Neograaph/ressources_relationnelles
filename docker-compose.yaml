@@ -1,5 +1,15 @@
 version: "3"
 services:
+  # migrations:
+  #     build:
+  #       context: ./migrations
+  #       dockerfile: Dockerfile
+  #     depends_on:
+  #       - db
+  #     environment:
+  #       - DATABASE_URL=mysql://root:123@db:3306/cubeDatabase
+  #     command: ["dotnet", "run", "--project", "YourMigrationProject.csproj"]
+  #     restart: "no"
   api:
     build:
       context: ./ApiCube

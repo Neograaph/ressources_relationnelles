@@ -2,7 +2,7 @@
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
 
 # Définir le répertoire de travail dans le conteneur
-WORKDIR /api
+WORKDIR /app
 
 # Copier les fichiers de projet et restaurer les dépendances
 COPY ApiCube/ApiCube.csproj ./
@@ -11,20 +11,17 @@ RUN dotnet restore
 # Copier le reste des fichiers de l'API
 COPY . ./
 
-# Exposer le port sur lequel l'API écoute
-# EXPOSE 7032
-
 # Générer l'API
 RUN dotnet publish -c Release -o out
 
 # Utiliser une image légère contenant .NET Core
-FROM mcr.microsoft.com/dotnet/sdk:6.0
+FROM mcr.microsoft.com/dotnet/aspnet:6.0
 
 # Définir le répertoire de travail dans le conteneur
-WORKDIR /api
+WORKDIR /app
 
 # Copier les fichiers générés précédemment
-COPY --from=build-env /api/out .
+COPY --from=build-env /app/out .
 
 # Définir les variables d'environnement pour Swagger
 # ENV ASPNETCORE_URLS=http://*:7032

@@ -28,19 +28,22 @@ export class PostRessourceComponent implements OnInit {
   constructor(
     public actiontype: ActionsTypeService,
     private formBuilder: FormBuilder,
-    private NotificationsService: NotificationsService,
-    private RessourcesService: RessourcesService,
+    private notificationsService: NotificationsService,
+    private ressourcesService: RessourcesService,
     private refreshService: RefreshService,
     private utilisateurService: UtilisateurService,
     public categorieService: CategorieService,
   ) {
     this.createForm();
   }
+
   ressource!: Ressource;
+
   ngOnInit(): void {
     this.categorieService.getAllCategories().subscribe((categoriesData) => {
       this.categories = categoriesData;
     });
+
     this.utilisateurService.getUtilisateur().subscribe(
       (utilisateur: Utilisateur | null) => {
         if (utilisateur !== null) {
@@ -48,17 +51,22 @@ export class PostRessourceComponent implements OnInit {
         }
       },
       (error) => {
-        console.error("Une erreur s'est produite lors de la récupération de l'utilisateur :", error);
+        console.error(
+          "Une erreur s'est produite lors de la récupération de l'utilisateur :",
+          error
+        );
       }
     );
   }
+
   createForm() {
     this.ajoutRessourceForm = this.formBuilder.group({
       titre: ['', Validators.required],
       contenu: ['', [Validators.required]],
-      categorie: [null], // Initialisation de la propriété 'categorie'
+      categorie: [''],
     });
   }
+
   publierRessource() {
     if (this.ajoutRessourceForm.valid) {
       this.ressource = this.ajoutRessourceForm.value;
@@ -66,22 +74,27 @@ export class PostRessourceComponent implements OnInit {
       this.ressource.valider = true;
       this.ressource.utilisateurId = this.utilisateur.utilisateurId;
       this.ressource.visibiliteLibelle = 'Public';
-      this.ressource.typeRessourceId = 5;
-      // Vérifier si la propriété 'categorie' est null avant de lui attribuer une valeur
-      if (this.ressource.categorie === null) {
-        this.ressource.categorie = new Categorie(); // Initialiser la propriété 'categorie' avec un nouvel objet Categorie
-      }
-      this.ressource.categorieId = this.selectedCategoryId ?? 1;
+      this.ressource.categorie = new Categorie();
 
-      this.NotificationsService.showSuccess('Succès', 'Ressource ajoutée');
+      if (this.selectedCategoryId !== undefined) {
+        this.ressource.categorie.categorieId = this.selectedCategoryId;
+      } else {
+        console.error("Veuillez choisir une catégorie");
+      }
+
+      this.notificationsService.showSuccess('Succès', 'Ressource ajoutée');
       console.log(this.ressource);
-      this.RessourcesService.createRessource(this.ressource).subscribe();
+      this.ressourcesService.createRessource(this.ressource).subscribe();
       this.ajoutRessourceForm.reset();
       this.triggerRefresh();
     } else {
-      this.NotificationsService.showError('Erreur', 'Veuillez remplir tous les champs');
+      this.notificationsService.showError(
+        'Erreur',
+        'Veuillez remplir tous les champs'
+      );
     }
   }
+
   triggerRefresh(): void {
     this.refreshService.triggerRefresh();
   }

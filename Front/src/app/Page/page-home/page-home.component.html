@@ -1,23 +1,23 @@
-<div class="bg-grisclair fixed max-h-screen z-10 "  >
-
-<div class="container mx-auto px-4 lg:px-8 overflow-hidden">
+<div class="bg-grisclair z-10">
+  <div class="container mx-auto px-4 lg:px-8 overflow-hidden">
     <div class="flex flex-col md:flex-row gap-x-4 pt-4">
-        <div class="hidden  md:block w-1/3 lg:w-1/4 bg-sidebar-left" *ngIf="authService.isAuthenticated()">
-            <!-- Contenu de la sidebar gauche -->
-            <app-bloc-mes-relations ></app-bloc-mes-relations>
-            <app-mes-ressources class="mx-2 "></app-mes-ressources>
+      <div class="hidden md:block w-1/3 lg:w-1/4 bg-sidebar-left" *ngIf="authService.isAuthenticated()">
+        <!-- Contenu de la sidebar gauche -->
+        <app-bloc-mes-relations></app-bloc-mes-relations>
+        <app-mes-ressources class="mx-2"></app-mes-ressources>
+      </div>
+      <div class="flex-1 bg-feed">
+        <!-- Contenu principal (feed) -->
+        <app-PostRessource *ngIf="authService.isAuthenticated()"></app-PostRessource>
+        <div class="h-5/6 overflow-y-auto">
+          <app-bloc-ressources ></app-bloc-ressources>
         </div>
-        <div class="flex-1 bg-feed">
-            <!-- Contenu principal (feed) -->
-            <app-PostRessource *ngIf="authService.isAuthenticated()"></app-PostRessource>
-            <app-bloc-ressources class="vh-screen max-h-screen"></app-bloc-ressources>
-        </div>
-        <div class="hidden lg:block w-1/4 bg-sidebar-right">
-            <!-- Contenu de la sidebar droite -->
-            <app-FiltreRecherche></app-FiltreRecherche>
-            <app-FavRessource class="mx-2" *ngIf="authService.isAuthenticated()"></app-FavRessource>
-        </div>
+      </div>
+      <div class="hidden lg:block w-1/4 bg-sidebar-right">
+        <!-- Contenu de la sidebar droite -->
+        <app-FiltreRecherche></app-FiltreRecherche>
+        <app-FavRessource class="mx-2" *ngIf="authService.isAuthenticated()"></app-FavRessource>
+      </div>
     </div>
-</div>
-
+  </div>
 </div>

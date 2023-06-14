@@ -1,60 +1,87 @@
-<header class="bg-cover bg-center h-screen" style="background-image: url('assets/img/vitrine/josh-hild-m9aGgc8UW6o-unsplash 1.png'); background-size: cover;">
-    <div class=" text-blanc container mx-auto flex flex-col items-center ">
-        <div class="mt-24 items-center flex flex-col">
-            <img src="assets/img/logo.png" class="max-h-24">
-            <div class="flex items-center justify-between">
-                <div class="h-full text-8xl">
-                    <p>
-                        RE
-                    </p>
-                </div>
-                <div class="h-full text-4xl flex flex-col justify-center">
-                    <p class="self-start">SSOURCES</p>
-                    <p class="self-end">LATIONNELLES</p>
-                </div>
-            </div>
+<header class="bg-cover bg-center h-screen"
+  style="background-image: url('assets/img/vitrine/josh-hild-m9aGgc8UW6o-unsplash 1.png'); background-size: cover;">
+  <div class=" text-blanc container mx-auto flex flex-col items-center ">
+    <div class="mt-24 items-center flex flex-col">
+      <img src="assets/img/logo.png" class="max-h-24">
+      <div class="flex items-center justify-between">
+        <div class="h-full text-8xl">
+          <p>
+            RE
+          </p>
         </div>
+        <div class="h-full text-4xl flex flex-col justify-center">
+          <p class="self-start">SSOURCES</p>
+          <p class="self-end">LATIONNELLES</p>
+        </div>
+      </div>
+    </div>
 
-        <button [routerLink]="'/inscription'" class=" rounded bg-violetbtn text-blanc py-1 px-16 w-56 h-9 absolute left-20 top-1/2 transform -translate-y-1/2 flex items-center">
-        <span class="mr-2">S'inscrire</span>
-        <div class="ml-3">
-          <svg class="w-4 h-4 " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-          </svg>
-        </div>
+    <button [routerLink]="'/inscription'"
+      class="hover:bg-rouge rounded bg-violetbtn text-blanc py-1 px-16 w-56 h-9 absolute left-20 top-3/4 md:top-1/2 transform -translate-y-1/2 flex items-center">
+      <span class="mr-2">S'inscrire</span>
+      <div class="ml-3">
+        <svg class="w-4 h-4 " xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </svg>
+      </div>
     </button>
 
-        <button [routerLink]="'/connexion'" class="z-1 rounded bg-bleubtn text-blanc py-1 px-12 w-56 h-9 absolute left-20 mt-12 top-1/2 transform -translate-y-1/2 flex items-center">
+    <button [routerLink]="'/connexion'"
+      class="hover:bg-rouge z-1 rounded bg-bleubtn text-blanc py-1 px-12 w-56 h-9 absolute left-20 mt-12 top-3/4 md:top-1/2 transform -translate-y-1/2 flex items-center">
       <span class="mr-2">Se connecter</span>
       <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
       </svg>
     </button>
-    </div>
+  </div>
 </header>
 <section>
-    <div class="container mx-auto flex flex-col md:flex-row items-center md:items-start mt-10 md:mt-32 md:pl-0">
-        <div class="w-full md:w-1/2 md:px-16 flex justify-center md:justify-start">
-            <img src="assets/img/vitrine/team-4529717_960_720 1.png" alt="Image" class="w-3/4 h-auto">
-        </div>
-        <div class="w-full md:w-1/2 pb-8 md:items-start text-center md:text-left md:pl-16">
-            <h2 class="text-3xl font-bold mb-4 mt-4 md:mt-0">Enrichissez vos relations</h2>
-            <p>Votre texte ici</p>
-        </div>
+  <div class="container mx-auto flex flex-col lg:flex-row items-center lg:items-start mt-24 lg:mt-32 lg:pl-0">
+    <div class="w-full lg:w-1/2 lg:px-16 flex justify-center lg:justify-start">
+      <img src="assets/img/vitrine/team-4529717_960_720 1.png" alt="Image" class="w-3/4 lg:w-full">
     </div>
-    <div class="container mx-auto flex flex-col md:flex-row items-center md:items-start mt-10 md:mt-32 md:pl-0">
-        <div class="w-full md:w-1/2 pb-8 md:items-start text-center md:text-left md:pl-16">
-            <h2 class="text-3xl font-bold mb-4 md:mt-0">Lieux de rencontres et partage</h2>
-            <p>Votre texte ici</p>
-        </div>
-        <div class="w-full md:w-1/2 flex justify-center md:justify-start">
-            <img src="assets\img\vitrine\friends-4187953_960_720 1.png" alt="Image" class="w-3/4 h-auto">
-        </div>
+    <div class="w-full lg:w-1/2 pb-8 lg:items-center text-center lg:text-left lg:pl-16">
+      <h2 class="text-3xl font-bold mb-4 mt-4 lg:mt-0">Enrichissez vos relations</h2>
+      <div class="flex items-center justify-center lg:block">
+        <p class="text-justify  w-4/5 my-12">Dans notre vie quotidienne, les relations que nous entretenons avec les autres
+          jouent un rôle essentiel dans notre bonheur et notre épanouissement personnel. Prendre le temps d'enrichir ces
+          relations est une démarche précieuse qui peut véritablement transformer notre quotidien.
 
+          Sur notre plateforme (RE)Sources Relationnelles, nous vous proposons une multitude de ressources et d'outils
+          pour vous aider à nourrir, renforcer et approfondir vos liens avec les autres. Que ce soit avec votre
+          conjoint, vos enfants, vos amis, vos collègues ou d'autres personnes qui vous sont chères, vous trouverez ici
+          des conseils pratiques, des idées inspirantes et des témoignages motivants pour vous accompagner dans cette
+          démarche.</p>
+          <br>
+
+      </div>
     </div>
-    <div class="container mx-auto flex items-start mt-10 pl-6 pb-4">
-        <div class="w-1/2 md:w-1/4 flex justify-center md:justify-start">
-            <img src="assets/img/vitrine/siteon0 1.png" alt="Image" class="w-1/2 h-auto">
-        </div>
+  </div>
+
+  <div class="container mx-auto flex flex-col lg:flex-row items-center lg:items-start mt-24 lg:mt-32 lg:pl-0">
+    <div class="w-full lg:w-1/2 pb-8 lg:items-center text-center lg:text-left lg:pl-16">
+      <h2 class="text-3xl font-bold mb-4 mt-4 lg:mt-0">Lieux de rencontres et partage</h2>
+      <div class="flex items-center justify-center lg:block">
+      <p  class="text-justify  w-4/5 my-12">Rejoignez nos forums de discussion, où vous pourrez échanger des
+        idées, partager vos expériences, poser des questions et trouver du soutien auprès d'une communauté
+        bienveillante. Vous y découvrirez des témoignages inspirants, des conseils avisés et des réflexions
+        enrichissantes qui vous aideront à approfondir vos relations et à créer des liens solides avec les autres.
+
+        Explorez nos groupes thématiques, qui vous permettront de rencontrer des personnes passionnées par les mêmes
+        sujets que vous. Qu'il s'agisse de la parentalité bienveillante, de la communication non violente, du
+        développement personnel ou d'autres thématiques liées aux relations humaines, vous trouverez des espaces dédiés
+        où vous pourrez échanger, apprendre et grandir ensemble.</p>
     </div>
+    </div>
+    <div class="w-full lg:w-1/2 lg:px-16 flex justify-center ">
+      <img src="assets\img\vitrine\friends-4187953_960_720 1.png" alt="Image" class="w-3/4 ">
+    </div>
+
+  </div>
+
 </section>
+<div class="container mx-auto flex items-start mt-10 pl-6 pb-4">
+  <div class="w-1/2 md:w-1/4 flex justify-center md:justify-start">
+    <img src="assets/img/vitrine/siteon0 1.png" alt="Image" class="w-1/2 h-auto">
+  </div>
+</div>

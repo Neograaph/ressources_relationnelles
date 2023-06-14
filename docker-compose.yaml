@@ -1,19 +1,16 @@
 version: "3"
 services:
   # migrations:
-  #     build:
-  #       context: ./migrations
-  #       dockerfile: Dockerfile
-  #     depends_on:
-  #       - db
-  #     environment:
-  #       - DATABASE_URL=mysql://root:123@db:3306/cubeDatabase
-  #     command: ["dotnet", "run", "--project", "YourMigrationProject.csproj"]
-  #     restart: "no"
+  #   build:
+  #     context: ./ApiCube
+  #     dockerfile: dockerfile.migrations
+  #   environment:
+  #     - DATABASE_URL=mysql://root:123@db:3306/cubeDatabase
+  #   restart: "no"
   api:
     build:
       context: ./ApiCube
-      dockerfile: Dockerfile
+      dockerfile: dockerfile.main
     ports:
       - "7032:7032"
       - "5128:5128"
@@ -25,8 +22,8 @@ services:
 
   frontend:
     build:
-      context: ./front
-      dockerfile: Dockerfile
+      context: ./Front
+      dockerfile: dockerfile
     ports:
       - "4200:80"
     restart: always

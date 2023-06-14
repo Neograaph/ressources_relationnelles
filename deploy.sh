@@ -1,31 +1,15 @@
-#!/bin/bash
+# docker compose up -d
 
-# Étapes de déploiement
+# docker build -t neo/migrations:1 -f dockerfile.migrations .
 
-# Étape 1 : Construire les images Docker
-docker-compose build
+# docker run -d -it --net=ressources_relationnelles_default -e DATABASE_URL=mysql://root:123@db:3306/cubeDatabase neo/migrations:1 bash
 
-# Étape 2 : Démarrer les conteneurs Docker
-docker-compose up -d
+# ==> dans le container :
 
-# Étape 3 : Attendre un certain temps pour que les conteneurs démarrent complètement
-sleep 10
+# apt update
 
-# Étape 4 : Effectuer les migrations
-# docker exec ressources_relationnelles-api-1 dotnet ef migrations add init --project <chemin_vers_votre_projet_api>
-# docker exec ressources_relationnelles-api-1 dotnet ef database update --project <chemin_vers_votre_projet_api>
+# apt install ping
 
-# docker run --rm -v <chemin_vers_votre_projet>:/app -w /app mcr.microsoft.com/dotnet/sdk:6.0 dotnet ef migrations add <nom_migration>
-docker run --rm -v $(pwd)/ApiCube/ApiCube:/app -w /app mcr.microsoft.com/dotnet/sdk:6.0 dotnet ef migrations add init
-docker run --rm -v "$(pwd)/ApiCube/ApiCube:/app" -w /app mcr.microsoft.com/dotnet/sdk:6.0 dotnet ef migrations add init
-docker run --rm -v "$(pwd)/ApiCube/ApiCube:/app" -w /app mcr.microsoft.com/dotnet/sdk:6.0 dotnet ef migrations add init --project /app/ApiCube/ApiCube/ApiCube.csproj
-docker run --rm -v "$(pwd)/ApiCube/ApiCube:/app" -w /app mcr.microsoft.com/dotnet/sdk:6.0 dotnet ef migrations add init --project-dir /app/ApiCube/ApiCube
+# ping db
 
-
-# docker run --rm -v <chemin_vers_votre_projet>:/app -w /app mcr.microsoft.com/dotnet/sdk:6.0 dotnet ef database update
-docker run --rm -v $(pwd)/ApiCube/ApiCube:/app -w /app mcr.microsoft.com/dotnet/sdk:6.0 dotnet ef database update
-
-# Étape 5 : Autres tâches de déploiement (le cas échéant)
-
-# Fin du script
-
+# dotnet ef database update

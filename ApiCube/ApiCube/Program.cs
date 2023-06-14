@@ -48,7 +48,9 @@ builder.Services.AddAuthorization(options =>
 
 
 var connectionString = builder.Configuration.GetConnectionString("containerConnection");
-builder.Services.AddDbContext<AppContexte>(x => x.UseSqlServer(connectionString));
+// builder.Services.AddDbContext<AppContexte>(x => x.UseSqlServer(connectionString));
+builder.Services.AddDbContext<AppContexte>(x => x.UseMySql(connectionString));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

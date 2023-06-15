@@ -14,4 +14,6 @@
 
 # ping db
 
+# cd Apicube 
+
 # dotnet ef database update

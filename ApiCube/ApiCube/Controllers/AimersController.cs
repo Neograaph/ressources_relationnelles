@@ -32,7 +32,7 @@ namespace ApiCube.Controllers
         [HttpGet("Utilisateur/{id}")]
         public async Task<ActionResult<IEnumerable<Aimer>>> GetAimersByUtilisateur(int id)
         {
-            var aimers = await _context.Aimers.Where(a => a.UtilisateurId == id).ToListAsync();
+            var aimers = await _context.Aimers.Where(a => a.UtilisateurId == id).Include(r => r.Ressource).ToListAsync();
 
             return aimers;
         }
@@ -100,8 +100,14 @@ namespace ApiCube.Controllers
             _context.Aimers.Add(aimer);
             await _context.SaveChangesAsync();
 
+            // Inclure la ressource associée
+            await _context.Entry(aimer)
+                .Reference(a => a.Ressource)
+                .LoadAsync();
+
             return CreatedAtAction("GetAimer", new { id = aimer.AimerId }, aimer);
         }
+
 
         // DELETE: api/Aimers/5
         [HttpDelete("{id}")]

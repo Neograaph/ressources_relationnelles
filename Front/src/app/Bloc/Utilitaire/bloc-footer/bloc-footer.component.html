@@ -1,13 +1,8 @@
 <footer [ngClass]="footerClass">
 
-  <div
-    class="border-t border-gray-400 flex flex-col md:flex-row justify-between items-center h-16"
-  >
-    <div class="flex flex-wrap justify-center md:justify-start">
-      <a
-        [routerLink]="'/planSite'"
-        class="hover:text-gris text-gray-500 hover:text-gray-900 mr-6 mb-2 pl-4"
-        >Plan du site</a
+    <div class="border-t border-gray-400 flex flex-col md:flex-row justify-between items-center h-16">
+        <div class="flex flex-wrap justify-center md:justify-start">
+            <a [routerLink]="'/planSite'" class="hover:text-gris text-gray-500 hover:text-gray-900 mr-6 mb-2 pl-4">Plan du site</a
       >
       <a
         [routerLink]="'/mentionsLegales'"
@@ -26,10 +21,8 @@
       >
     </div>
     <div class="hover:text-gris text-gray-500 text-sm mr-4 mt-2 md:mt-0">
-      <a routerLink="/">©</a>
-      2023 GROUPE
-      <span (click)="removeToken()">1</span>
-      CESI
+      <a routerLink="/">©</a> 2023 GROUPE
+            <span (click)="removeToken()">1</span> CESI
+        </div>
     </div>
-  </div>
 </footer>

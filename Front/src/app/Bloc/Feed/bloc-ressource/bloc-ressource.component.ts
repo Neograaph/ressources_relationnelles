@@ -14,6 +14,7 @@ export class BlocRessourceComponent {
   utilisateur!: Utilisateur;
   isLiked: boolean = false;
 
+  AimerUtilisateur : Aimer[] = [];
   constructor(
     private utilisateurService: UtilisateurService,
     private FavRessourceService: AimerService
@@ -24,16 +25,21 @@ export class BlocRessourceComponent {
       (utilisateur: Utilisateur | null) => {
         if (utilisateur !== null) {
           this.utilisateur = utilisateur;
-          // console.log(this.utilisateur);
+          this.utilisateurService.getAimersByUserId(this.utilisateur.utilisateurId).subscribe(res => {
+            this.AimerUtilisateur = res;
+            const ressourceId = this.data.ressourceId;
+            this.isLiked = this.isRessourceInAimers(ressourceId);
+
+            // Effectuer d'autres opérations liées à la ressource aimée ici
+
+          });
         }
       },
       (error) => {
-        console.error(
-          "Une erreur s'est produite lors de la récupération de l'utilisateur :",
-          error
-        );
+        console.error("Une erreur s'est produite lors de la récupération de l'utilisateur :", error);
       }
     );
+
   }
   like() {
     // console.log('like');
@@ -91,4 +97,8 @@ export class BlocRessourceComponent {
       }
     );
   }
+  isRessourceInAimers(ressourceId: number): boolean {
+    return this.AimerUtilisateur.some(aimer => aimer.ressourceId === ressourceId);
+  }
+
 }

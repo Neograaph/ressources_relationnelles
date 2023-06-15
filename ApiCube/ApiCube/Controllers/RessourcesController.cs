@@ -44,7 +44,12 @@ namespace ApiCube.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Ressource>> GetRessource(int id)
         {
-            var ressource = await _context.Ressources.FindAsync(id);
+            var ressource = await _context.Ressources
+                .Include(r => r.TypeRessource)
+                .Include(r => r.Categorie)
+                .Include(r => r.Utilisateur)
+                .Include(r => r.Document)
+                .FirstOrDefaultAsync(r => r.RessourceId == id);
 
             if (ressource == null)
             {
@@ -53,6 +58,7 @@ namespace ApiCube.Controllers
 
             return ressource;
         }
+
         [HttpPost("publier")]
         public async Task<ActionResult<Ressource>> PostRessource([FromForm] PublierRessource postRessource)
         {

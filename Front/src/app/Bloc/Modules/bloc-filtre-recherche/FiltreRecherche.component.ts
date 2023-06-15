@@ -15,7 +15,7 @@ export class FiltreRechercheComponent implements OnInit {
   categories: Categorie[] = [];
   typeRess: TypeRessource[] = [];
 
-  selectedCategoryId?: number;
+  selectedCategoryId?: number | null;
   selectedTypeRessourceId?: number;
   publicationName?: string;
   author?: string;

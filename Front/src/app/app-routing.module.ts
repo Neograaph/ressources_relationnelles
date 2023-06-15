@@ -9,6 +9,7 @@ import { PageProfilComponent } from './Page/page-profil/page-profil.component';
 import { PageMentionsLegalesComponent } from './Page/page-mentions-legales/page-mentions-legales.component';
 import { PageDonneesPersonnellesComponent } from './Page/page-donnees-personnelles/page-donnees-personnelles.component';
 import { PageCookiesComponent } from './Page/page-cookies/page-cookies.component';
+import { RessourceComponent } from './Page/ressource/ressource.component';
 
 const routes: Routes = [
   { path: '', component: PageVitrineComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'donneesPersonnelles', component: PageDonneesPersonnellesComponent },
   { path: 'gestionCookies', component: PageCookiesComponent },
   { path: 'profil', component: PageProfilComponent },
+  { path: 'ressource/:id', component: RessourceComponent },
   { path: '**', component: PageNotFoundComponent }
 
 ];

@@ -29,6 +29,7 @@ import { PageMentionsLegalesComponent } from './Page/page-mentions-legales/page-
 import { PageDonneesPersonnellesComponent } from './Page/page-donnees-personnelles/page-donnees-personnelles.component';
 import { PageCookiesComponent } from './Page/page-cookies/page-cookies.component';
 import { RefreshService } from './services/refresh-service.service';
+import { RessourceComponent } from './Page/ressource/ressource.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { RefreshService } from './services/refresh-service.service';
     PageMentionsLegalesComponent,
     PageDonneesPersonnellesComponent,
     PageCookiesComponent,
+    RessourceComponent,
   ],
   imports: [
     BrowserModule,

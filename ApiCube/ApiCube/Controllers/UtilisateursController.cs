@@ -139,8 +139,22 @@ namespace ApiCube.Controllers
 
             return utilisateur;
         }
+        [HttpGet("{userId}/aimers")]
+        public async Task<ActionResult<IEnumerable<Aimer>>> GetAimersByUserId(int userId)
+        {
+            var aimers = await _context.Aimers
+                .Where(a => a.UtilisateurId == userId)
+                .ToListAsync();
+
+            if (aimers == null)
+            {
+                return NotFound();
+            }
+
+            return aimers;
+        }
         // PUT: api/Utilisateurs/5
-       [HttpPut("{id}")]
+        [HttpPut("{id}")]
         //[Authorize]
         public async Task<IActionResult> PutUtilisateur(int id, Utilisateur utilisateur)
         {

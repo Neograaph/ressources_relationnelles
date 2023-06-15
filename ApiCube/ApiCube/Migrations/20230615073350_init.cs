@@ -359,7 +359,7 @@ namespace ApiCube.Migrations
             migrationBuilder.InsertData(
                 table: "Documents",
                 columns: new[] { "DocumentId", "Chemin", "Extension", "Poids" },
-                values: new object[] { 1, "/chemin/vers/document.pdf", ".pdf", 100 });
+                values: new object[] { 1, "image.jpeg", ".jpeg", 4000 });
 
             migrationBuilder.InsertData(
                 table: "TypeRessources",
@@ -379,17 +379,17 @@ namespace ApiCube.Migrations
             migrationBuilder.InsertData(
                 table: "Utilisateurs",
                 columns: new[] { "UtilisateurId", "AdresseId", "DateCreation", "DateNaissance", "DerniereConnexion", "Email", "MotDePasse", "Nom", "Prenom", "Role", "Telephone", "UtilisateurActif" },
-                values: new object[] { 1, 1, new DateTime(2023, 6, 14, 16, 28, 3, 486, DateTimeKind.Local).AddTicks(1166), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 6, 14, 16, 28, 3, 486, DateTimeKind.Local).AddTicks(1199), "admin@admin.com", "$2b$10$4QNhY42lquMZgUcFTPAtrO0Zuw1ytnq6pY9kL16UwtWoSqpv1gFSK", "admin", "admin", "Utilisateur", "0123456789", true });
+                values: new object[] { 1, 1, new DateTime(2023, 6, 15, 9, 33, 50, 381, DateTimeKind.Local).AddTicks(4767), new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2023, 6, 15, 9, 33, 50, 381, DateTimeKind.Local).AddTicks(4805), "admin@admin.com", "$2b$10$4QNhY42lquMZgUcFTPAtrO0Zuw1ytnq6pY9kL16UwtWoSqpv1gFSK", "admin", "admin", "Administrateur", "0123456789", true });
 
             migrationBuilder.InsertData(
                 table: "Ressources",
                 columns: new[] { "RessourceId", "CategorieId", "Contenu", "DateCreation", "DocumentId", "Titre", "TypeRessourceId", "UtilisateurId", "Valider", "VisibiliteLibelle" },
                 values: new object[,]
                 {
-                    { 1, 2, "Contenu de la ressource", new DateTime(2023, 6, 14, 16, 28, 3, 486, DateTimeKind.Local).AddTicks(1371), 1, "Titre de la ressource", 1, 1, true, "Publique" },
-                    { 2, 2, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec sapien sed odio malesuada lobortis sed ut ex. Vestibulum facilisis scelerisque elit, ac commodo magna eleifend id.", new DateTime(2023, 6, 14, 16, 28, 3, 486, DateTimeKind.Local).AddTicks(1367), null, "Ressource random", 1, 1, true, "Publique" },
-                    { 3, 3, "Contenu de la ressource eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", new DateTime(2023, 6, 14, 16, 28, 3, 486, DateTimeKind.Local).AddTicks(1374), 1, "Test", 4, 1, true, "Publique" },
-                    { 4, 5, "Contenu encore", new DateTime(2023, 6, 14, 16, 28, 3, 486, DateTimeKind.Local).AddTicks(1376), 1, "Another post", 1, 1, true, "Publique" }
+                    { 1, 2, "Contenu de la ressource", new DateTime(2023, 6, 15, 9, 33, 50, 381, DateTimeKind.Local).AddTicks(5031), 1, "Titre de la ressource", 1, 1, true, "Publique" },
+                    { 2, 2, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec sapien sed odio malesuada lobortis sed ut ex. Vestibulum facilisis scelerisque elit, ac commodo magna eleifend id.", new DateTime(2023, 6, 15, 9, 33, 50, 381, DateTimeKind.Local).AddTicks(5026), null, "Ressource random", 1, 1, true, "Publique" },
+                    { 3, 3, "Contenu de la ressource eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee", new DateTime(2023, 6, 15, 9, 33, 50, 381, DateTimeKind.Local).AddTicks(5034), 1, "Test", 4, 1, true, "Publique" },
+                    { 4, 5, "Contenu encore", new DateTime(2023, 6, 15, 9, 33, 50, 381, DateTimeKind.Local).AddTicks(5036), 1, "Another post", 1, 1, true, "Publique" }
                 });
 
             migrationBuilder.CreateIndex(

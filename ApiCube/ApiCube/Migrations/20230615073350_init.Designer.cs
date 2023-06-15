@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiCube.Migrations
 {
     [DbContext(typeof(AppContexte))]
-    [Migration("20230614142803_init")]
+    [Migration("20230615073350_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -277,9 +277,9 @@ namespace ApiCube.Migrations
                         new
                         {
                             DocumentId = 1,
-                            Chemin = "/chemin/vers/document.pdf",
-                            Extension = ".pdf",
-                            Poids = 100
+                            Chemin = "image.jpeg",
+                            Extension = ".jpeg",
+                            Poids = 4000
                         });
                 });
 
@@ -451,7 +451,7 @@ namespace ApiCube.Migrations
                             RessourceId = 2,
                             CategorieId = 2,
                             Contenu = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec sapien sed odio malesuada lobortis sed ut ex. Vestibulum facilisis scelerisque elit, ac commodo magna eleifend id.",
-                            DateCreation = new DateTime(2023, 6, 14, 16, 28, 3, 486, DateTimeKind.Local).AddTicks(1367),
+                            DateCreation = new DateTime(2023, 6, 15, 9, 33, 50, 381, DateTimeKind.Local).AddTicks(5026),
                             Titre = "Ressource random",
                             TypeRessourceId = 1,
                             UtilisateurId = 1,
@@ -463,7 +463,7 @@ namespace ApiCube.Migrations
                             RessourceId = 1,
                             CategorieId = 2,
                             Contenu = "Contenu de la ressource",
-                            DateCreation = new DateTime(2023, 6, 14, 16, 28, 3, 486, DateTimeKind.Local).AddTicks(1371),
+                            DateCreation = new DateTime(2023, 6, 15, 9, 33, 50, 381, DateTimeKind.Local).AddTicks(5031),
                             DocumentId = 1,
                             Titre = "Titre de la ressource",
                             TypeRessourceId = 1,
@@ -476,7 +476,7 @@ namespace ApiCube.Migrations
                             RessourceId = 3,
                             CategorieId = 3,
                             Contenu = "Contenu de la ressource eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
-                            DateCreation = new DateTime(2023, 6, 14, 16, 28, 3, 486, DateTimeKind.Local).AddTicks(1374),
+                            DateCreation = new DateTime(2023, 6, 15, 9, 33, 50, 381, DateTimeKind.Local).AddTicks(5034),
                             DocumentId = 1,
                             Titre = "Test",
                             TypeRessourceId = 4,
@@ -489,7 +489,7 @@ namespace ApiCube.Migrations
                             RessourceId = 4,
                             CategorieId = 5,
                             Contenu = "Contenu encore",
-                            DateCreation = new DateTime(2023, 6, 14, 16, 28, 3, 486, DateTimeKind.Local).AddTicks(1376),
+                            DateCreation = new DateTime(2023, 6, 15, 9, 33, 50, 381, DateTimeKind.Local).AddTicks(5036),
                             DocumentId = 1,
                             Titre = "Another post",
                             TypeRessourceId = 1,
@@ -615,14 +615,14 @@ namespace ApiCube.Migrations
                         {
                             UtilisateurId = 1,
                             AdresseId = 1,
-                            DateCreation = new DateTime(2023, 6, 14, 16, 28, 3, 486, DateTimeKind.Local).AddTicks(1166),
+                            DateCreation = new DateTime(2023, 6, 15, 9, 33, 50, 381, DateTimeKind.Local).AddTicks(4767),
                             DateNaissance = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DerniereConnexion = new DateTime(2023, 6, 14, 16, 28, 3, 486, DateTimeKind.Local).AddTicks(1199),
+                            DerniereConnexion = new DateTime(2023, 6, 15, 9, 33, 50, 381, DateTimeKind.Local).AddTicks(4805),
                             Email = "admin@admin.com",
                             MotDePasse = "$2b$10$4QNhY42lquMZgUcFTPAtrO0Zuw1ytnq6pY9kL16UwtWoSqpv1gFSK",
                             Nom = "admin",
                             Prenom = "admin",
-                            Role = "Utilisateur",
+                            Role = "Administrateur",
                             Telephone = "0123456789",
                             UtilisateurActif = true
                         });

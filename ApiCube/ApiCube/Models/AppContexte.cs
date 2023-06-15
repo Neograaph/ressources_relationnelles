@@ -28,6 +28,7 @@ namespace ApiCube.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<Relation>()
                 .HasOne(r => r.Utilisateur)
                 .WithMany()

@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace ApiCube.Models.BuisnessObjects
 {
@@ -34,6 +35,7 @@ namespace ApiCube.Models.BuisnessObjects
         public Utilisateur? Utilisateur { get; set; }
 
         [NotMapped]
+        [JsonIgnore]
         public ICollection<Aimer>? Aimers { get; set; }
 
         [NotMapped]

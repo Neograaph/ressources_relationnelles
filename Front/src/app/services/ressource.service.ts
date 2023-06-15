@@ -20,7 +20,7 @@ export class RessourcesService {
     return this.http.get<Ressource[]>(`${this.baseUrl}/utilisateur/${id}`);
   }
 
-  getRessource(id: number): Observable<Ressource> {
+  getRessource(id: string | null): Observable<Ressource> {
     return this.http.get<Ressource>(`${this.baseUrl}/${id}`);
   }
 

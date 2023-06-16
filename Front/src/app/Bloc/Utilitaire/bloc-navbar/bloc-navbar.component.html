@@ -1,41 +1,41 @@
 <nav [ngClass]="navbarClass" class="fixed top-0 w-screen flex items-center justify-center text-white px-4 py-2 z-20">
     <div class="container flex items-center justify-between text-white px-4 ">
-    <a class="font-bold" routerLink="/accueil">
-        <img src="assets/img/logo.png" class="max-h-12" alt="Logo" />
-    </a>
-    <div class="flex-grow"></div>
-    <div class="flex items-center">
-        <input type="text" placeholder="Rechercher sur RE..." class="border-2 border-blue-500 rounded px-8 py-2" />
-    </div>
-    <div class="flex-grow"></div>
-    <div *ngIf="currentRoute === '/'">
-        <a class=" border-black rounded-2xl p-2 flex hover:bg-gris shadow" routerLink="/accueil">
-            <p style="color: rgb(255, 255, 255) !important;">Accéder au site </p>
+        <a class="font-bold" routerLink="/accueil">
+            <img src="assets/img/logo.png" class="max-h-12" alt="Logo" />
         </a>
-    </div>
-    <div class="flex items-center hidden sm:flex " *ngIf="utilisateur">
-      <div class="dropdown inline-block relative">
-        <button class="hover:text-grisclair p-2 ml-4 text-blanc flex items-center text-blanc bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center">
+        <div class="flex-grow"></div>
+        <div class="flex items-center">
+            <input type="text" placeholder="Rechercher sur RE..." class="border-2 border-blue-500 rounded px-8 py-2" />
+        </div>
+        <div class="flex-grow"></div>
+        <div *ngIf="currentRoute === '/'">
+            <a class=" border-black rounded-2xl p-2 flex hover:bg-gris shadow" routerLink="/accueil">
+                <p style="color: rgb(255, 255, 255) !important;">Accéder au site </p>
+            </a>
+        </div>
+        <div class="flex items-center hidden sm:flex " *ngIf="utilisateur">
+            <div class="dropdown inline-block relative">
+                <button class="hover:text-grisclair p-2 ml-4 text-blanc flex items-center text-blanc bg-gray-300 text-gray-700 font-semibold py-2 px-4 rounded inline-flex items-center">
           <span class="mr-1">{{ utilisateur.prenom}}</span>
           <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/> </svg>
           <div class="shadow ml-2 p-2 " style="background-color: rgba(192, 192, 192, 0.336);">
             <img src="assets/img/user-icon.svg" class="max-h-12" alt="Utilisateur" />
         </div>
         </button>
-        <ul class="dropdown-menu absolute hidden bg-blanc text-gray-700 pt-1 shadow z-20 rounded">
-          <li class="hover:bg-grisclair"><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" [routerLink]="'/profil'">Mon profil</a></li>
-          <li class="hover:bg-grisclair"><a class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" [routerLink]="'/mentionsLegales'">Mentions légales</a></li>
-          <li *ngIf="utilisateur.role == 'Administrateur'" class="hover:bg-grisclair"><a class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" [routerLink]="'/mentionsLegales'">Page admin</a></li>
+                <ul class="dropdown-menu absolute hidden bg-blanc text-gray-700 pt-1 shadow z-20 rounded">
+                    <li class="hover:bg-grisclair"><a class="rounded-t bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" [routerLink]="'/profil'">Mon profil</a></li>
+                    <li class="hover:bg-grisclair"><a class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" [routerLink]="'/mentionsLegales'">Mentions légales</a></li>
+                    <li *ngIf="utilisateur.role == 'Administrateur'" class="hover:bg-grisclair"><a class="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" [routerLink]="'/admin'">Page admin</a></li>
 
-          <hr class="text-grisclair">
-          <li class="hover:bg-grisclair">
-            <a class="rounded-b bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#" (click)="logout()">Se déconnecter</a>
-          </li>
-          </ul>
-      </div>
+                    <hr class="text-grisclair">
+                    <li class="hover:bg-grisclair">
+                        <a class="rounded-b bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#" (click)="logout()">Se déconnecter</a>
+                    </li>
+                </ul>
+            </div>
 
-    </div>
-    <!-- <div class="flex items-center hidden sm:flex " *ngIf="utilisateur">
+        </div>
+        <!-- <div class="flex items-center hidden sm:flex " *ngIf="utilisateur">
         <a [routerLink]="'/profil'" class="hover:text-grisclair p-2 ml-4 text-blanc flex items-center">
             <p>
                 {{ utilisateur.prenom}}
@@ -43,26 +43,26 @@
 
         </a>
     </div> -->
-    <div *ngIf="!utilisateur && this.currentRoute !== '/'" class="text-blanc">
-        <a routerLink="/inscription" class="mr-4 hover:text-grisclair">S'inscrire</a>
-        <a routerLink="/connexion" class="border p-2 rounded-md hover:text-grisclair">Se connecter</a>
-    </div>
-
-
-    <div class="sm:flex sm:items-center sm:ml-auto" [class.hidden]="!isMenuOpen">
-        <!-- Éléments du menu ici -->
-        <div class=" lg:flex  bg-blanc bottom-500 left-50">
-            <!-- <p class="sm:flex">test</p> -->
+        <div *ngIf="!utilisateur && this.currentRoute !== '/'" class="text-blanc">
+            <a routerLink="/inscription" class="mr-4 hover:text-grisclair">S'inscrire</a>
+            <a routerLink="/connexion" class="border p-2 rounded-md hover:text-grisclair">Se connecter</a>
         </div>
-    </div>
 
-    <button class="block sm:hidden" (click)="toggleMenu()">
+
+        <div class="sm:flex sm:items-center sm:ml-auto" [class.hidden]="!isMenuOpen">
+            <!-- Éléments du menu ici -->
+            <div class=" lg:flex  bg-blanc bottom-500 left-50">
+                <!-- <p class="sm:flex">test</p> -->
+            </div>
+        </div>
+
+        <button class="block sm:hidden" (click)="toggleMenu()">
       <!-- Icône du menu hamburger ici -->
       <svg xmlns="http://www.w3.org/2000/svg" style="color: white;" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
       </svg>
     </button>
-</div>
+    </div>
 </nav>
 <div *ngIf="this.currentRoute !== '/connexion' && this.currentRoute !== '/inscription'" style="margin-top: 64px;">
 

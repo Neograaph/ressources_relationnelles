@@ -1,0 +1,21 @@
+# Utilisez l'image de base contenant .NET Core SDK
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+
+# Définir le répertoire de travail dans le conteneur
+WORKDIR /app
+
+# Copier les fichiers de projet et restaurer les dépendances
+COPY ApiCube/ApiCube.csproj ./
+RUN dotnet restore
+
+# Copier le reste des fichiers de l'API
+COPY . ./
+
+# Exécuter les migrations
+RUN dotnet tool install --global dotnet-ef
+ENV PATH="$PATH:/root/.dotnet/tools"
+# RUN dotnet ef migrations add init
+RUN dotnet build
+
+# Exécutez la migration vers la base de données cible
+CMD ["dotnet", "ef", "database", "update"]

@@ -1,3 +1,5 @@
+import { Relation } from "./relation.model";
+
 export class Utilisateur {
   utilisateurId: number;
   nom?: string;
@@ -10,7 +12,7 @@ export class Utilisateur {
   derniereConnexion?: Date;
   dateNaissance: Date;
   role? : String;
-
+  relations? : Relation [];
   constructor(utilisateurId: number, utilisateurActif: boolean, dateCreation: Date, dateNaissance: Date) {
     this.utilisateurId = utilisateurId;
     this.utilisateurActif = utilisateurActif;

@@ -12,7 +12,9 @@ import { Aimer } from 'src/app/Models/Aimer.model';
 export class BlocRessourceComponent {
   @Input() data!: Ressource;
   utilisateur!: Utilisateur;
-  isLiked: boolean = false;
+  isLiked: boolean = false; isDropdownOpen: boolean = false;
+  dropdownOptions: string[] = ['Option 1', 'Option 2', 'Option 3'];
+
 
   AimerUtilisateur : Aimer[] = [];
   constructor(
@@ -100,5 +102,12 @@ export class BlocRessourceComponent {
   isRessourceInAimers(ressourceId: number): boolean {
     return this.AimerUtilisateur.some(aimer => aimer.ressourceId === ressourceId);
   }
+  toggleDropdown() {
+    this.isDropdownOpen = !this.isDropdownOpen;
+  }
 
+  selectOption() {
+    // Faites quelque chose lorsque l'option est sélectionnée
+    console.log('Option sélectionnée:');
+  }
 }

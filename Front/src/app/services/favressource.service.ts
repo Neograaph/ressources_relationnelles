@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Aimer } from '../Models/Aimer.model';
 import { environment } from 'src/environments/environment.prod';
 
@@ -9,6 +9,8 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class AimerService {
   private baseUrl = environment.apiURL + 'api/Aimers';
+  private newLikeAddedSource = new Subject<Aimer>(); // Source du Subject pour les nouveaux likes
+  newLikeAdded$ = this.newLikeAddedSource.asObservable(); // Observable pour les nouveaux likes
 
   constructor(private http: HttpClient) {}
 
@@ -21,6 +23,7 @@ export class AimerService {
   }
 
   createAimer(aimer: Aimer): Observable<Aimer> {
+    this.newLikeAddedSource.next(aimer);
     return this.http.post<Aimer>(`${this.baseUrl}/`, aimer);
   }
 

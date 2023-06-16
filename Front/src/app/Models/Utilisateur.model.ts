@@ -9,6 +9,7 @@ export class Utilisateur {
   dateCreation: Date;
   derniereConnexion?: Date;
   dateNaissance: Date;
+  role? : String;
 
   constructor(utilisateurId: number, utilisateurActif: boolean, dateCreation: Date, dateNaissance: Date) {
     this.utilisateurId = utilisateurId;

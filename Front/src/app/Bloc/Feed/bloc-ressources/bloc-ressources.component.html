@@ -1,7 +1,5 @@
-<div class="overflow-y-scroll max-h-screen">
-  <div class="flex flex-col vh-screen pb-16">
-    <ng-container *ngFor="let ressource of filteredResources ? filteredResources : ressources">
-      <app-bloc-ressource [data]="ressource" class="p-2"></app-bloc-ressource>
-    </ng-container>
-  </div>
+<div class="h-1/2 overflow-y-scroll" (scroll)="onScroll()">
+    <div class="flex flex-col vh-screen pb-16">
+        <app-bloc-ressource *ngFor="let ressource of filteredResources" [data]="ressource" class="p-2"></app-bloc-ressource>
+    </div>
 </div>

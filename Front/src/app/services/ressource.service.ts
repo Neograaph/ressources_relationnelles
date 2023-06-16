@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Ressource } from '../Models/Ressource.model';
 import { environment } from 'src/environments/environment.prod';
@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment.prod';
 @Injectable({
   providedIn: 'root',
 })
+
 export class RessourcesService {
   private baseUrl = environment.apiURL + 'api/Ressources';
 
@@ -19,7 +20,7 @@ export class RessourcesService {
     return this.http.get<Ressource[]>(`${this.baseUrl}/utilisateur/${id}`);
   }
 
-  getRessource(id: number): Observable<Ressource> {
+  getRessource(id: string | null): Observable<Ressource> {
     return this.http.get<Ressource>(`${this.baseUrl}/${id}`);
   }
 
@@ -28,6 +29,11 @@ export class RessourcesService {
 
     return this.http.post<Ressource>(this.baseUrl, ressource, { headers });
   }
+  publierRessource(ressource: any): Observable<HttpResponse<Ressource>> {
+    return this.http.post<Ressource>(this.baseUrl + '/publier', ressource, { observe: 'response' });
+  }
+
+
 
   updateRessource(id: number, ressource: Ressource): Observable<any> {
     return this.http.put<any>(`${this.baseUrl}/${id}`, ressource);

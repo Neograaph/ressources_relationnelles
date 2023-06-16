@@ -1,0 +1,101 @@
+import { Component, OnInit } from '@angular/core';
+import { ActionsTypeService } from 'src/app/services/actions-type.service';
+import { ToastrService } from 'ngx-toastr';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Ressource } from 'src/app/Models/Ressource.model';
+import { Categorie } from 'src/app/Models/Categorie.model';
+import { NotificationsService } from 'src/app/services/notifications.service';
+import { RessourcesService } from '../../../services/ressource.service';
+import { RefreshService } from 'src/app/services/refresh-service.service';
+import { UtilisateurService } from 'src/app/services/utilisateur.service';
+import { Utilisateur } from 'src/app/Models/Utilisateur.model';
+import { TypeRessource } from 'src/app/Models/TypeRessource.model';
+import { CategorieService } from 'src/app/services/categorie.service';
+
+@Component({
+  selector: 'app-PostRessource',
+  templateUrl: './PostRessource.component.html',
+  styleUrls: ['./PostRessource.component.css'],
+  providers: [ToastrService],
+})
+export class PostRessourceComponent implements OnInit {
+  ajoutRessourceForm!: FormGroup;
+  utilisateur!: Utilisateur;
+  typeRess: TypeRessource[] = [];
+  categories: Categorie[] = [];
+  selectedCategoryId?: number;
+
+  constructor(
+    public actiontype: ActionsTypeService,
+    private formBuilder: FormBuilder,
+    private notificationsService: NotificationsService,
+    private ressourcesService: RessourcesService,
+    private refreshService: RefreshService,
+    private utilisateurService: UtilisateurService,
+    public categorieService: CategorieService,
+  ) {
+    this.createForm();
+  }
+
+  ressource!: Ressource;
+
+  ngOnInit(): void {
+    this.categorieService.getAllCategories().subscribe((categoriesData) => {
+      this.categories = categoriesData;
+    });
+
+    this.utilisateurService.getUtilisateur().subscribe(
+      (utilisateur: Utilisateur | null) => {
+        if (utilisateur !== null) {
+          this.utilisateur = utilisateur;
+        }
+      },
+      (error) => {
+        console.error(
+          "Une erreur s'est produite lors de la récupération de l'utilisateur :",
+          error
+        );
+      }
+    );
+  }
+
+  createForm() {
+    this.ajoutRessourceForm = this.formBuilder.group({
+      titre: ['', Validators.required],
+      contenu: ['', [Validators.required]],
+      categorie: [''],
+    });
+  }
+
+  publierRessource() {
+    if (this.ajoutRessourceForm.valid) {
+      this.ressource = this.ajoutRessourceForm.value;
+      this.ressource.dateCreation = new Date();
+      this.ressource.valider = true;
+      this.ressource.utilisateurId = this.utilisateur.utilisateurId;
+      this.ressource.visibiliteLibelle = 'Public';
+      this.ressource.categorie = new Categorie();
+
+      if (this.selectedCategoryId !== undefined) {
+        this.ressource.categorie.categorieId = this.selectedCategoryId;
+      } else {
+        console.error("Veuillez choisir une catégorie");
+      }
+
+      this.notificationsService.showSuccess('Succès', 'Ressource ajoutée');
+      console.log(this.ressource);
+      this.ressourcesService.createRessource(this.ressource).subscribe();
+      this.ajoutRessourceForm.reset();
+      this.triggerRefresh();
+    } else {
+      this.notificationsService.showError(
+        'Erreur',
+        'Veuillez remplir tous les champs'
+      );
+    }
+  }
+
+  triggerRefresh(): void {
+    this.refreshService.triggerRefresh();
+  }
+}

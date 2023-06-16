@@ -19,6 +19,7 @@ namespace ApiCube.Migrations
                 .HasAnnotation("ProductVersion", "6.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+
             modelBuilder.Entity("ApiCube.Models.BuisnessObjects.ActionType", b =>
                 {
                     b.Property<int>("ActionTypeId")
@@ -29,7 +30,6 @@ namespace ApiCube.Migrations
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
-
                     b.HasKey("ActionTypeId");
 
                     b.ToTable("ActionTypes");
@@ -40,7 +40,6 @@ namespace ApiCube.Migrations
                     b.Property<int>("AdresseId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
-
                     b.Property<int>("AdresseNum")
                         .HasColumnType("int");
 
@@ -48,16 +47,17 @@ namespace ApiCube.Migrations
                         .IsRequired()
                         .HasMaxLength(5)
                         .HasColumnType("varchar(5)");
-
                     b.Property<string>("Rue")
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("varchar(150)");
 
+
                     b.Property<string>("Ville")
                         .IsRequired()
                         .HasMaxLength(150)
                         .HasColumnType("varchar(150)");
+
 
                     b.HasKey("AdresseId");
 
@@ -83,6 +83,7 @@ namespace ApiCube.Migrations
                     b.Property<DateTime>("DateAimer")
                         .HasColumnType("datetime(6)");
 
+
                     b.Property<int>("RessourceId")
                         .HasColumnType("int");
 
@@ -106,6 +107,7 @@ namespace ApiCube.Migrations
 
                     b.Property<string>("Libelle")
                         .HasColumnType("longtext");
+
 
                     b.HasKey("CategorieId");
 
@@ -192,10 +194,12 @@ namespace ApiCube.Migrations
                         .IsRequired()
                         .HasColumnType("datetime(6)");
 
+
                     b.Property<string>("Message")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("varchar(255)");
+
 
                     b.Property<int>("RessourceId")
                         .HasColumnType("int");
@@ -215,6 +219,7 @@ namespace ApiCube.Migrations
                     b.Property<int>("ConsulterId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
 
                     b.Property<int>("RessourceId")
                         .HasColumnType("int");
@@ -242,10 +247,12 @@ namespace ApiCube.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("varchar(150)");
 
+
                     b.Property<string>("Extension")
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("varchar(10)");
+
 
                     b.Property<int>("Poids")
                         .HasColumnType("int");
@@ -261,6 +268,7 @@ namespace ApiCube.Migrations
                             Chemin = "/chemin/vers/document.pdf",
                             Extension = ".pdf",
                             Poids = 100
+
                         });
                 });
 
@@ -269,6 +277,7 @@ namespace ApiCube.Migrations
                     b.Property<int>("ModererComId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
 
                     b.Property<int>("ActionTypeId")
                         .HasColumnType("int");
@@ -294,11 +303,13 @@ namespace ApiCube.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+
                     b.Property<int>("ActionTypeId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DateModerRes")
                         .HasColumnType("datetime(6)");
+
 
                     b.Property<int>("RessourceId")
                         .HasColumnType("int");
@@ -321,10 +332,12 @@ namespace ApiCube.Migrations
                     b.Property<DateTime?>("RechercheDate")
                         .HasColumnType("datetime(6)");
 
+
                     b.Property<string>("RechercheLibelle")
                         .IsRequired()
                         .HasMaxLength(255)
                         .HasColumnType("varchar(255)");
+
 
                     b.Property<int>("RessourceId")
                         .HasColumnType("int");
@@ -350,6 +363,7 @@ namespace ApiCube.Migrations
                     b.Property<string>("Libelle")
                         .HasColumnType("longtext");
 
+
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
@@ -374,6 +388,7 @@ namespace ApiCube.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+
                     b.Property<int>("CategorieId")
                         .HasColumnType("int");
 
@@ -384,12 +399,14 @@ namespace ApiCube.Migrations
                     b.Property<DateTime>("DateCreation")
                         .HasColumnType("datetime(6)");
 
+
                     b.Property<int?>("DocumentId")
                         .HasColumnType("int");
 
                     b.Property<string>("Titre")
                         .HasMaxLength(150)
                         .HasColumnType("varchar(150)");
+
 
                     b.Property<int>("TypeRessourceId")
                         .HasColumnType("int");
@@ -403,6 +420,7 @@ namespace ApiCube.Migrations
                     b.Property<string>("VisibiliteLibelle")
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
+
 
                     b.HasKey("RessourceId");
 
@@ -423,6 +441,7 @@ namespace ApiCube.Migrations
                             CategorieId = 2,
                             Contenu = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis nec sapien sed odio malesuada lobortis sed ut ex. Vestibulum facilisis scelerisque elit, ac commodo magna eleifend id.",
                             DateCreation = new DateTime(2023, 6, 16, 15, 20, 23, 478, DateTimeKind.Local).AddTicks(8328),
+
                             Titre = "Ressource random",
                             TypeRessourceId = 1,
                             UtilisateurId = 1,
@@ -435,6 +454,7 @@ namespace ApiCube.Migrations
                             CategorieId = 2,
                             Contenu = "Contenu de la ressource",
                             DateCreation = new DateTime(2023, 6, 16, 15, 20, 23, 478, DateTimeKind.Local).AddTicks(8336),
+
                             DocumentId = 1,
                             Titre = "Titre de la ressource",
                             TypeRessourceId = 1,
@@ -448,6 +468,7 @@ namespace ApiCube.Migrations
                             CategorieId = 3,
                             Contenu = "Contenu de la ressource eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
                             DateCreation = new DateTime(2023, 6, 16, 15, 20, 23, 478, DateTimeKind.Local).AddTicks(8339),
+
                             DocumentId = 1,
                             Titre = "Test",
                             TypeRessourceId = 4,
@@ -461,6 +482,7 @@ namespace ApiCube.Migrations
                             CategorieId = 5,
                             Contenu = "Contenu encore",
                             DateCreation = new DateTime(2023, 6, 16, 15, 20, 23, 478, DateTimeKind.Local).AddTicks(8341),
+
                             DocumentId = 1,
                             Titre = "Another post",
                             TypeRessourceId = 1,
@@ -478,6 +500,7 @@ namespace ApiCube.Migrations
 
                     b.Property<string>("Libelle")
                         .HasColumnType("longtext");
+
 
                     b.HasKey("TypeRessourceId");
 
@@ -532,6 +555,7 @@ namespace ApiCube.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+
                     b.Property<int?>("AdresseId")
                         .HasColumnType("int");
 
@@ -559,6 +583,7 @@ namespace ApiCube.Migrations
                         .HasMaxLength(150)
                         .HasColumnType("varchar(150)");
 
+
                     b.Property<string>("Role")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -570,6 +595,7 @@ namespace ApiCube.Migrations
 
                     b.Property<bool>("UtilisateurActif")
                         .HasColumnType("tinyint(1)");
+
 
                     b.HasKey("UtilisateurId");
 
@@ -590,6 +616,7 @@ namespace ApiCube.Migrations
                             Nom = "John",
                             Prenom = "Doe",
                             Role = "Utilisateur",
+
                             Telephone = "0123456789",
                             UtilisateurActif = true
                         });

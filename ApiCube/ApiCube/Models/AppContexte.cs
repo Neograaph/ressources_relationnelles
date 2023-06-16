@@ -29,6 +29,7 @@ namespace ApiCube.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<Relation>()
                 .HasOne(r => r.Utilisateur)
                 .WithMany()
@@ -90,15 +91,15 @@ namespace ApiCube.Models
             modelBuilder.Entity<Utilisateur>().HasData(new Utilisateur
             {
                 UtilisateurId = 1,
-                Nom = "John",
-                Prenom = "Doe",
-                MotDePasse = "123456",
+                Nom = "admin",
+                Prenom = "admin",
+                MotDePasse = "$2b$10$4QNhY42lquMZgUcFTPAtrO0Zuw1ytnq6pY9kL16UwtWoSqpv1gFSK",
                 Telephone = "0123456789",
-                Email = "john.doe@example.com",
+                Email = "admin@admin.com",
                 UtilisateurActif = true,
                 DateCreation = DateTime.Now,
                 DerniereConnexion = DateTime.Now,
-                Role = "Utilisateur",
+                Role = "Administrateur",
                 AdresseId = 1 // Clé étrangère vers l'adresse
             });
 
@@ -190,9 +191,9 @@ namespace ApiCube.Models
             modelBuilder.Entity<Document>().HasData(new Document
             {
                 DocumentId = 1,
-                Poids = 100,
-                Extension = ".pdf",
-                Chemin = "/chemin/vers/document.pdf"
+                Poids = 4000,
+                Extension = ".jpeg",
+                Chemin = "image.jpeg"
             });
 
 

@@ -15,7 +15,7 @@ export class FiltreRechercheComponent implements OnInit {
   categories: Categorie[] = [];
   typeRess: TypeRessource[] = [];
 
-  selectedCategoryId?: number;
+  selectedCategoryId?: number | null;
   selectedTypeRessourceId?: number;
   publicationName?: string;
   author?: string;
@@ -39,13 +39,17 @@ export class FiltreRechercheComponent implements OnInit {
 
   onSearch(): void {
     // Utilisez les valeurs des propriétés pour effectuer votre recherche
-    console.log('Catégorie sélectionnée :', this.selectedCategoryId);
-    console.log('Type de ressource sélectionné :', this.selectedTypeRessourceId);
-    console.log('Nom de la publication :', this.publicationName);
-    console.log('Auteur :', this.author);
-    console.log('Date de publication :', this.publicationDate);
     this.filterResources();
+  }Reset(): void {
+    // Réinitialisez les valeurs des filtres
+    this.selectedCategoryId = undefined;
+    this.selectedTypeRessourceId = undefined;
+    this.publicationName = '';
+    this.author = '';
+    this.publicationDate = '';
+    this.filterResources()
   }
+
   filterResources(): void {
     // Effectuez le filtrage en fonction des valeurs des filtres
 

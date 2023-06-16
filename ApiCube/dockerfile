@@ -1,0 +1,22 @@
+# Utilisez l'image officielle de .NET Core 6.0 comme image de base
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
+# Définissez le répertoire de travail dans le conteneur
+WORKDIR /app
+EXPOSE 7032
+
+# Copiez le fichier csproj et restaurer les dépendances
+COPY ApiCube/ApiCube.csproj ./
+RUN dotnet restore
+
+# Copiez tout le reste et construisez l'application
+COPY . ./
+RUN dotnet publish -c Release -o out
+
+# Utilisez l'image officielle de .NET Core 6.0 Runtime comme image de base pour l'exécution
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS runtime
+WORKDIR /app
+COPY --from=build-env /app/out .
+
+
+# Définissez la commande par défaut pour exécuter votre application
+ENTRYPOINT ["dotnet", "ApiCube.dll"]

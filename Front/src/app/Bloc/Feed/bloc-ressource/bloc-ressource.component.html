@@ -4,7 +4,19 @@
             <div class="flex items-center " *ngIf="data.utilisateur">
                 <img src="../../../../assets/img/utilisateur.png" alt="image de profil" class="max-h-12 mr-2" />
                 <div>
-                    <h3 class="font-bold">{{ data.utilisateur.prenom }} {{data.utilisateur.nom }} • (famille)</h3>
+                  <div class="flex">
+                    <h3 class="font-bold">{{ data.utilisateur.prenom }} {{data.utilisateur.nom }} • </h3>
+                    <div class="ml-2">
+                      <ng-container  *ngIf="utilisateur && data.utilisateur.utilisateurId === utilisateur.utilisateurId; else relationsBlock">
+                         (Soi)
+                      </ng-container>
+                      <ng-template #relationsBlock>
+                        <ng-container>
+                          (Inconnus)
+                        </ng-container>
+                      </ng-template>
+                    </div>
+                  </div>
                     <div class="flex">
                         <span class="italic mr-4">{{ data.categorie?.libelle }} •</span>
                         <span class="italic">{{ data.typeRessource?.libelle }}</span>
@@ -13,7 +25,25 @@
                 </div>
             </div>
             <div class="ml-auto">
-                <a routerLink="/accueil">...</a>
+              <div class="ml-auto relative">
+                <a  class="text-gris text-2xl hover:text-gray-900 cursor-pointer" (click)="toggleDropdown()">...</a>
+
+                <div class="absolute bg-blanc right-0 mt-2 w-48 bg-white border border-grisclair rounded-md shadow-lg z-10"
+                     *ngIf="isDropdownOpen">
+                  <div >
+                    <a href="#" class="hover:bg-grisclair block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    (click)="selectOption()">Partager</a>
+                    <a href="#" *ngIf="utilisateur.utilisateurId == data.utilisateur?.utilisateurId ||  utilisateur.role === 'Administrateur'" class="hover:bg-grisclair block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    (click)="selectOption()">Changer la visibilité</a>
+                    <hr class="text-grisclair">
+                    <a href="#" class="hover:bg-grisclair text-bienrouge block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    (click)="selectOption()">Signaler la ressource</a>
+                    <a href="#" *ngIf="utilisateur.utilisateurId == data.utilisateur?.utilisateurId ||  utilisateur.role === 'Administrateur'" class="hover:bg-grisclair text-bienrouge block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    (click)="selectOption()">Supprimer la ressource</a>
+
+                  </div>
+                </div>
+              </div>
             </div>
         </div>
 

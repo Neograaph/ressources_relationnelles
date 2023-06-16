@@ -1,0 +1,101 @@
+# # Utilisez l'image de base contenant .NET Core SDK
+# FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build-env
+
+# # Définir le répertoire de travail dans le conteneur
+# WORKDIR /app
+
+# # Copier les fichiers de projet et restaurer les dépendances
+# COPY ApiCube/ApiCube.csproj ./
+# RUN dotnet restore
+
+# # Copier le reste des fichiers de l'API
+# COPY . ./
+
+# # Générer l'API
+# RUN dotnet publish -c Release -o out
+
+# # Utiliser une image légère contenant .NET Core
+# FROM mcr.microsoft.com/dotnet/aspnet:6.0
+
+# # Définir le répertoire de travail dans le conteneur
+# WORKDIR /app
+
+# # Copier les fichiers générés précédemment
+# COPY --from=build-env /app/out .
+
+# # Définir les variables d'environnement pour Swagger
+# # ENV ASPNETCORE_URLS=http://*:7032
+# # ENV ASPNETCORE_ENVIRONMENT=Development
+
+# # Exécuter l'API
+# ENTRYPOINT ["dotnet", "ApiCube.dll"]
+
+
+
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-nanoserver-1903 AS base
+WORKDIR /app
+EXPOSE 7032
+EXPOSE 5128
+
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
+COPY ["ApiCube/ApiCube.csproj", "ApiCube/"]
+# WORKDIR /src/ApiCube/
+RUN dotnet restore "ApiCube/ApiCube.csproj"
+COPY . .
+WORKDIR "/src/ApiCube"
+RUN dotnet build "ApiCube.csproj" -c Release -o /app/build
+
+# FROM mcr.microsoft.com/dotnet/sdk:6.0 AS migration
+# WORKDIR /src
+# COPY ["ApiCube.Migration/ApiCube.Migration.csproj", "ApiCube/"]
+# # WORKDIR /src/ApiCube
+# RUN dotnet restore "ApiCube.Migration/ApiCube.Migration.csproj"
+# COPY . .
+# WORKDIR "/src/ApiCube.Migration"
+# RUN dotnet build "ApiCube.Migration.csproj" -c Release -o /app/migration
+
+FROM build AS publish
+RUN dotnet publish "ApiCube.csproj" -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /migration
+COPY --from=migration /app/migration .
+
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "ApiCube.dll"]
+
+
+
+# FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-nanoserver-1903 AS base
+# WORKDIR /app
+# EXPOSE 80
+# EXPOSE 443
+
+# FROM mcr.microsoft.com/dotnet/core/sdk:3.1-nanoserver-1903 AS build
+# WORKDIR /src
+# COPY ["LearningAnalytics.API/LearningAnalytics.API.csproj", "LearningAnalytics.API/"]
+# RUN dotnet restore "LearningAnalytics.API/LearningAnalytics.API.csproj"
+# COPY . .
+# WORKDIR "/src/LearningAnalytics.API"
+# RUN dotnet build "LearningAnalytics.API.csproj" -c Release -o /app/build
+
+# FROM mcr.microsoft.com/dotnet/core/sdk:3.1-nanoserver-1903 AS migration
+# WORKDIR /src
+# COPY . .
+# RUN dotnet restore "LearningAnalytics.Migration/LearningAnalytics.Migration.csproj"
+# COPY . .
+# WORKDIR "/src/LearningAnalytics.Migration"
+# RUN dotnet build "LearningAnalytics.Migration.csproj" -c Release -o /app/migration
+
+# FROM build AS publish
+# RUN dotnet publish "LearningAnalytics.API.csproj" -c Release -o /app/publish
+
+# FROM base AS final
+# WORKDIR /migration
+# COPY --from=migration /app/migration .
+
+# WORKDIR /app
+# COPY --from=publish /app/publish .
+# ENTRYPOINT ["dotnet", "LearningAnalytics.API.dll"]

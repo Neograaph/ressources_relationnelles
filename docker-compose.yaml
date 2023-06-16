@@ -12,8 +12,9 @@ services:
       context: ./ApiCube
       dockerfile: dockerfile.main
     ports:
-      - "7032:7032"
-      - "5128:5128"
+      # - "7032:7032"
+      # - "5128:5128"
+      - "7032:80"
     restart: always
     depends_on:
       - db

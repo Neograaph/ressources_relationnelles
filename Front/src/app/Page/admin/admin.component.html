@@ -1,4 +1,4 @@
-<div class="flex flex-col h-screen">
+<div class="flex flex-col ">
     <!-- Barre de navigation -->
     <nav class="bg-gray-800 text-white py-4">
         <div class="container-sm mx-auto flex justify-around">
@@ -70,6 +70,15 @@
             </div>
         </div>
     </div>
-
-
+    <div class="flex justify-around m-10 item-center">
+      <div class="w-1/2">
+        <apx-chart
+          [series]="chartOptions.series"
+          [chart]="chartOptions.chart"
+          [xaxis]="chartOptions.xaxis"
+          [title]="chartOptions.title"
+        ></apx-chart>
+      </div>
+      <app-piechart></app-piechart>
+    </div>
 </div>

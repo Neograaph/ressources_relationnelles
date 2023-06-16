@@ -31,6 +31,8 @@ import { PageCookiesComponent } from './Page/page-cookies/page-cookies.component
 import { RefreshService } from './services/refresh-service.service';
 import { RessourceComponent } from './Page/ressource/ressource.component';
 import { AdminComponent } from './Page/admin/admin.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { PiechartComponent } from './Page/admin/piechart/piechart.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +60,7 @@ import { AdminComponent } from './Page/admin/admin.component';
     PageCookiesComponent,
     RessourceComponent,
     AdminComponent,
+    PiechartComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +70,7 @@ import { AdminComponent } from './Page/admin/admin.component';
     CommonModule,
     BrowserAnimationsModule,
     FormsModule,
+    NgApexchartsModule,
     ToastrModule.forRoot({ timeOut: 2000, enableHtml: true }),
   ],
   providers: [ToastrModule, RefreshService],

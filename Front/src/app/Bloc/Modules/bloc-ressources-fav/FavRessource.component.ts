@@ -23,6 +23,11 @@ export class FavRessourceComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    // Souscrire à l'observable pour détecter les nouveaux likes
+    this.FavRessourceService.newLikeAdded$.subscribe((newLike: Aimer) => {
+      this.getFavRessources(this.utilisateur.utilisateurId);
+    });
+
     this.utilisateurService.getUtilisateur().subscribe(
       (utilisateur: Utilisateur | null) => {
         if (utilisateur !== null) {
@@ -38,21 +43,13 @@ export class FavRessourceComponent implements OnInit {
       }
     );
   }
+
   getFavRessources(id: number) {
     this.FavRessourceService.getAimerById(id).subscribe((data) => {
       if (Array.isArray(data)) {
         this.FavRessource = data;
-        console.log(this.FavRessource);
-
-        // Obtenir les titres des ressources associées
-        this.FavRessource.forEach((fav) => {
-          this.ressourceService
-            .getRessource(fav.ressourceId)
-            .subscribe((ressource) => {
-              fav.titre = ressource.titre; // Assigner le titre à l'attribut "titre" de l'objet "fav"
-            });
-        });
       }
     });
   }
+
 }

@@ -1,5 +1,5 @@
 export const environment = {
-    production: false,
-    actiontype: 'https://localhost:7032/api/ActionTypes',
-    apiURL: 'https://localhost:7032/'
-  };
+  production: false,
+  actiontype: 'http://cube-cesi.ddns.net:7032/api/ActionTypes',
+  apiURL: 'http://cube-cesi.ddns.net:7032/',
+};

@@ -1,47 +1,75 @@
 <div class="flex justify-center shadow bg-blanc rounded ">
-  <div class="w-full bg-white m-2 p-2 flex flex-col gap-4">
-    <div class="flex content-around ">
-      <div class="flex items-center ">
-        <img
-          src="../../../../assets/img/utilisateur.png"
-          alt="image de profil"
-          class="max-h-12 mr-2"
-        />
-        <div>
-          <h3 class="font-bold">{{ data.utilisateur?.prenom }} {{data.utilisateur?.nom }} • (famille)</h3>
-          <div class="flex">
-            <span class="italic mr-4">{{ data.categorie?.libelle }} •</span>
-             <span class="italic">{{ data.typeRessource?.libelle }}</span>
-          </div>
-          <p class="italic text-xs">Publié le {{ data.dateCreation |  date: 'dd/MM/YYYY' }}</p>
+    <div class="w-full bg-white m-2 p-2 flex flex-col gap-4">
+        <div class="flex content-around ">
+            <div class="flex items-center " *ngIf="data.utilisateur">
+                <img src="../../../../assets/img/utilisateur.png" alt="image de profil" class="max-h-12 mr-2" />
+                <div>
+                  <div class="flex">
+                    <h3 class="font-bold">{{ data.utilisateur.prenom }} {{data.utilisateur.nom }} • </h3>
+                    <div class="ml-2">
+                      <ng-container  *ngIf="utilisateur && data.utilisateur.utilisateurId === utilisateur.utilisateurId; else relationsBlock">
+                         (Soi)
+                      </ng-container>
+                      <ng-template #relationsBlock>
+                        <ng-container>
+                          (Inconnus)
+                        </ng-container>
+                      </ng-template>
+                    </div>
+                  </div>
+                    <div class="flex">
+                        <span class="italic mr-4">{{ data.categorie?.libelle }} •</span>
+                        <span class="italic">{{ data.typeRessource?.libelle }}</span>
+                    </div>
+                    <p class="italic text-xs">Publié le {{ data.dateCreation | date: 'dd/MM/YYYY' }}</p>
+                </div>
+            </div>
+            <div class="ml-auto">
+              <div class="ml-auto relative">
+                <a  class="text-gris text-2xl hover:text-gray-900 cursor-pointer" (click)="toggleDropdown()">...</a>
+
+                <div class="absolute bg-blanc right-0 mt-2 w-48 bg-white border border-grisclair rounded-md shadow-lg z-10"
+                     *ngIf="isDropdownOpen">
+                  <div >
+                    <a href="#" class="hover:bg-grisclair block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    (click)="selectOption()">Partager</a>
+                    <a href="#" *ngIf="utilisateur.utilisateurId == data.utilisateur?.utilisateurId ||  utilisateur.role === 'Administrateur'" class="hover:bg-grisclair block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    (click)="selectOption()">Changer la visibilité</a>
+                    <hr class="text-grisclair">
+                    <a href="#" class="hover:bg-grisclair text-bienrouge block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    (click)="selectOption()">Signaler la ressource</a>
+                    <a href="#" *ngIf="utilisateur.utilisateurId == data.utilisateur?.utilisateurId ||  utilisateur.role === 'Administrateur'" class="hover:bg-grisclair text-bienrouge block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    (click)="selectOption()">Supprimer la ressource</a>
+
+                  </div>
+                </div>
+              </div>
+            </div>
         </div>
-      </div>
-      <div class="ml-auto">
-        <a routerLink="/accueil">...</a>
-      </div>
-    </div>
 
-    <div class="flex flex-col gap-2 max-h-3xl">
+        <div class="flex flex-col gap-2 max-h-3xl">
 
-      <h1 class="font-bold text-xl">{{ data.titre }}</h1>
+            <h1 class="font-bold text-xl">{{ data.titre }}</h1>
 
-      <p class="break-words">
-        {{ data.contenu }}
-      </p>
-      <div *ngIf="data.document && (data.document.extension === '.pdf' || data.document.extension === '.jpeg' || data.document.extension === '.jpg')
+            <p class="break-words">
+                {{ data.contenu }}
+            </p>
+            <div *ngIf="data.document && (data.document.extension === '.pdf' || data.document.extension === '.jpeg' || data.document.extension === '.jpg')
       ">
-      <img [src]="'assets/documents/' + data.document.chemin" alt="Image">
-      </div>
-      <div *ngIf="data.document && data.document.extension && data.document.extension.toLowerCase() === '.pdf'" class="flex text-rouge items-center hover:text-bleu">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <img [src]="'assets/documents/' + data.document.chemin" alt="Image">
+            </div>
+            <div *ngIf="data.document && data.document.extension && data.document.extension.toLowerCase() === '.pdf'" class="flex text-rouge items-center hover:text-bleu">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
           <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
         </svg>
-        <a class="ml-2" [href]="'assets/documents/' + data.document.chemin" download="{{data.document.chemin}}">Télécharger le PDF</a>
-      </div>
-    </div>
+                <a class="ml-2" [href]="'assets/documents/' + data.document.chemin" download="{{data.document.chemin}}">Télécharger le PDF</a>
+            </div>
+        </div>
 
-    <div class="flex justify-around border-t pt-3">
-      <button class="flex gap-2" (click)="like()">
+
+
+        <div class="flex justify-around border-t pt-3">
+            <button class="flex gap-2" (click)="like()">
         <img
           [src]="isLiked ? '../../../../assets/img/ressource/coeurClick.png' : '../../../../assets/img/ressource/coeurNotClick.png'"
           alt=""
@@ -49,7 +77,7 @@
         />
         <div>J'aime</div>
       </button>
-      <button class="flex gap-2">
+            <button class="flex gap-2">
         <img
           src="../../../../assets/img/ressource/commentaire.png"
           alt=""
@@ -57,6 +85,6 @@
         />
         <div>Commenter</div>
       </button>
+        </div>
     </div>
-  </div>
 </div>

@@ -29,6 +29,10 @@ import { PageMentionsLegalesComponent } from './Page/page-mentions-legales/page-
 import { PageDonneesPersonnellesComponent } from './Page/page-donnees-personnelles/page-donnees-personnelles.component';
 import { PageCookiesComponent } from './Page/page-cookies/page-cookies.component';
 import { RefreshService } from './services/refresh-service.service';
+import { RessourceComponent } from './Page/ressource/ressource.component';
+import { AdminComponent } from './Page/admin/admin.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
+import { PiechartComponent } from './Page/admin/piechart/piechart.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +58,9 @@ import { RefreshService } from './services/refresh-service.service';
     PageMentionsLegalesComponent,
     PageDonneesPersonnellesComponent,
     PageCookiesComponent,
+    RessourceComponent,
+    AdminComponent,
+    PiechartComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,6 +70,7 @@ import { RefreshService } from './services/refresh-service.service';
     CommonModule,
     BrowserAnimationsModule,
     FormsModule,
+    NgApexchartsModule,
     ToastrModule.forRoot({ timeOut: 2000, enableHtml: true }),
   ],
   providers: [ToastrModule, RefreshService],

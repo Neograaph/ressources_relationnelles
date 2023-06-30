@@ -1,5 +1,5 @@
 export const environment = {
-    production: true,
-    title: 'Production Environment Heading',
-    apiURL: 'https://localhost:7032/'
-  };
+  production: true,
+  title: 'Production Environment Heading',
+  apiURL: 'http://cube-cesi.ddns.net:7032',
+};

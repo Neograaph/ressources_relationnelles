@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 
 namespace ApiCube.Models
 {
@@ -28,6 +29,7 @@ namespace ApiCube.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
             modelBuilder.Entity<Relation>()
                 .HasOne(r => r.Utilisateur)
                 .WithMany()

@@ -1,15 +1,17 @@
 <div class="flex justify-center shadow bg-blanc rounded">
-  <form class="w-full bg-white">
-    <div class="m-2 p-2 border-b-2">
-      <h3 class="font-bold">Mes ressources</h3>
-    </div>
-    <div *ngFor="let produit of Ressources.reverse(); let i = index">
-      <div *ngIf="i < 5" class="flex items-center w-full m-2 p-2">
-        <div class="flex flex-col">
-          <h3 class="font-bold">{{ produit.titre }}</h3>
-          <p>{{ produit.dateCreation | date : "yyyy-MM-dd HH:mm:ss" }}</p>
+    <form class="w-full bg-white">
+        <div class="m-2 p-2 border-b-2">
+            <h3 class="font-bold">Mes ressources</h3>
         </div>
-      </div>
-    </div>
-  </form>
+        <div *ngFor="let mesressource of Ressources.slice().reverse(); let i = index" class="hover:bg-grisclair">
+            <div *ngIf=" i < 5 " class="flex items-center w-full m-2 p-2 ">
+                <div class="flex flex-col ">
+                    <a [routerLink]="[ '/ressource', mesressource.ressourceId] ">{{ mesressource.titre }}</a>
+                    <h3 class="font-bold "></h3>
+                    <p class="text-gris text-sm">{{ mesressource.dateCreation | date : 'dd-MM-yyyy' }}</p>
+                </div>
+            </div>
+        </div>
+
+    </form>
 </div>

@@ -3,8 +3,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Net;
+
 
 var builder = WebApplication.CreateBuilder(args);
+// builder.Listen(IPAddress.Any, 7032); // Spécifiez ici le port d'écoute de votre choix
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 // Add services to the container.
 builder.Services.AddCors(options =>
@@ -44,8 +47,16 @@ builder.Services.AddAuthorization(options =>
 });
 
 
-var connectionString = builder.Configuration.GetConnectionString("connexion");
-builder.Services.AddDbContext<AppContexte>(x => x.UseSqlServer(connectionString));
+// var connectionString = builder.Configuration.GetConnectionString("containerConnection");
+// builder.Services.AddDbContext<AppContexte>(x => x.Use
+// Server(connectionString));
+// builder.Services.AddDbContext<AppContexte>(x => x.UseMySql(connectionString));
+var connectionString = builder.Configuration.GetConnectionString("containerConnection");
+var serverVersion = new MySqlServerVersion(new Version(8, 0, 26)); // Remplacez la version par celle de votre serveur MySQL
+
+builder.Services.AddDbContext<AppContexte>(x => x.UseMySql(connectionString, serverVersion));
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

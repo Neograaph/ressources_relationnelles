@@ -17,7 +17,9 @@ builder.Services.AddCors(options =>
                       {
                           builder.WithOrigins("http://cube-cesi.ddns.net:4200", "http://localhost:4200")
                                  .AllowAnyHeader()
-                                 .AllowAnyMethod();
+                                 .AllowAnyMethod()
+                                 .SetIsOriginAllowedToAllowWildcardSubdomains()
+                                 .AllowCredentials();
                       });
 });
 builder.Services.AddControllers();

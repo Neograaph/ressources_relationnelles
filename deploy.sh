@@ -6,6 +6,8 @@
 
 # docker run -d -it --net=ressources_relationnelles_default -e DATABASE_URL=mysql://root:123@db:3306/cubeDatabase neo/migrations:1 bash
 
+# si besoin docker exec -it id sh
+
 # ==> dans le container :
 
 # apt update

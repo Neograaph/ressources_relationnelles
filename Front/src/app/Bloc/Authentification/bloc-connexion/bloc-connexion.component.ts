@@ -27,7 +27,7 @@ export class BlocConnexionComponent {
   ) {
     this.createForm();
   }
-  OnInit(): void {}
+  ngOnInit(): void {}
 
   createForm() {
     // j'ai mis des valeurs par défaut ici pour les tests pour éviter de remplir le formulaire à chaque fois
@@ -61,8 +61,8 @@ export class BlocConnexionComponent {
               "Connexion à l'application validée",
               'token enregistré'
             );
-            window.location.href = "http://localhost:4200/accueil";
-
+            // window.location.href = 'http://localhost:4200/accueil';
+            this.router.navigate(['/accueil']);
           })
           .catch((error) => {
             //console.error(error);

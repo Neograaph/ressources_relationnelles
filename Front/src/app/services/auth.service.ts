@@ -52,7 +52,10 @@ export class AuthService {
   register(data: UtilisateurInscription): Promise<any> {
     // Définir les en-têtes de la requête (optionnel)
     const headers = new HttpHeaders().set('Content-Type', 'text/json');
-    //console.log("Envoi des données à l'API");
+    console.log(
+      "Envoi des données à l'API avec l'URL :",
+      this.apiUrl + 'api/utilisateurs'
+    );
 
     //Envoyer la requête POST à l'API avec les données JSON
     return this.http
@@ -60,12 +63,12 @@ export class AuthService {
       .toPromise()
       .then((response) => {
         // Traiter la réponse de l'API si nécessaire
-        console.log("Réponse de l'API:", response);
+        console.log("Réponse de l'API :", response);
         return response; // Renvoyer la réponse
       })
       .catch((error) => {
         // Gérer les erreurs
-        console.error("Erreur lors de l'envoi de la requête:", error);
+        console.error("Erreur lors de l'envoi de la requête :", error);
         throw error; // Renvoyer l'erreur
       });
   }
@@ -73,7 +76,10 @@ export class AuthService {
   login(params?: UtilisateurConnexion): Promise<any> {
     // Définir les en-têtes de la requête (optionnel)
     const headers = new HttpHeaders().set('Content-Type', 'text/json');
-    //console.log("Envoi de la requête GET à l'API");
+    console.log(
+      "Envoi de la requête POST à l'API avec l'URL :",
+      this.apiUrl + 'api/utilisateurs/authenticate'
+    );
 
     // Envoyer la requête POST à l'API avec les paramètres
     return this.http
@@ -81,30 +87,35 @@ export class AuthService {
       .toPromise()
       .then((response) => {
         // Traiter la réponse de l'API si nécessaire
-        console.log("Réponse de l'API:", response);
+        console.log("Réponse de l'API :", response);
         return response; // Renvoyer la réponse
       })
       .catch((error) => {
         // Gérer les erreurs
-        console.error("Erreur lors de l'envoi de la requête GET:", error);
+        console.error("Erreur lors de l'envoi de la requête POST :", error);
         throw error; // Renvoyer l'erreur
       });
   }
 
-
   getDecodedAccessToken(token: string): any {
     try {
       // console.log(jwt_decode(token));
-      const decodedToken = jwt_decode(token)
+      const decodedToken = jwt_decode(token);
       return decodedToken;
-    } catch(Error) {
+    } catch (Error) {
       return null;
     }
   }
 
   getUtilisateurProfil(id: string): Observable<Utilisateur> {
     const headers = new HttpHeaders().set('Content-Type', 'text/json');
+    console.log(
+      "Envoi de la requête GET à l'API avec l'URL :",
+      this.apiUrl + 'api/utilisateurs/' + id
+    );
 
-    return this.http.get<Utilisateur>(this.apiUrl + 'api/utilisateurs/' + id, { headers });
+    return this.http.get<Utilisateur>(this.apiUrl + 'api/utilisateurs/' + id, {
+      headers,
+    });
   }
 }

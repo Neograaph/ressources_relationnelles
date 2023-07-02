@@ -14,7 +14,7 @@ COPY . .
 
 # Construire l'application Angular
 RUN npm install -g @angular/cli@latest
-RUN ng build
+RUN ng build --configuration=production
 
 # Étape suivante : Utiliser un serveur HTTP léger pour servir l'application Angular
 FROM nginx:alpine

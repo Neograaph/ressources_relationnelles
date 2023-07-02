@@ -73,6 +73,8 @@ app.UseCors(MyAllowSpecificOrigins);
 app.Use((context, next) =>
 {
     context.Response.Headers.Add("Access-Control-Allow-Origin", "http://cube-cesi.ddns.net:4200");
+    context.Response.Headers.Add("Access-Control-Allow-Headers", "http://cube-cesi.ddns.net:4200");
+
     return next();
 });
 

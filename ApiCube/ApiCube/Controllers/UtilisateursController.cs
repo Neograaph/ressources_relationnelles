@@ -43,6 +43,9 @@ namespace ApiCube.Controllers
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody] AuthentificationRequest request)
         {
+            Response.Headers.Add("Access-Control-Allow-Origin", "http://cube-cesi.ddns.net:4200");
+            Response.Headers.Add("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+            Response.Headers.Add("Access-Control-Allow-Headers", "Content-Type, Authorization");
             var utilisateur = _context.Utilisateurs.SingleOrDefault(u => u.Email == request.Email);
 
             if (utilisateur == null)

@@ -15,7 +15,8 @@ builder.Services.AddCors(options =>
     options.AddPolicy("MyAllowSpecificOrigins",
                       builder =>
                       {
-                          builder.WithOrigins("http://cube-cesi.ddns.net:4200", "http://localhost:4200")
+                          builder.WithOrigins("http://cube-cesi.ddns.net:4200",
+                          "http://localhost:4200")
                                  .AllowAnyHeader()
                                  .AllowAnyMethod()
                                  .SetIsOriginAllowedToAllowWildcardSubdomains()
@@ -37,8 +38,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuer = true,
             ValidateAudience = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = "https://localhost:4200",
-            ValidAudience = "https://localhost:4200",
+            ValidIssuer = "http://cube-cesi.ddns.net:4200",
+            ValidAudience = "http://cube-cesi.ddns.net:4200",
             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
         };
     });

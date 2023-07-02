@@ -12,12 +12,12 @@ var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 // Add services to the container.
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: MyAllowSpecificOrigins,
-                      policy =>
+    options.AddPolicy("MyAllowSpecificOrigins",
+                      builder =>
                       {
-                          policy.WithOrigins("http://localhost:4200",
-                                              "http://localhost:4200/").AllowAnyHeader()
-                                                  .AllowAnyMethod(); ;
+                          builder.WithOrigins("http://cube-cesi.ddns.net:4200", "http://localhost:4200")
+                                 .AllowAnyHeader()
+                                 .AllowAnyMethod();
                       });
 });
 builder.Services.AddControllers();

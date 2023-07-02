@@ -20,7 +20,8 @@ builder.Services.AddCors(options =>
                                  .AllowAnyHeader()
                                  .WithMethods("GET", "PUT", "POST", "DELETE", "OPTIONS")
                                  .SetIsOriginAllowedToAllowWildcardSubdomains()
-                                 .AllowCredentials();
+                                 .AllowCredentials()
+                                 .WithExposedHeaders("Access-Control-Allow-Origin");
                       });
 });
 builder.Services.AddControllers();

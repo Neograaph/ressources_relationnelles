@@ -220,6 +220,7 @@ namespace ApiCube.Controllers
             return _context.Utilisateurs.Any(e => e.UtilisateurId == id);
         }
 
+        // OPTIONS: api/Utilisateurs/
         [HttpOptions]
         public IActionResult Options()
         {

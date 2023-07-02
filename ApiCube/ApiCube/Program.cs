@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.Net;
+using Microsoft.DotNet.Scaffolding.Shared.CodeModifier.CodeChange;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,7 +21,8 @@ builder.Services.AddCors(options =>
                                  .AllowAnyHeader()
                                  .AllowAnyMethod()
                                  .AllowCredentials()
-                                 .SetIsOriginAllowedToAllowWildcardSubdomains();
+                          .SetIsOriginAllowedToAllowWildcardSubdomains()
+                                 .WithHeaders("Access-Control-Allow-Origin", "Access-Control-Allow-Methods", "Access-Control-Allow-Headers");
                                  //.WithMethods("GET", "PUT", "POST", "DELETE", "OPTIONS")
                                  //.WithExposedHeaders("Access-Control-Allow-Origin");
                       });

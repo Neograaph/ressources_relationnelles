@@ -7,7 +7,7 @@ using System.Net;
 
 
 var builder = WebApplication.CreateBuilder(args);
-// builder.Listen(IPAddress.Any, 7032); // Spécifiez ici le port d'écoute de votre choix
+builder.Listen(IPAddress.Any, 7032); // Spécifiez ici le port d'écoute de votre choix
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 // Add services to the container.
 builder.Services.AddCors(options =>
@@ -67,8 +67,8 @@ var app = builder.Build();
     app.UseSwagger();
     app.UseSwaggerUI();
 // }
-app.UseCors(MyAllowSpecificOrigins);
 app.UseHttpsRedirection();
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 

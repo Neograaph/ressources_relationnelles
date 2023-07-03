@@ -21,6 +21,7 @@ using Microsoft.IdentityModel.Tokens;
 namespace ApiCube.Controllers
 {
     [Route("api/[controller]")]
+    [EnableCors("MyAllowSpecificOrigins")]
     [ApiController]
     public class UtilisateursController : ControllerBase
     {

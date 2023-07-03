@@ -11,6 +11,7 @@ using ApiCube.Models.BuisnessObjects;
 namespace ApiCube.Controllers
 {
     [Route("api/[controller]")]
+    [EnableCors("MyAllowSpecificOrigins")]
     [ApiController]
     public class ActionTypesController : ControllerBase
     {

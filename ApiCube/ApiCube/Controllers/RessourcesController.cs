@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 namespace ApiCube.Controllers
 {
     [ApiController]
+    [EnableCors("MyAllowSpecificOrigins")]
     [Route("api/[controller]")]
     public class RessourcesController : ControllerBase
     {

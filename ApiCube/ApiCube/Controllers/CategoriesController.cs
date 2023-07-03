@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace ApiCube.Controllers
 {
     [Route("api/[controller]")]
+    [EnableCors("MyAllowSpecificOrigins")]
     [ApiController]
     public class CategoriesController : ControllerBase
     {

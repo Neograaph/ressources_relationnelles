@@ -11,23 +11,23 @@ var builder = WebApplication.CreateBuilder(args);
 // builder.Listen(IPAddress.Any, 7032); // Spécifiez ici le port d'écoute de votre choix
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 // Add services to the container.
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy("MyAllowSpecificOrigins",
-//                      builder =>
-//                      {
-//                          builder.WithOrigins("http://cube-cesi.ddns.net:4200",
-//                          "http://localhost:4200")
-//                                 .AllowAnyMethod()
-//                                 .AllowCredentials()
-//                          .SetIsOriginAllowedToAllowWildcardSubdomains()
-//                                 .WithMethods("GET", "PUT", "POST", "DELETE", "OPTIONS")
-//                                 .WithExposedHeaders("Access-Control-Allow-Origin")
-//                                 .WithExposedHeaders("Access-Control-Allow-Methods")
-//                                 .WithExposedHeaders("Access-Control-Allow-Headers")
-//                                 .AllowAnyHeader();
-//                      });
-//});
+builder.Services.AddCors(options =>
+{
+   options.AddPolicy("MyAllowSpecificOrigins",
+                     builder =>
+                     {
+                         builder.WithOrigins("http://cube-cesi.ddns.net:4200",
+                         "http://localhost:4200")
+                                .AllowAnyMethod()
+                                .AllowCredentials()
+                         .SetIsOriginAllowedToAllowWildcardSubdomains()
+                                .WithMethods("GET", "PUT", "POST", "DELETE", "OPTIONS")
+                                .WithExposedHeaders("Access-Control-Allow-Origin")
+                                .WithExposedHeaders("Access-Control-Allow-Methods")
+                                .WithExposedHeaders("Access-Control-Allow-Headers")
+                                .AllowAnyHeader();
+                     });
+});
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -73,26 +73,27 @@ var app = builder.Build();
     app.UseSwagger();
     app.UseSwaggerUI();
 // }
-// app.UseCors(MyAllowSpecificOrigins);
+app.UseCors(MyAllowSpecificOrigins);
 
-app.UseCors(builder =>
+// app.UseCors(builder =>
+// {
+//     builder.WithOrigins("")
+//     .SetIsOriginAllowedToAllowWildcardSubdomains()
+//     .AllowAnyHeader()
+//     .AllowCredentials()
+//     .WithMethods("GET", "PUT", "DELETE", "OPTIONS")
+//     .SetPreflightMaxAge(TimeSpan.FromSeconds(3600));
+// }
+// );
+
+app.Use((context, next) =>
 {
-    builder.WithOrigins("")
-    .SetIsOriginAllowedToAllowWildcardSubdomains()
-    .AllowAnyHeader()
-    .AllowCredentials()
-    .WithMethods("GET", "PUT", "DELETE", "OPTIONS")
-    .SetPreflightMaxAge(TimeSpan.FromSeconds(3600));
-}
-);
+   context.Response.Headers.Add("Access-Control-Allow-Origin", "http://cube-cesi.ddns.net:4200");
+   context.Response.Headers.Add("Access-Control-Allow-Headers", "http://cube-cesi.ddns.net:4200");
+   context.Response.Headers.Add("Access-Control-Max-Age", "3600");
 
-//app.Use((context, next) =>
-//{
-//    context.Response.Headers.Add("Access-Control-Allow-Origin", "http://cube-cesi.ddns.net:4200");
-//    context.Response.Headers.Add("Access-Control-Allow-Headers", "http://cube-cesi.ddns.net:4200");
-
-//    return next();
-//});
+   return next();
+});
 
 app.UseHttpsRedirection();
 

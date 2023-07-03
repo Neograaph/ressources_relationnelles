@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActionsTypeService } from 'src/app/services/actions-type.service';
+
 @Component({
   selector: 'app-page-vitrine',
   templateUrl: './page-vitrine.component.html',

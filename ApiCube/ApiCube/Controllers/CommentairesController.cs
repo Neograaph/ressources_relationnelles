@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ApiCube.Models;
 using ApiCube.Models.BuisnessObjects;
+using Microsoft.AspNetCore.Cors;
 
 namespace ApiCube.Controllers
 {

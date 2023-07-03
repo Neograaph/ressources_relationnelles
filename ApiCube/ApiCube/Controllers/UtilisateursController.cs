@@ -17,6 +17,7 @@ using Microsoft.CodeAnalysis.Scripting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Cors;
 
 namespace ApiCube.Controllers
 {

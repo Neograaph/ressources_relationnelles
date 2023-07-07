@@ -1,12 +1,5 @@
 version: "3"
 services:
-  # migrations:
-  #   build:
-  #     context: ./ApiCube
-  #     dockerfile: dockerfile.migrations
-  #   environment:
-  #     - DATABASE_URL=mysql://root:123@db:3306/cubeDatabase
-  #   restart: "no"
   api:
     build:
       context: ./ApiCube
@@ -18,6 +11,10 @@ services:
       - db
     environment:
       - DATABASE_URL=mysql://root:123@db:3306/cubeDatabase
+    networks:
+      ressourcesrelationnelles_default:
+        aliases:
+          - api
 
   frontend:
     build:
@@ -26,6 +23,50 @@ services:
     ports:
       - "4200:80"
     restart: always
+    networks:
+      ressourcesrelationnelles_default:
+        aliases:
+          - frontend
+
+  # grafana:
+  #   image: grafana/grafana
+  #   ports:
+  #     - 3000:3000
+  #   volumes:
+  #     - ./grafana/grafana.ini:/etc/grafana/grafana.ini
+  #     - grafana-storage:/var/lib/grafana
+  #   networks:
+  #     ressourcesrelationnelles_default:
+  #       aliases:
+  #         - grafana
+  #       # ipv4_address: 10.10.10.30
+
+  prometheus:
+    image: prom/prometheus
+    #ports:
+    #  - 9090
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      ressourcesrelationnelles_default:
+        aliases:
+          - prometheus
+        # ipv4_address: 10.10.10.40
+
+  # nginx-exporter:
+  #   image: nginx/nginx-prometheus-exporter
+  #   ports:
+  #     - 9113:9113
+  #   environment:
+  #     - NGINX_PROMETHEUS_EXPORTER_HOST=nginx
+  #     - NGINX_PROMETHEUS_EXPORTER_NGINX_STATUS_URL=http://localhost:4200/metrics
+  #   depends_on:
+  #     - frontend
+  #   networks:
+  #     ressourcesrelationnelles_default:
+  #       aliases:
+  #         - nginxexporter
+  #       # ipv4_address: 10.10.10.50
 
   db:
     image: mysql:latest
@@ -39,18 +80,11 @@ services:
     volumes:
       - cube-data:/var/lib/mysql
     restart: always
+    networks:
+      ressourcesrelationnelles_default:
+        aliases:
+          - db
 
-  # phpmyadmin:
-  #   image: phpmyadmin/phpmyadmin
-  #   ports:
-  #     - "8080:80"
-  #   environment:
-  #     PMA_HOST: db
-  #     PMA_PORT: 3306
-  #     MYSQL_ROOT_PASSWORD: your_root_password
-  #   restart: always
-  #   depends_on:
-  #     - db
   adminer:
     image: adminer
     restart: always
@@ -58,6 +92,14 @@ services:
       - 8080:8080
     depends_on:
       - db
+    networks:
+      ressourcesrelationnelles_default:
+        aliases:
+          - adminer
 
+networks:
+  ressourcesrelationnelles_default:
+    
 volumes:
   cube-data:
+  grafana-storage:
